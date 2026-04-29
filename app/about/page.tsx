@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { Marquee } from "@/components/marquee";
+import { ContactCTA } from "@/components/contact-cta";
 import { site } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -127,6 +128,19 @@ export default function AboutPage() {
           ))}
         />
       </section>
+
+      <ContactCTA
+        eyebrow="Now booking · 2025 — 2026"
+        heading={
+          <>
+            Think we&rsquo;d{" "}
+            <span className="italic text-[color:var(--color-warm)]">
+              fit
+            </span>{" "}
+            your project?
+          </>
+        }
+      />
     </>
   );
 }

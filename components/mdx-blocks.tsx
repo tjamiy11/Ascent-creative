@@ -47,7 +47,6 @@ export function Video({
           controls
           playsInline
           preload="metadata"
-          data-cursor="play"
           className="h-full w-full object-cover"
         />
       </div>

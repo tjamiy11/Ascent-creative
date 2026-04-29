@@ -31,7 +31,6 @@ export function HoneybookEmbed() {
           In the meantime, email us directly at{" "}
           <a
             href={`mailto:${site.email}`}
-            data-cursor="view"
             className="underline underline-offset-4"
           >
             {site.email}

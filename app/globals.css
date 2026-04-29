@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --color-ink: #0a0a0a;
-  --color-paper: #f7f5f1;
-  --color-warm: #d4b896;
-  --color-mute: #8a8580;
-  --color-line: rgba(10, 10, 10, 0.12);
+  /* Cinematic / immersive — deep film-leader background, warm bone text,
+     a single saturated accent. "Paper" = page background; "ink" = text.
+     Names are intentional: even when dark, the relationship holds. */
+  --color-paper: #0c0a08;
+  --color-ink: #ece5d7;
+  --color-warm: #d49b3d;
+  --color-mute: #6b665c;
+  --color-line: rgba(236, 229, 215, 0.14);
 
   --space-section: clamp(4rem, 10vw, 9rem);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -56,9 +59,8 @@ button {
 
 img,
 video {
-  max-width: 100%;
-  height: auto;
   display: block;
+  max-width: 100%;
 }
 
 .font-display {
@@ -103,10 +105,6 @@ video {
   animation: marquee-x 32s linear infinite;
   display: flex;
   width: max-content;
-}
-
-.cursor-hidden {
-  cursor: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

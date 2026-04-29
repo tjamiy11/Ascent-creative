@@ -29,7 +29,6 @@ export function Nav() {
       <div className="container-edge flex items-center justify-between py-5">
         <Link
           href="/"
-          data-cursor="view"
           className="font-display text-xl tracking-tight"
           aria-label={`${site.name} home`}
         >
@@ -46,7 +45,6 @@ export function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
-                data-cursor="view"
                 className={clsx(
                   "relative text-sm tracking-wide transition-opacity",
                   active ? "opacity-100" : "opacity-70 hover:opacity-100"

@@ -37,7 +37,6 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
               role="tab"
               aria-selected={active}
               onClick={() => setFilter(f.id)}
-              data-cursor="view"
               className={clsx(
                 "eyebrow rounded-full border px-4 py-2 transition-colors duration-300",
                 active

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { WorkGrid } from "@/components/work-grid";
 import { Reveal } from "@/components/reveal";
+import { ContactCTA } from "@/components/contact-cta";
 import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
@@ -33,6 +34,20 @@ export default function WorkPage() {
       </section>
 
       <WorkGrid projects={projects} />
+
+      <ContactCTA
+        eyebrow="Have a project?"
+        heading={
+          <>
+            See something{" "}
+            <span className="italic text-[color:var(--color-warm)]">
+              you like?
+            </span>
+            <br />
+            Tell us about yours.
+          </>
+        }
+      />
     </>
   );
 }

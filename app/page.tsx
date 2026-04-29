@@ -3,6 +3,7 @@ import { HeroReel } from "@/components/hero-reel";
 import { WorkCard } from "@/components/work-card";
 import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/reveal";
+import { ContactCTA } from "@/components/contact-cta";
 import { getFeaturedProjects } from "@/lib/projects";
 import { site } from "@/lib/site-config";
 
@@ -13,10 +14,7 @@ export default function HomePage() {
     <>
       {/* Hero is full-bleed; cancel the layout's pt-24 with a negative margin */}
       <div className="-mt-24">
-        <HeroReel
-          src="/placeholders/hero.mp4"
-          poster="/placeholders/hero-poster.jpg"
-        />
+        <HeroReel />
       </div>
 
       <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-10">
@@ -43,7 +41,6 @@ export default function HomePage() {
           </div>
           <Link
             href="/work"
-            data-cursor="view"
             className="eyebrow underline-offset-4 hover:underline"
           >
             All work →
@@ -101,17 +98,10 @@ export default function HomePage() {
             weeks. We turn down most of what we&rsquo;re asked, so what we make
             we make completely.
           </Reveal>
-          <Reveal delay={0.2} className="mt-10">
-            <Link
-              href="/contact"
-              data-cursor="view"
-              className="eyebrow inline-flex items-center gap-3 border-b border-[color:var(--color-ink)] pb-1"
-            >
-              Start a project →
-            </Link>
-          </Reveal>
         </div>
       </section>
+
+      <ContactCTA />
     </>
   );
 }

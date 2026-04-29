@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/reveal";
+import { ContactCTA } from "@/components/contact-cta";
 import {
   getNextProject,
   getProject,
   projectSlugs,
-  projects,
 } from "@/lib/projects";
 
 type Params = { slug: string };
@@ -94,7 +94,6 @@ export default async function CaseStudyPage({
         <p className="eyebrow opacity-60">Next</p>
         <Link
           href={`/work/${next.slug}`}
-          data-cursor="view"
           className="mt-3 flex items-baseline justify-between gap-6"
         >
           <span className="font-display text-3xl tracking-tight md:text-6xl">
@@ -103,6 +102,17 @@ export default async function CaseStudyPage({
           <span className="eyebrow whitespace-nowrap">{next.client} →</span>
         </Link>
       </nav>
+
+      <ContactCTA
+        eyebrow="Like what you see?"
+        heading={
+          <>
+            Let&rsquo;s build the{" "}
+            <span className="italic text-[color:var(--color-warm)]">next</span>{" "}
+            one together.
+          </>
+        }
+      />
     </article>
   );
 }

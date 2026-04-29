@@ -41,7 +41,6 @@ export function WorkCard({
   return (
     <Link
       href={`/work/${project.slug}`}
-      data-cursor="view"
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
       className={clsx("group block", className)}

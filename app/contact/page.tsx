@@ -41,7 +41,6 @@ export default function ContactPage() {
             <li>
               <a
                 href={`mailto:${site.email}`}
-                data-cursor="view"
                 className="underline underline-offset-4"
               >
                 {site.email}
@@ -55,7 +54,6 @@ export default function ContactPage() {
             <li>
               <a
                 href={site.social.instagram}
-                data-cursor="view"
                 rel="noreferrer"
                 target="_blank"
                 className="underline underline-offset-4"
@@ -66,7 +64,6 @@ export default function ContactPage() {
             <li>
               <a
                 href={site.social.vimeo}
-                data-cursor="view"
                 rel="noreferrer"
                 target="_blank"
                 className="underline underline-offset-4"

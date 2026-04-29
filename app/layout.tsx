@@ -4,7 +4,6 @@ import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { Cursor } from "@/components/cursor";
 import { site } from "@/lib/site-config";
 
 const display = Fraunces({
@@ -44,7 +43,6 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <SmoothScroll />
-        <Cursor />
         <Nav />
         <main className="flex-1 pt-24">{children}</main>
         <Footer />
