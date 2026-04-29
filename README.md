@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ascent Creative Co.
 
-## Getting Started
+Studio website for **Ascent Creative Co.** — a video and photography studio.
 
-First, run the development server:
+Built with **Next.js 16 (App Router) + TypeScript + Tailwind v4**, with Framer
+Motion + Lenis for the editorial motion language and MDX for case-study
+content. The contact page is wired to embed a HoneyBook contact form.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project layout
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/                  Routes (Home, Work, Case study, About, Contact)
+components/           Reusable UI (Nav, Footer, HeroReel, WorkCard, ...)
+content/projects/     MDX case studies, one per project
+lib/projects.ts       Project metadata (titles, covers, tags, etc.)
+lib/site-config.ts    Studio name, nav, social, HoneyBook form ID
+public/placeholders/  Placeholder hero clip + cover stills (swap freely)
+mdx-components.tsx    MDX block mappings (Still, Video, Pull, Pair, h2, p)
+```
 
-## Learn More
+## Common tasks
 
-To learn more about Next.js, take a look at the following resources:
+### Add a new project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Add an entry to the `projects` array in `lib/projects.ts`.
+2. Drop a cover image (and optional clip) into `public/placeholders/` (or
+   wherever you keep real assets).
+3. Create `content/projects/<slug>.mdx` with the case-study content.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The new project shows up automatically in `/work` and at `/work/<slug>`.
 
-## Deploy on Vercel
+### Wire the real HoneyBook form
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. In HoneyBook, go to **Tools → Contact Forms** and create the form.
+2. Click **Embed**, copy the placement ID.
+3. Paste it into `honeybook.formId` in `lib/site-config.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The placeholder card in `/contact` will be replaced by the real form.
+
+### Swap placeholder media for real assets
+
+Drop replacements into `public/placeholders/` using the same filenames, or
+update the paths in `lib/projects.ts` and the MDX files.
+
+### Reduce-motion support
+
+Lenis smooth scroll, Framer Motion reveals, and the marquee all respect
+`prefers-reduced-motion: reduce`.
+
+## Deploy
+
+The site is a standard Next.js App Router app — deploy to Vercel, Netlify, or
+any Node host. No environment variables required for the placeholder build.
+
+```bash
+npm run build && npm start
+```

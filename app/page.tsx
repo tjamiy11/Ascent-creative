@@ -1,65 +1,117 @@
-import Image from "next/image";
+import Link from "next/link";
+import { HeroReel } from "@/components/hero-reel";
+import { WorkCard } from "@/components/work-card";
+import { Marquee } from "@/components/marquee";
+import { Reveal } from "@/components/reveal";
+import { getFeaturedProjects } from "@/lib/projects";
+import { site } from "@/lib/site-config";
 
-export default function Home() {
+export default function HomePage() {
+  const featured = getFeaturedProjects();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* Hero is full-bleed; cancel the layout's pt-24 with a negative margin */}
+      <div className="-mt-24">
+        <HeroReel
+          src="/placeholders/hero.mp4"
+          poster="/placeholders/hero-poster.jpg"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </div>
+
+      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-10">
+        <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
+          [01] Studio
+        </Reveal>
+        <Reveal as="h2" className="heading-display col-span-12 md:col-span-9">
+          We make a small number of films and image campaigns each year — for
+          brands willing to{" "}
+          <span className="italic text-[color:var(--color-warm)]">
+            slow down
+          </span>{" "}
+          and make the right thing.
+        </Reveal>
+      </section>
+
+      <section className="mt-[var(--space-section)]">
+        <div className="container-edge mb-12 flex items-end justify-between">
+          <div>
+            <p className="eyebrow opacity-60">[02] Selected Work</p>
+            <h2 className="heading-display mt-3 text-[clamp(2rem,5vw,4rem)]">
+              Recent
+            </h2>
+          </div>
+          <Link
+            href="/work"
+            data-cursor="view"
+            className="eyebrow underline-offset-4 hover:underline"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            All work →
+          </Link>
         </div>
-      </main>
-    </div>
+
+        <div className="container-edge grid grid-cols-12 gap-y-16 md:gap-x-10">
+          {featured.map((project, i) => (
+            <Reveal
+              key={project.slug}
+              delay={i * 0.05}
+              className={
+                i === 0
+                  ? "col-span-12 md:col-span-7"
+                  : i === 1
+                    ? "col-span-12 md:col-span-5 md:mt-32"
+                    : "col-span-12 md:col-span-8 md:col-start-3"
+              }
+            >
+              <WorkCard
+                project={project}
+                priority={i === 0}
+                aspect={i === 0 ? "aspect-[16/10]" : "aspect-[4/5]"}
+              />
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-[var(--space-section)] border-y border-[color:var(--color-line)] py-10">
+        <Marquee
+          items={site.capabilities.map((c) => (
+            <span key={c} className="font-display text-3xl md:text-5xl">
+              {c}
+            </span>
+          ))}
+        />
+      </section>
+
+      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-10">
+        <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
+          [03] How we work
+        </Reveal>
+        <div className="col-span-12 md:col-span-9">
+          <Reveal as="h2" className="heading-display text-[clamp(2rem,6vw,5rem)]">
+            One brief at a time.
+          </Reveal>
+          <Reveal
+            delay={0.1}
+            as="p"
+            className="mt-8 max-w-2xl text-base leading-relaxed opacity-80 md:text-lg"
+          >
+            We embed early — usually before the brief is fully written — and
+            stay through edit, color, and finish. Most projects run 6 to 14
+            weeks. We turn down most of what we&rsquo;re asked, so what we make
+            we make completely.
+          </Reveal>
+          <Reveal delay={0.2} className="mt-10">
+            <Link
+              href="/contact"
+              data-cursor="view"
+              className="eyebrow inline-flex items-center gap-3 border-b border-[color:var(--color-ink)] pb-1"
+            >
+              Start a project →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }
