@@ -5,28 +5,67 @@ import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
 import { getFeaturedProjects } from "@/lib/projects";
+import { getFeaturedTestimonials } from "@/lib/testimonials";
 import { site } from "@/lib/site-config";
+
+const SOLUTIONS = [
+  {
+    title: "Brand Commercials",
+    body: "30-second to two-minute films that establish your brand's positioning and emotional core. Made for the home page, the launch, and the room you want to own.",
+  },
+  {
+    title: "Tourism Films",
+    body: "Destination storytelling that turns location into desire. For hotels, regions, and travel brands competing on feeling, not features.",
+  },
+  {
+    title: "Social Media Content",
+    body: "Scroll-stopping shorts and series built for the platforms your audience actually lives on — without losing the cinematic standard.",
+  },
+  {
+    title: "Personal Branding",
+    body: "Founder films and editorial-style portraits that put a face to your business. Quiet, confident, and made to age well.",
+  },
+  {
+    title: "Music Videos",
+    body: "Concept-led promo films for artists and labels — the medium that taught us how to make everything else.",
+  },
+  {
+    title: "Direction & Cinematography",
+    body: "On-call director and DP for productions you're already running. Bring us in for the scenes that matter most.",
+  },
+] as const;
+
+const INDUSTRIES = [
+  "Beauty & Wellness",
+  "Hospitality & Tourism",
+  "Food & Beverage",
+  "Fashion & Lifestyle",
+  "Music & Entertainment",
+  "Independent Brands",
+] as const;
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
+  const stories = getFeaturedTestimonials().slice(0, 2);
 
   return (
     <>
-      {/* Hero is full-bleed; cancel the layout's pt-24 with a negative margin */}
+      {/* Hero (full-bleed; cancels the layout's pt-24) */}
       <div className="-mt-24">
         <HeroReel />
       </div>
 
+      {/* (02) Work — Portfolio */}
       <section className="container-edge mt-[var(--space-section)]">
         <div className="mb-16 flex items-end justify-between md:mb-24">
           <Reveal as="p" className="eyebrow opacity-60">
-            (02) Selected Work
+            (02) Work
           </Reveal>
           <Link
             href="/work"
             className="eyebrow underline-offset-4 hover:underline"
           >
-            Index →
+            Full portfolio →
           </Link>
         </div>
 
@@ -53,42 +92,166 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* (03) Clients — revolving banner */}
       <section
-        aria-label="Selected clients"
-        className="mt-[var(--space-section)] border-y border-[color:var(--color-line)] py-10"
+        aria-label="Clients we've worked with"
+        className="mt-[var(--space-section)]"
       >
-        <Marquee
-          durationSec={48}
-          items={site.clients.map((c) => (
-            <span key={c} className="font-display text-2xl md:text-3xl">
-              {c}
-            </span>
-          ))}
-        />
+        <div className="container-edge mb-8 flex items-baseline justify-between">
+          <Reveal as="p" className="eyebrow opacity-60">
+            (03) Clients
+          </Reveal>
+          <Reveal
+            as="p"
+            className="eyebrow opacity-50"
+          >
+            Trusted by
+          </Reveal>
+        </div>
+        <div className="border-y border-[color:var(--color-line)] py-10">
+          <Marquee
+            durationSec={48}
+            items={site.clients.map((c) => (
+              <span key={c} className="font-display text-2xl md:text-3xl">
+                {c}
+              </span>
+            ))}
+          />
+        </div>
       </section>
 
-      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-12">
+      {/* (04) Solutions */}
+      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-12 md:gap-x-12">
         <Reveal
           as="p"
           className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
         >
-          (03) Approach
+          (04) Solutions
         </Reveal>
         <div className="col-span-12 md:col-span-9">
           <Reveal as="h2" className="heading-display max-w-3xl">
-            Authentic moments,
+            What we make,
             <br />
-            <span className="italic opacity-60">real emotions.</span>
+            <span className="italic opacity-60">and what it does.</span>
           </Reveal>
           <Reveal
-            delay={0.1}
             as="p"
+            delay={0.1}
             className="mt-10 max-w-xl text-base leading-relaxed opacity-70 md:text-lg"
           >
-            Best-in-class video production for brands across Chicago and
-            beyond. Ten-plus years working with clients in Chicago, NYC, LA,
-            and on location in Italy, Ibiza, Bali, and Costa Rica.
+            Films and image campaigns built around the outcome you need —
+            not a generic deliverable list.
           </Reveal>
+
+          <ul className="mt-20 space-y-10">
+            {SOLUTIONS.map((s, i) => (
+              <Reveal
+                key={s.title}
+                as="li"
+                delay={i * 0.04}
+                className="grid grid-cols-12 gap-x-6 gap-y-3 border-t border-[color:var(--color-line)] pt-6"
+              >
+                <span className="eyebrow col-span-12 opacity-40 md:col-span-1">
+                  0{i + 1}
+                </span>
+                <div className="col-span-12 md:col-span-11">
+                  <h3 className="font-display text-2xl tracking-tight md:text-3xl">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 max-w-2xl text-base leading-relaxed opacity-70">
+                    {s.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* (05) Client Stories — testimonials excerpt */}
+      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-12 md:gap-x-12">
+        <Reveal
+          as="p"
+          className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
+        >
+          (05) Client Stories
+        </Reveal>
+        <div className="col-span-12 md:col-span-9">
+          <Reveal as="h2" className="heading-display max-w-3xl">
+            What clients
+            <br />
+            <span className="italic opacity-60">say.</span>
+          </Reveal>
+
+          <div className="mt-16 space-y-16 md:space-y-20">
+            {stories.map((t, i) => (
+              <Reveal
+                key={`${t.author}-${i}`}
+                delay={i * 0.05}
+                className="border-t border-[color:var(--color-line)] pt-8"
+              >
+                <blockquote className="font-display text-[clamp(1.5rem,2.6vw,2.5rem)] leading-[1.15] tracking-tight">
+                  <span className="opacity-30">“</span>
+                  {t.quote}
+                  <span className="opacity-30">”</span>
+                </blockquote>
+                <div className="mt-6 flex flex-wrap items-baseline gap-x-6 gap-y-1">
+                  <span className="text-sm">{t.author}</span>
+                  <span className="eyebrow opacity-60">
+                    {t.role} · {t.company}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.15} className="mt-12">
+            <Link
+              href="/testimonials"
+              className="eyebrow inline-flex items-baseline gap-3 border-b border-[color:var(--color-ink)] pb-1"
+            >
+              All client stories →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* (06) Industries */}
+      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-12 md:gap-x-12">
+        <Reveal
+          as="p"
+          className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
+        >
+          (06) Industries
+        </Reveal>
+        <div className="col-span-12 md:col-span-9">
+          <Reveal as="h2" className="heading-display max-w-3xl">
+            Who we
+            <br />
+            <span className="italic opacity-60">work with.</span>
+          </Reveal>
+          <Reveal
+            as="p"
+            delay={0.1}
+            className="mt-10 max-w-xl text-base leading-relaxed opacity-70 md:text-lg"
+          >
+            We work with brands that take craft seriously — across categories
+            where image carries weight.
+          </Reveal>
+
+          <ul className="mt-16 grid grid-cols-1 gap-x-12 gap-y-2 md:grid-cols-2">
+            {INDUSTRIES.map((industry, i) => (
+              <Reveal
+                key={industry}
+                as="li"
+                delay={i * 0.04}
+                className="flex items-baseline justify-between border-b border-[color:var(--color-line)] py-4 text-base md:text-lg"
+              >
+                <span>{industry}</span>
+                <span className="text-xs opacity-40">0{i + 1}</span>
+              </Reveal>
+            ))}
+          </ul>
         </div>
       </section>
 
