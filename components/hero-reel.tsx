@@ -45,6 +45,7 @@ export function HeroReel() {
   return (
     <section
       ref={sectionRef}
+      data-hero
       className="relative w-full overflow-hidden bg-[color:var(--color-ink)]"
     >
       <video

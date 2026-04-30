@@ -9,6 +9,7 @@ import { site } from "@/lib/site-config";
 export function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [overHero, setOverHero] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -17,11 +18,32 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>("[data-hero]");
+    if (!hero) {
+      setOverHero(false);
+      return;
+    }
+    const check = () => {
+      const r = hero.getBoundingClientRect();
+      setOverHero(r.bottom > 0 && r.top < window.innerHeight);
+    };
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [pathname]);
+
   return (
     <header
       className={clsx(
-        "fixed inset-x-0 top-0 z-50 transition-[backdrop-filter,background-color,border-color] duration-500",
-        scrolled
+        "fixed inset-x-0 top-0 z-50 transition-[backdrop-filter,background-color,border-color,color] duration-500",
+        overHero
+          ? "bg-black/40 backdrop-blur-md border-b border-white/10 text-[color:var(--color-paper)]"
+          : scrolled
           ? "bg-[color:var(--color-paper)]/75 backdrop-blur-md border-b border-[color:var(--color-line)]"
           : "bg-transparent border-b border-transparent"
       )}
@@ -51,7 +73,7 @@ export function Nav() {
                 <span
                   aria-hidden
                   className={clsx(
-                    "absolute -bottom-1 left-0 h-px bg-[color:var(--color-ink)] transition-[width] duration-500 ease-[cubic-bezier(.16,1,.3,1)]",
+                    "absolute -bottom-1 left-0 h-px bg-[currentColor] transition-[width] duration-500 ease-[cubic-bezier(.16,1,.3,1)]",
                     active ? "w-full" : "w-0 group-hover:w-full"
                   )}
                 />
