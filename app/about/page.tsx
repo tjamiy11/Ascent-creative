@@ -44,9 +44,10 @@ export default function AboutPage() {
             delay={0.05}
             className="text-base leading-relaxed opacity-80"
           >
-            With over ten years of experience, we&rsquo;ve worked with clients
-            in Chicago, New York City, Los Angeles, and on projects worldwide
-            in Italy, Ibiza, Bali, Costa Rica, and beyond.
+            Founded in 2025 and led by Stefan Lewikowski — who brings over a
+            decade of experience in photo and video — we&rsquo;ve worked with
+            clients in Chicago, New York City, Los Angeles, and on projects
+            worldwide in Italy, Ibiza, Bali, Costa Rica, and beyond.
           </Reveal>
           <Reveal
             as="p"
@@ -165,9 +166,9 @@ export default function AboutPage() {
             delay={0.05}
             className="text-base leading-relaxed opacity-90 md:text-lg"
           >
-            With over ten years of photo and video experience, we work closely
-            with you to understand your business and make the experience easy
-            — so we deliver a project your team is proud of.
+            Backed by more than a decade of photo and video experience, we
+            work closely with you to understand your business and make the
+            process easy — so we deliver a project your team is proud of.
           </Reveal>
           <Reveal
             as="p"
