@@ -108,7 +108,7 @@ export default async function CaseStudyPage({
         heading={
           <>
             Let&rsquo;s build the{" "}
-            <span className="italic text-[color:var(--color-warm)]">next</span>{" "}
+            <span className="italic">next</span>{" "}
             one together.
           </>
         }

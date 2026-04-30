@@ -11,28 +11,26 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="container-edge pt-12 pb-16 md:pt-24">
+      <section className="container-edge pt-12 pb-24 md:pt-24 md:pb-32">
         <Reveal as="p" className="eyebrow opacity-60">
-          New Projects · 2025 — 2026
+          (Now booking · 2025 — 2026)
         </Reveal>
-        <Reveal as="h1" className="heading-display mt-4 max-w-5xl">
-          Tell us about{" "}
-          <span className="italic text-[color:var(--color-warm)]">your</span>{" "}
-          project.
+        <Reveal as="h1" className="heading-display mt-6 max-w-5xl">
+          Tell us about
+          <br />
+          <span className="italic opacity-60">your project.</span>
         </Reveal>
         <Reveal
           as="p"
           delay={0.1}
-          className="mt-8 max-w-2xl text-base leading-relaxed opacity-80 md:text-lg"
+          className="mt-10 max-w-md text-sm leading-relaxed opacity-70"
         >
-          A few sentences is enough to start. Brand, scope, rough timing,
-          budget if you have one. We&rsquo;ll reply within two business days,
-          and if it isn&rsquo;t a fit, we&rsquo;ll point you at someone we
-          trust.
+          A few sentences is enough — brand, scope, rough timing. Reply within
+          two business days.
         </Reveal>
       </section>
 
-      <section className="container-edge grid grid-cols-12 gap-y-10 md:gap-x-10">
+      <section className="container-edge grid grid-cols-12 gap-y-12 md:gap-x-12">
         <div className="col-span-12 md:col-span-4">
           <Reveal as="p" className="eyebrow opacity-60">
             Direct

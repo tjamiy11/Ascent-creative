@@ -59,7 +59,7 @@ export function Video({
 
 export function Pull({ children }: { children: ReactNode }) {
   return (
-    <blockquote className="my-16 max-w-3xl border-l-2 border-[color:var(--color-warm)] pl-6">
+    <blockquote className="my-16 max-w-3xl border-l-2 border-[color:var(--color-line)] pl-6">
       <p className="font-display text-2xl leading-snug md:text-4xl">
         “{children}”
       </p>

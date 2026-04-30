@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { HeroReel } from "@/components/hero-reel";
 import { WorkCard } from "@/components/work-card";
-import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
 import { getFeaturedProjects } from "@/lib/projects";
-import { site } from "@/lib/site-config";
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
@@ -17,47 +15,30 @@ export default function HomePage() {
         <HeroReel />
       </div>
 
-      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-10">
-        <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
-          [01] Studio
-        </Reveal>
-        <Reveal as="h2" className="heading-display col-span-12 md:col-span-9">
-          We make a small number of films and image campaigns each year — for
-          brands willing to{" "}
-          <span className="italic text-[color:var(--color-warm)]">
-            slow down
-          </span>{" "}
-          and make the right thing.
-        </Reveal>
-      </section>
-
-      <section className="mt-[var(--space-section)]">
-        <div className="container-edge mb-12 flex items-end justify-between">
-          <div>
-            <p className="eyebrow opacity-60">[02] Selected Work</p>
-            <h2 className="heading-display mt-3 text-[clamp(2rem,5vw,4rem)]">
-              Recent
-            </h2>
-          </div>
+      <section className="container-edge mt-[var(--space-section)]">
+        <div className="mb-16 flex items-end justify-between md:mb-24">
+          <Reveal as="p" className="eyebrow opacity-60">
+            (02) Selected Work
+          </Reveal>
           <Link
             href="/work"
             className="eyebrow underline-offset-4 hover:underline"
           >
-            All work →
+            Index →
           </Link>
         </div>
 
-        <div className="container-edge grid grid-cols-12 gap-y-16 md:gap-x-10">
+        <div className="grid grid-cols-12 gap-y-32 md:gap-x-12">
           {featured.map((project, i) => (
             <Reveal
               key={project.slug}
               delay={i * 0.05}
               className={
                 i === 0
-                  ? "col-span-12 md:col-span-7"
+                  ? "col-span-12 md:col-span-9"
                   : i === 1
-                    ? "col-span-12 md:col-span-5 md:mt-32"
-                    : "col-span-12 md:col-span-8 md:col-start-3"
+                    ? "col-span-12 md:col-span-6 md:col-start-7 md:mt-32"
+                    : "col-span-12 md:col-span-7 md:col-start-2"
               }
             >
               <WorkCard
@@ -70,33 +51,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mt-[var(--space-section)] border-y border-[color:var(--color-line)] py-10">
-        <Marquee
-          items={site.capabilities.map((c) => (
-            <span key={c} className="font-display text-3xl md:text-5xl">
-              {c}
-            </span>
-          ))}
-        />
-      </section>
-
-      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-10">
+      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-12">
         <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
-          [03] How we work
+          (03) Approach
         </Reveal>
         <div className="col-span-12 md:col-span-9">
-          <Reveal as="h2" className="heading-display text-[clamp(2rem,6vw,5rem)]">
+          <Reveal as="h2" className="heading-display max-w-3xl">
             One brief at a time.
           </Reveal>
           <Reveal
             delay={0.1}
             as="p"
-            className="mt-8 max-w-2xl text-base leading-relaxed opacity-80 md:text-lg"
+            className="mt-10 max-w-xl text-base leading-relaxed opacity-70 md:text-lg"
           >
-            We embed early — usually before the brief is fully written — and
-            stay through edit, color, and finish. Most projects run 6 to 14
-            weeks. We turn down most of what we&rsquo;re asked, so what we make
-            we make completely.
+            We embed early and stay through edit, color, and finish. Six to
+            eight projects a year.
           </Reveal>
         </div>
       </section>

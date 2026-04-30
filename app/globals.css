@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Cinematic / immersive — deep film-leader background, warm bone text,
-     a single saturated accent. "Paper" = page background; "ink" = text.
-     Names are intentional: even when dark, the relationship holds. */
-  --color-paper: #0c0a08;
-  --color-ink: #ece5d7;
-  --color-warm: #d49b3d;
-  --color-mute: #6b665c;
-  --color-line: rgba(236, 229, 215, 0.14);
+  /* Stark gallery — pure white wall, true black ink, no chromatic accent.
+     Italic + weight + scale carry emphasis instead of color. */
+  --color-paper: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-mute: #6b6b6b;
+  --color-line: rgba(10, 10, 10, 0.10);
+  /* Kept for legacy compatibility — resolves to ink so any stray reference
+     is visually neutral until it's removed. */
+  --color-warm: var(--color-ink);
 
-  --space-section: clamp(4rem, 10vw, 9rem);
+  --space-section: clamp(6rem, 14vw, 13rem);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -73,9 +74,9 @@ video {
 .heading-display {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   line-height: 0.95;
-  font-size: clamp(2.75rem, 8vw, 7.5rem);
+  font-size: clamp(2.5rem, 6.5vw, 6.5rem);
 }
 
 .eyebrow {

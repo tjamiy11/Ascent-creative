@@ -33,9 +33,6 @@ export function Nav() {
           aria-label={`${site.name} home`}
         >
           {site.shortName}
-          <span aria-hidden className="text-[color:var(--color-warm)]">
-            .
-          </span>
         </Link>
 
         <nav aria-label="Primary" className="flex items-center gap-7">

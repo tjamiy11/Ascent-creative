@@ -1,6 +1,6 @@
 export const site = {
   name: "Ascent Creative Co.",
-  shortName: "Ascent",
+  shortName: "Ascent Studios",
   tagline: "Films & photography for brands that mean it.",
   description:
     "Ascent Creative Co. is a video and photography studio crafting cinematic brand films, commercials, and editorial campaigns.",
