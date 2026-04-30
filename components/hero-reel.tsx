@@ -71,15 +71,6 @@ export function HeroReel() {
       <HeroBackground />
 
       <div className="container-edge relative flex min-h-[100svh] flex-col justify-between pt-40 pb-16 text-[color:var(--color-paper)]">
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 0.6, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="eyebrow"
-        >
-          Chicago Video Production Agency · Est. 2025
-        </motion.p>
-
         <div className="max-w-5xl">
           <motion.h1
             variants={headlineContainer}
@@ -126,7 +117,7 @@ export function HeroReel() {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="mt-10 max-w-md text-base leading-relaxed"
           >
-            Professional Video Marketing for Brands throughout Chicago and Beyond. Brand commercials, tourism films, and social media content built to make audiences feel something worth remembering.
+            Professional Video Marketing for Brands throughout Chicago and Beyond.
           </motion.p>
 
           <motion.div
@@ -170,10 +161,6 @@ export function HeroReel() {
             <span aria-hidden className="hero-orbit-wrap ml-3">
               <span className="hero-orbit" />
             </span>
-          </p>
-          <p className="col-span-12 max-w-md text-xs leading-relaxed opacity-50 md:col-span-6 md:col-start-7">
-            Authentic moments. Real emotions. The feeling of being immersed in
-            a story.
           </p>
         </motion.div>
       </div>
