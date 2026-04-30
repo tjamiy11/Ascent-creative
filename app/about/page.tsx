@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
+import { Marquee } from "@/components/marquee";
 import { ContactCTA } from "@/components/contact-cta";
 import { site } from "@/lib/site-config";
 
@@ -100,6 +101,21 @@ export default function AboutPage() {
             </Reveal>
           ))}
         </ul>
+      </section>
+
+      {/* Selected clients marquee */}
+      <section
+        aria-label="Selected clients"
+        className="mt-[var(--space-section)] border-y border-[color:var(--color-line)] py-10"
+      >
+        <Marquee
+          durationSec={48}
+          items={site.clients.map((c) => (
+            <span key={c} className="font-display text-2xl md:text-3xl">
+              {c}
+            </span>
+          ))}
+        />
       </section>
 
       {/* Founder */}

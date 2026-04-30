@@ -14,7 +14,23 @@ export const site = {
   nav: [
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
+    { label: "Testimonials", href: "/testimonials" },
     { label: "Contact", href: "/contact" },
+  ],
+  // Marquee of past + current clients. Swap with real names freely.
+  clients: [
+    "Lumen Botanicals",
+    "Atelier Hús",
+    "Halcyon Coffee Co.",
+    "Nido Wear",
+    "Verre Skin",
+    "Pomme & Fern",
+    "Wayward Goods",
+    "Marrow Press",
+    "North & Loom",
+    "Calmer Tides",
+    "Cabin Project",
+    "Field Notes Hotel",
   ],
   capabilities: [
     "Brand Commercials",

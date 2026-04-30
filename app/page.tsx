@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { HeroReel } from "@/components/hero-reel";
 import { WorkCard } from "@/components/work-card";
+import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
 import { getFeaturedProjects } from "@/lib/projects";
+import { site } from "@/lib/site-config";
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
@@ -49,6 +51,20 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      <section
+        aria-label="Selected clients"
+        className="mt-[var(--space-section)] border-y border-[color:var(--color-line)] py-10"
+      >
+        <Marquee
+          durationSec={48}
+          items={site.clients.map((c) => (
+            <span key={c} className="font-display text-2xl md:text-3xl">
+              {c}
+            </span>
+          ))}
+        />
       </section>
 
       <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-12">
