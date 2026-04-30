@@ -13,20 +13,24 @@ const headlineContainer = {
   },
 };
 
+// Headline word reveal — uses full `transform` strings instead of the `y`
+// shorthand so the animation runs on the compositor thread. The hero
+// mounts while the Vespa video, LFS posters, and fonts are still
+// streaming, so keeping it off the main thread prevents dropped frames.
 const headlineWord = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, transform: "translateY(28px)" },
   show: {
     opacity: 1,
-    y: 0,
+    transform: "translateY(0px)",
     transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
 const italicWord = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, transform: "translateY(28px)" },
   show: {
     opacity: 0.6,
-    y: 0,
+    transform: "translateY(0px)",
     transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
