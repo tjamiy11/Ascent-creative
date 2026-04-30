@@ -55,9 +55,9 @@ export default function HomePage() {
         <HeroReel />
       </div>
 
-      {/* (02) Work — Portfolio */}
+      {/* (02) Work — Portfolio: one row, three equal tiles */}
       <section className="container-edge mt-[var(--space-section)]">
-        <div className="mb-16 flex items-end justify-between md:mb-24">
+        <div className="mb-12 flex items-end justify-between md:mb-16">
           <Reveal as="p" className="eyebrow opacity-60">
             (02) Work
           </Reveal>
@@ -69,23 +69,13 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-12 gap-y-32 md:gap-x-12">
+        <div className="grid grid-cols-1 gap-y-12 md:grid-cols-3 md:gap-x-6 lg:gap-x-8">
           {featured.map((project, i) => (
-            <Reveal
-              key={project.slug}
-              delay={i * 0.05}
-              className={
-                i === 0
-                  ? "col-span-12 md:col-span-9"
-                  : i === 1
-                    ? "col-span-12 md:col-span-6 md:col-start-7 md:mt-32"
-                    : "col-span-12 md:col-span-7 md:col-start-2"
-              }
-            >
+            <Reveal key={project.slug} delay={i * 0.05}>
               <WorkCard
                 project={project}
                 priority={i === 0}
-                aspect={i === 0 ? "aspect-[16/10]" : "aspect-[4/5]"}
+                aspect="aspect-[4/5]"
               />
             </Reveal>
           ))}
