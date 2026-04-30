@@ -3,7 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import clsx from "clsx";
 import type { Project } from "@/lib/projects";
 
@@ -15,6 +20,8 @@ type WorkCardProps = {
   aspect?: string;
 };
 
+const MAGNET_STRENGTH = 0.18;
+
 export function WorkCard({
   project,
   priority,
@@ -23,6 +30,17 @@ export function WorkCard({
 }: WorkCardProps) {
   const [hover, setHover] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+
+  // Cursor-magnet: track pointer offset from card center, translate the
+  // media block toward it (max ~16px). Subtle on its own; combines with
+  // the custom cursor's "View" prompt to make the card feel pickable.
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 220, damping: 22, mass: 0.4 });
+  const sy = useSpring(my, { stiffness: 220, damping: 22, mass: 0.4 });
+  const magnetX = useTransform(sx, (v) => v * MAGNET_STRENGTH);
+  const magnetY = useTransform(sy, (v) => v * MAGNET_STRENGTH);
 
   const onEnter = () => {
     setHover(true);
@@ -32,10 +50,21 @@ export function WorkCard({
   };
   const onLeave = () => {
     setHover(false);
+    mx.set(0);
+    my.set(0);
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
+  };
+  const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    const el = mediaRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    mx.set(e.clientX - cx);
+    my.set(e.clientY - cy);
   };
 
   return (
@@ -43,9 +72,12 @@ export function WorkCard({
       href={`/work/${project.slug}`}
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
+      onPointerMove={onMove}
       className={clsx("group block", className)}
     >
-      <div
+      <motion.div
+        ref={mediaRef}
+        style={{ x: magnetX, y: magnetY }}
         className={clsx(
           "relative w-full overflow-hidden bg-[color:var(--color-ink)]/5",
           aspect
@@ -60,7 +92,7 @@ export function WorkCard({
           className={clsx(
             "object-cover transition-[transform,opacity] duration-700 ease-[cubic-bezier(.16,1,.3,1)]",
             hover && project.clip ? "opacity-0" : "opacity-100",
-            "group-hover:scale-[1.02]"
+            "group-hover:scale-[1.03]"
           )}
         />
         {project.clip && (
@@ -88,7 +120,7 @@ export function WorkCard({
         >
           {project.kind === "video" ? "Film" : "Series"} · {project.year}
         </motion.span>
-      </div>
+      </motion.div>
 
       <div className="mt-4 flex items-baseline justify-between gap-4">
         <div>

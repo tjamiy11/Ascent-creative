@@ -52,7 +52,10 @@ export default function HomePage() {
       </section>
 
       <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-12">
-        <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
+        <Reveal
+          as="p"
+          className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
+        >
           (03) Approach
         </Reveal>
         <div className="col-span-12 md:col-span-9">

@@ -27,7 +27,10 @@ export default function AboutPage() {
 
       {/* What is Ascent Studios? */}
       <section className="container-edge grid grid-cols-12 gap-y-10 md:gap-x-12">
-        <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
+        <Reveal
+          as="p"
+          className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
+        >
           What is Ascent Studios?
         </Reveal>
         <div className="col-span-12 space-y-8 md:col-span-7">
@@ -78,7 +81,10 @@ export default function AboutPage() {
 
       {/* Capabilities */}
       <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-12">
-        <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
+        <Reveal
+          as="p"
+          className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
+        >
           Capabilities
         </Reveal>
         <ul className="col-span-12 grid grid-cols-1 gap-x-10 gap-y-2 md:col-span-7 md:grid-cols-2">
@@ -97,8 +103,8 @@ export default function AboutPage() {
       </section>
 
       {/* Founder */}
-      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-12 md:gap-x-12">
-        <div className="col-span-12 md:col-span-3">
+      <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-12 md:items-start md:gap-x-12">
+        <div className="col-span-12 md:col-span-3 md:sticky md:top-32">
           <Reveal as="p" className="eyebrow opacity-60">
             About the founder
           </Reveal>
@@ -152,7 +158,10 @@ export default function AboutPage() {
 
       {/* Why work with us */}
       <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-12">
-        <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
+        <Reveal
+          as="p"
+          className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
+        >
           Why work with us
         </Reveal>
         <div className="col-span-12 space-y-8 md:col-span-7">

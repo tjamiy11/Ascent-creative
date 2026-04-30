@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { HeroBackground } from "@/components/hero-background";
 import { site } from "@/lib/site-config";
 
@@ -31,8 +32,21 @@ const italicWord = {
 };
 
 export function HeroReel() {
+  const sectionRef = useRef<HTMLElement>(null);
+  // Bottom mantra row fades out as the user scrolls past the hero — gives
+  // the hand-off into Selected Work a sense of finality.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const bottomOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const bottomY = useTransform(scrollYProgress, [0, 0.6], [0, 24]);
+
   return (
-    <section className="relative w-full overflow-hidden bg-[color:var(--color-paper)]">
+    <section
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-[color:var(--color-paper)]"
+    >
       <HeroBackground />
 
       <div className="container-edge relative flex min-h-[100svh] flex-col justify-between pt-40 pb-16 text-[color:var(--color-ink)]">
@@ -120,6 +134,7 @@ export function HeroReel() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.1 }}
+          style={{ opacity: bottomOpacity, y: bottomY }}
           className="grid grid-cols-12 items-end gap-6"
         >
           <p className="eyebrow col-span-6 opacity-50 md:col-span-3">
