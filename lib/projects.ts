@@ -10,6 +10,7 @@ export type Project = {
   tags: string[];
   cover: string;
   clip?: string;
+  logo?: string;
   excerpt: string;
   featured?: boolean;
 };
@@ -25,6 +26,7 @@ export const projects: Project[] = [
     tags: ["Commercial", "Athletic"],
     cover: "/video/hoka.jpg",
     clip: "/video/hoka.mp4",
+    logo: "/logos/hoka.png",
     excerpt:
       "A short-form spot for Hoka — vertical-first, built to land in the feed without losing the cinematic standard.",
     featured: true,
@@ -39,6 +41,7 @@ export const projects: Project[] = [
     tags: ["Brand Film", "Athletic"],
     cover: "/video/dtla.jpg",
     clip: "/video/dtla.mp4",
+    logo: "/logos/nike.svg",
     excerpt:
       "A downtown LA activation for Nike — color, motion, and the city as a runway.",
     featured: true,
@@ -53,6 +56,7 @@ export const projects: Project[] = [
     tags: ["Hospitality", "Tourism"],
     cover: "/video/palmer.jpg",
     clip: "/video/palmer.mp4",
+    logo: "/logos/palmer.png",
     excerpt:
       "A brand film for the historic Chicago hotel — spa, ceremony, and the language of arrival.",
     featured: true,

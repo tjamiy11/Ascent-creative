@@ -109,13 +109,20 @@ export function HeroReel() {
 
           <motion.p
             initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 0.85, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
+            className="mt-6 font-display text-xl tracking-tight md:text-2xl"
+          >
+            Best in Class Video Production
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 0.7, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
             className="mt-10 max-w-md text-base leading-relaxed"
           >
-            Brand commercials, tourism films, and social media content from
-            Chicago. We help your brand tell stories worth
-            remembering.
+            Professional Video Marketing for Brands throughout Chicago and Beyond. Brand commercials, tourism films, and social media content built to make audiences feel something worth remembering.
           </motion.p>
 
           <motion.div

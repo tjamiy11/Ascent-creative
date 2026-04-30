@@ -140,13 +140,17 @@ export default function TestimonialsPage() {
           durationSec={48}
           separator={<span aria-hidden className="px-12" />}
           items={site.clients.map((c) => (
-            <span key={c.name} className="flex items-center" title={c.name}>
+            <span
+              key={c.name}
+              className="flex h-14 w-36 items-center justify-center px-2"
+              title={c.name}
+            >
               <Image
                 src={c.logo}
                 alt={c.name}
-                width={160}
-                height={48}
-                className="h-10 w-auto object-contain opacity-70 grayscale mix-blend-multiply md:h-12"
+                width={144}
+                height={56}
+                className="max-h-10 max-w-32 object-contain opacity-70 grayscale mix-blend-multiply"
                 unoptimized
               />
             </span>
