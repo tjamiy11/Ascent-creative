@@ -2,12 +2,40 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { HeroBackground } from "@/components/hero-background";
 import { site } from "@/lib/site-config";
+
+const headlineContainer = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.09, delayChildren: 0.15 },
+  },
+};
+
+const headlineWord = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
+const italicWord = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 0.6,
+    y: 0,
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
 
 export function HeroReel() {
   return (
-    <section className="relative w-full bg-[color:var(--color-paper)]">
-      <div className="container-edge flex min-h-[100svh] flex-col justify-between pt-40 pb-16 text-[color:var(--color-ink)]">
+    <section className="relative w-full overflow-hidden bg-[color:var(--color-paper)]">
+      <HeroBackground />
+
+      <div className="container-edge relative flex min-h-[100svh] flex-col justify-between pt-40 pb-16 text-[color:var(--color-ink)]">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 0.6, y: 0 }}
@@ -19,31 +47,50 @@ export function HeroReel() {
 
         <div className="max-w-5xl">
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            variants={headlineContainer}
+            initial="hidden"
+            animate="show"
             className="font-display text-[clamp(2.75rem,7vw,7.5rem)]"
           >
-            Make your audience
+            <motion.span variants={headlineWord} className="inline-block">
+              Make
+            </motion.span>{" "}
+            <motion.span variants={headlineWord} className="inline-block">
+              your
+            </motion.span>{" "}
+            <motion.span variants={headlineWord} className="inline-block">
+              audience
+            </motion.span>
             <br />
-            <span className="italic opacity-60">feel something.</span>
+            <motion.span
+              variants={italicWord}
+              className="inline-block italic"
+            >
+              feel
+            </motion.span>{" "}
+            <motion.span
+              variants={italicWord}
+              className="inline-block italic"
+            >
+              something.
+            </motion.span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 0.7, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
             className="mt-10 max-w-md text-base leading-relaxed"
           >
             Brand commercials, tourism films, and social media content from
-            downtown Chicago. We help your brand tell stories worth
+            Chicago. We help your brand tell stories worth
             remembering.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.95 }}
             className="mt-12 flex flex-wrap items-baseline gap-x-10 gap-y-3"
           >
             <Link
@@ -72,7 +119,7 @@ export function HeroReel() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
           className="grid grid-cols-12 items-end gap-6"
         >
           <p className="eyebrow col-span-6 opacity-50 md:col-span-3">

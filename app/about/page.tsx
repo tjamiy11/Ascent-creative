@@ -7,7 +7,7 @@ import { site } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "About — Chicago Video Production Agency",
   description:
-    "Ascent Studios is a downtown Chicago video production agency. Ten-plus years of experience producing brand commercials, tourism films, and social media content for clients across the U.S. and worldwide.",
+    "Ascent Studios is a Chicago video production agency. Ten-plus years of experience producing brand commercials, tourism films, and social media content for clients across the U.S. and worldwide.",
 };
 
 export default function AboutPage() {
@@ -16,7 +16,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="container-edge pt-12 pb-32 md:pt-24 md:pb-40">
         <Reveal as="p" className="eyebrow opacity-60">
-          (Studio · Downtown Chicago)
+          (Studio · Chicago)
         </Reveal>
         <Reveal as="h1" className="heading-display mt-6 max-w-5xl">
           A Chicago video
@@ -35,7 +35,7 @@ export default function AboutPage() {
             as="p"
             className="text-base leading-relaxed opacity-90 md:text-lg"
           >
-            Based in downtown Chicago, Ascent Studios is a video production
+            Based in Chicago, Ascent Studios is a video production
             agency offering a personalized approach to crafting visually
             captivating marketing through creative storytelling.
           </Reveal>

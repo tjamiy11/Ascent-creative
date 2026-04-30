@@ -5,7 +5,7 @@ import { site } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Contact — Chicago Video Production",
-  description: `Get in touch with ${site.name}, a downtown Chicago video production agency. Brand commercials, tourism films, and social media content. Reply within two business days.`,
+  description: `Get in touch with ${site.name}, a Chicago video production agency. Brand commercials, tourism films, and social media content. Reply within two business days.`,
 };
 
 export default function ContactPage() {
@@ -27,7 +27,7 @@ export default function ContactPage() {
         >
           We can&rsquo;t wait to work with you. A few sentences is enough —
           brand, scope, rough timing. Reply within two business days, from
-          downtown Chicago.
+          Chicago.
         </Reveal>
       </section>
 

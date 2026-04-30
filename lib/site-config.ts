@@ -3,9 +3,9 @@ export const site = {
   shortName: "Ascent Studios",
   tagline: "Chicago Video Production Agency",
   description:
-    "Ascent Studios is a Chicago video production agency crafting brand commercials, tourism films, and social media content. Based in downtown Chicago. Serving clients in Chicago, NYC, LA, and worldwide.",
+    "Ascent Studios is a Chicago video production agency crafting brand commercials, tourism films, and social media content. Based in Chicago. Serving clients in Chicago, NYC, LA, and worldwide.",
   email: "hello@ascentstudios.com",
-  location: "Downtown Chicago",
+  location: "Chicago",
   social: {
     instagram: "https://instagram.com/",
     vimeo: "https://vimeo.com/",

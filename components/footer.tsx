@@ -54,7 +54,7 @@ export function Footer() {
             <p className="eyebrow mb-3 opacity-60">Inquiries</p>
             <p className="leading-relaxed opacity-80">
               Brand commercials, tourism films, and social media content. From
-              downtown Chicago. Worldwide.
+              Chicago. Worldwide.
             </p>
           </div>
         </div>
