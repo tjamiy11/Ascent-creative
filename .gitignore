@@ -42,3 +42,5 @@ next-env.d.ts
 
 # media (large local-only assets)
 /Videos /
+/Company logos /
+/Thumbnails/

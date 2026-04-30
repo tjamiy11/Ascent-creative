@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { HeroReel } from "@/components/hero-reel";
 import { WorkCard } from "@/components/work-card";
 import { Marquee } from "@/components/marquee";
@@ -36,12 +37,30 @@ const SOLUTIONS = [
 ] as const;
 
 const INDUSTRIES = [
-  "Beauty & Wellness",
-  "Hospitality & Tourism",
-  "Food & Beverage",
-  "Fashion & Lifestyle",
-  "Music & Entertainment",
-  "Independent Brands",
+  {
+    title: "Beauty & Wellness",
+    body: "Brand films and editorial campaigns for skincare, fragrance, and wellness lines — light, texture, and quiet ceremony in place of feature lists.",
+  },
+  {
+    title: "Hospitality & Tourism",
+    body: "Cinematic films for hotels, resorts, and destinations. The room you walk into, the morning view, the language of arrival.",
+  },
+  {
+    title: "Food & Beverage",
+    body: "Restaurants, coffee, and spirits — close-ups, hands at work, and the narrative of a single pour.",
+  },
+  {
+    title: "Fashion & Lifestyle",
+    body: "Lookbooks, brand films, and seasonal campaigns for apparel and lifestyle labels. Cut for taste, made to age well.",
+  },
+  {
+    title: "Music & Entertainment",
+    body: "Promo films, festival recaps, and live tours for artists, labels, and venues — the medium that taught us to make everything else.",
+  },
+  {
+    title: "Independent Brands",
+    body: "Founder-led, design-forward brands at every stage. Sized to your moment, whether it's a Series A campaign or a first launch reel.",
+  },
 ] as const;
 
 export default function HomePage() {
@@ -101,9 +120,17 @@ export default function HomePage() {
         <div className="border-y border-[color:var(--color-line)] py-10">
           <Marquee
             durationSec={48}
+            separator={<span aria-hidden className="px-12" />}
             items={site.clients.map((c) => (
-              <span key={c} className="font-display text-2xl md:text-3xl">
-                {c}
+              <span key={c.name} className="flex items-center" title={c.name}>
+                <Image
+                  src={c.logo}
+                  alt={c.name}
+                  width={160}
+                  height={48}
+                  className="h-10 w-auto object-contain opacity-70 grayscale mix-blend-multiply md:h-12"
+                  unoptimized
+                />
               </span>
             ))}
           />
@@ -238,13 +265,20 @@ export default function HomePage() {
           <ul className="mt-16 grid grid-cols-1 gap-x-12 gap-y-2 md:grid-cols-2">
             {INDUSTRIES.map((industry, i) => (
               <Reveal
-                key={industry}
+                key={industry.title}
                 as="li"
                 delay={i * 0.04}
-                className="flex items-baseline justify-between border-b border-[color:var(--color-line)] py-4 text-base md:text-lg"
+                className="border-b border-[color:var(--color-line)] py-6"
               >
-                <span>{industry}</span>
-                <span className="text-xs opacity-40">0{i + 1}</span>
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="font-display text-xl tracking-tight md:text-2xl">
+                    {industry.title}
+                  </span>
+                  <span className="text-xs opacity-40">0{i + 1}</span>
+                </div>
+                <p className="mt-3 max-w-md text-sm leading-relaxed opacity-70 md:text-base">
+                  {industry.body}
+                </p>
               </Reveal>
             ))}
           </ul>

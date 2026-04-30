@@ -110,9 +110,17 @@ export default function AboutPage() {
       >
         <Marquee
           durationSec={48}
+          separator={<span aria-hidden className="px-12" />}
           items={site.clients.map((c) => (
-            <span key={c} className="font-display text-2xl md:text-3xl">
-              {c}
+            <span key={c.name} className="flex items-center" title={c.name}>
+              <Image
+                src={c.logo}
+                alt={c.name}
+                width={160}
+                height={48}
+                className="h-10 w-auto object-contain opacity-70 grayscale mix-blend-multiply md:h-12"
+                unoptimized
+              />
             </span>
           ))}
         />
