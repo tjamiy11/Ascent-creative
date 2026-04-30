@@ -163,6 +163,9 @@ export function HeroReel() {
         >
           <p className="eyebrow col-span-6 opacity-50 md:col-span-3">
             (01) Studio
+            <span aria-hidden className="hero-orbit-wrap ml-3">
+              <span className="hero-orbit" />
+            </span>
           </p>
           <p className="col-span-12 max-w-md text-xs leading-relaxed opacity-50 md:col-span-6 md:col-start-7">
             Authentic moments. Real emotions. The feeling of being immersed in

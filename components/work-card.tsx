@@ -42,6 +42,13 @@ export function WorkCard({
   const magnetX = useTransform(sx, (v) => v * MAGNET_STRENGTH);
   const magnetY = useTransform(sy, (v) => v * MAGNET_STRENGTH);
 
+  // Tilt (decorative): rotation derived from cursor offset, smoothed with
+  // a slower/bouncier spring so cards feel alive after the cursor stops.
+  const rotY = useTransform(mx, [-220, 220], [6, -6]);
+  const rotX = useTransform(my, [-260, 260], [-6, 6]);
+  const tiltY = useSpring(rotY, { mass: 1, stiffness: 100, damping: 10 });
+  const tiltX = useSpring(rotX, { mass: 1, stiffness: 100, damping: 10 });
+
   const onEnter = () => {
     setHover(true);
     if (project.clip && videoRef.current) {
@@ -73,11 +80,11 @@ export function WorkCard({
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
       onPointerMove={onMove}
-      className={clsx("group block", className)}
+      className={clsx("group block [perspective:1200px]", className)}
     >
       <motion.div
         ref={mediaRef}
-        style={{ x: magnetX, y: magnetY }}
+        style={{ x: magnetX, y: magnetY, rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
         className={clsx(
           "relative w-full overflow-hidden bg-[color:var(--color-ink)]/5",
           aspect
@@ -90,8 +97,8 @@ export function WorkCard({
           sizes="(min-width: 1024px) 50vw, 100vw"
           priority={priority}
           className={clsx(
-            "object-cover transition-[transform,opacity] duration-700 ease-[cubic-bezier(.16,1,.3,1)]",
-            hover && project.clip ? "opacity-0" : "opacity-100",
+            "object-cover transition-[transform,opacity,filter] duration-700 ease-[cubic-bezier(.16,1,.3,1)]",
+            hover && project.clip ? "opacity-0 blur-md" : "opacity-100 blur-0",
             "group-hover:scale-[1.03]"
           )}
         />

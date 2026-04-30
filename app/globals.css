@@ -121,3 +121,37 @@ video {
     animation: none;
   }
 }
+
+@keyframes hero-orbit {
+  from {
+    transform: translate(-50%, -50%) rotateY(0deg) translateZ(14px) rotateY(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateY(360deg) translateZ(14px) rotateY(-360deg);
+  }
+}
+
+.hero-orbit-wrap {
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  transform-style: preserve-3d;
+}
+
+.hero-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--color-paper);
+  opacity: 0.6;
+  animation: hero-orbit 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orbit { animation: none; }
+}
