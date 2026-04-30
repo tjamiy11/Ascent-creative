@@ -4,8 +4,8 @@ import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: `Tell us about your project. ${site.name} works on commercials, brand films, and editorial campaigns.`,
+  title: "Contact — Chicago Video Production",
+  description: `Get in touch with ${site.name}, a downtown Chicago video production agency. Brand commercials, tourism films, and social media content. Reply within two business days.`,
 };
 
 export default function ContactPage() {
@@ -25,8 +25,9 @@ export default function ContactPage() {
           delay={0.1}
           className="mt-10 max-w-md text-sm leading-relaxed opacity-70"
         >
-          A few sentences is enough — brand, scope, rough timing. Reply within
-          two business days.
+          We can&rsquo;t wait to work with you. A few sentences is enough —
+          brand, scope, rough timing. Reply within two business days, from
+          downtown Chicago.
         </Reveal>
       </section>
 

@@ -1,11 +1,11 @@
 export const site = {
-  name: "Ascent Creative Co.",
+  name: "Ascent Studios",
   shortName: "Ascent Studios",
-  tagline: "Films & photography for brands that mean it.",
+  tagline: "Chicago Video Production Agency",
   description:
-    "Ascent Creative Co. is a video and photography studio crafting cinematic brand films, commercials, and editorial campaigns.",
-  email: "hello@ascentcreative.co",
-  location: "—",
+    "Ascent Studios is a Chicago video production agency crafting brand commercials, tourism films, and social media content. Based in downtown Chicago. Serving clients in Chicago, NYC, LA, and worldwide.",
+  email: "hello@ascentstudios.com",
+  location: "Downtown Chicago",
   social: {
     instagram: "https://instagram.com/",
     vimeo: "https://vimeo.com/",
@@ -17,12 +17,12 @@ export const site = {
     { label: "Contact", href: "/contact" },
   ],
   capabilities: [
-    "Brand Films",
-    "Commercials",
-    "Product Photography",
-    "Editorial",
-    "Direction",
-    "Color & Finish",
+    "Brand Commercials",
+    "Tourism Films",
+    "Social Media Content",
+    "Personal Branding",
+    "Music Videos",
+    "Direction & Cinematography",
   ],
   honeybook: {
     // When you have your HoneyBook contact form embed, paste the form ID here.

@@ -25,11 +25,22 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.description,
-  metadataBase: new URL("https://ascentcreative.co"),
+  keywords: [
+    "Chicago video production agency",
+    "Chicago video production",
+    "video production Chicago",
+    "brand commercials Chicago",
+    "tourism video production",
+    "social media content production",
+    "professional video marketing",
+    "Chicago video agency",
+  ],
+  metadataBase: new URL("https://ascentstudios.com"),
   openGraph: {
     title: site.name,
     description: site.description,
     type: "website",
+    locale: "en_US",
   },
 };
 

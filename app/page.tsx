@@ -57,15 +57,18 @@ export default function HomePage() {
         </Reveal>
         <div className="col-span-12 md:col-span-9">
           <Reveal as="h2" className="heading-display max-w-3xl">
-            One brief at a time.
+            Authentic moments,
+            <br />
+            <span className="italic opacity-60">real emotions.</span>
           </Reveal>
           <Reveal
             delay={0.1}
             as="p"
             className="mt-10 max-w-xl text-base leading-relaxed opacity-70 md:text-lg"
           >
-            We embed early and stay through edit, color, and finish. Six to
-            eight projects a year.
+            Best-in-class video production for brands across Chicago and
+            beyond. Ten-plus years working with clients in Chicago, NYC, LA,
+            and on location in Italy, Ibiza, Bali, and Costa Rica.
           </Reveal>
         </div>
       </section>

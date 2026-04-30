@@ -12,7 +12,7 @@ export function HeroReel() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="eyebrow"
         >
-          Ascent Studios · Est. 2025
+          Chicago Video Production Agency · Est. 2015
         </motion.p>
 
         <div className="max-w-5xl">
@@ -38,8 +38,8 @@ export function HeroReel() {
             (01) Studio
           </p>
           <p className="col-span-12 max-w-md text-sm leading-relaxed opacity-70 md:col-span-6 md:col-start-7">
-            An independent studio in moving and still image. Selectively, and
-            with intent.
+            Brand commercials, tourism films, and social media content. Based
+            in downtown Chicago. Working worldwide.
           </p>
         </motion.div>
       </div>

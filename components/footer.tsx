@@ -53,8 +53,8 @@ export function Footer() {
           <div>
             <p className="eyebrow mb-3 opacity-60">Inquiries</p>
             <p className="leading-relaxed opacity-80">
-              We work with brands, agencies, and direct clients on commercials,
-              brand films, and editorial campaigns.
+              Brand commercials, tourism films, and social media content. From
+              downtown Chicago. Worldwide.
             </p>
           </div>
         </div>

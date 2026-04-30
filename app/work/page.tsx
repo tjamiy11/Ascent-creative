@@ -5,8 +5,9 @@ import { ContactCTA } from "@/components/contact-cta";
 import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Work",
-  description: "Selected films and photography from Ascent Studios.",
+  title: "Work — Chicago Video Production",
+  description:
+    "Selected brand commercials, tourism films, and social media content by Ascent Studios — a Chicago video production agency working with clients in Chicago, NYC, LA, and worldwide.",
 };
 
 export default function WorkPage() {
