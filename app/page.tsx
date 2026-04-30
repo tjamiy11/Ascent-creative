@@ -174,25 +174,31 @@ export default function HomePage() {
           </Reveal>
 
           <div className="mt-16 space-y-16 md:space-y-20">
-            {stories.map((t, i) => (
-              <Reveal
-                key={`${t.author}-${i}`}
-                delay={i * 0.05}
-                className="border-t border-[color:var(--color-line)] pt-8"
-              >
-                <blockquote className="font-display text-[clamp(1.5rem,2.6vw,2.5rem)] leading-[1.15] tracking-tight">
-                  <span className="opacity-30">“</span>
-                  {t.quote}
-                  <span className="opacity-30">”</span>
-                </blockquote>
-                <div className="mt-6 flex flex-wrap items-baseline gap-x-6 gap-y-1">
-                  <span className="text-sm">{t.author}</span>
-                  <span className="eyebrow opacity-60">
-                    {t.role} · {t.company}
-                  </span>
-                </div>
-              </Reveal>
-            ))}
+            {stories.map((t, i) => {
+              const attribution = [t.role, t.company]
+                .filter(Boolean)
+                .join(" · ");
+              return (
+                <Reveal
+                  key={`${t.author}-${i}`}
+                  delay={i * 0.05}
+                  className="border-t border-[color:var(--color-line)] pt-8"
+                >
+                  <h3 className="font-display text-[clamp(1.5rem,2.6vw,2.5rem)] leading-[1.15] tracking-tight">
+                    &ldquo;{t.title}.&rdquo;
+                  </h3>
+                  <p className="mt-6 max-w-2xl text-base leading-relaxed opacity-80">
+                    {t.quote}
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-baseline gap-x-6 gap-y-1">
+                    <span className="text-sm">— {t.author}</span>
+                    {attribution && (
+                      <span className="eyebrow opacity-60">{attribution}</span>
+                    )}
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
 
           <Reveal delay={0.15} className="mt-12">

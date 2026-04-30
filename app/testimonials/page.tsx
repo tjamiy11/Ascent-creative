@@ -4,12 +4,18 @@ import { Reveal } from "@/components/reveal";
 import { Marquee } from "@/components/marquee";
 import { ContactCTA } from "@/components/contact-cta";
 import { testimonials, getFeaturedTestimonials } from "@/lib/testimonials";
+import type { Testimonial } from "@/lib/testimonials";
 import { site } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Testimonials — Client Feedback",
   description: `What clients say about working with ${site.name}, a Chicago video production agency. Brand commercials, tourism films, and social media content.`,
 };
+
+function attributionLine(t: Testimonial): string | null {
+  const parts = [t.role, t.company].filter(Boolean) as string[];
+  return parts.length > 0 ? parts.join(" · ") : null;
+}
 
 export default function TestimonialsPage() {
   const featured = getFeaturedTestimonials();
@@ -38,76 +44,88 @@ export default function TestimonialsPage() {
         </Reveal>
       </section>
 
-      {/* Featured pull-quotes — one per scroll, generous breathing room */}
+      {/* Featured: title leads, full quote underneath */}
       <div className="space-y-[var(--space-section)]">
-        {featured.map((t, i) => (
-          <section
-            key={`${t.author}-${i}`}
-            className="container-edge grid grid-cols-12 gap-y-10 md:gap-x-12"
-          >
-            <Reveal
-              as="p"
-              className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
+        {featured.map((t, i) => {
+          const attribution = attributionLine(t);
+          return (
+            <section
+              key={`${t.author}-${i}`}
+              className="container-edge grid grid-cols-12 gap-y-10 md:gap-x-12"
             >
-              ({String(i + 1).padStart(2, "0")}) {t.company}
-            </Reveal>
-            <div className="col-span-12 md:col-span-9">
-              <Reveal>
-                <blockquote className="font-display text-[clamp(1.75rem,3.4vw,3.75rem)] leading-[1.1] tracking-tight">
-                  <span className="opacity-30">“</span>
-                  {t.quote}
-                  <span className="opacity-30">”</span>
-                </blockquote>
-              </Reveal>
-
               <Reveal
-                delay={0.1}
-                className="mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-2 border-t border-[color:var(--color-line)] pt-6"
+                as="p"
+                className="eyebrow col-span-12 opacity-60 md:col-span-3 md:sticky md:top-32 md:self-start"
               >
-                <span className="text-base">{t.author}</span>
-                <span className="eyebrow opacity-60">
-                  {t.role} · {t.company}
-                </span>
-                {t.projectSlug && (
-                  <Link
-                    href={`/work/${t.projectSlug}`}
-                    className="eyebrow ml-auto underline-offset-4 hover:underline"
-                  >
-                    See the project →
-                  </Link>
-                )}
+                ({String(i + 1).padStart(2, "0")}) {t.author}
               </Reveal>
-            </div>
-          </section>
-        ))}
+              <div className="col-span-12 md:col-span-9">
+                <Reveal
+                  as="h2"
+                  className="font-display text-[clamp(2rem,4.6vw,4.5rem)] leading-[1.05] tracking-tight"
+                >
+                  &ldquo;{t.title}.&rdquo;
+                </Reveal>
+
+                <Reveal>
+                  <blockquote className="mt-10 max-w-3xl text-lg leading-relaxed opacity-80 md:text-xl">
+                    {t.quote}
+                  </blockquote>
+                </Reveal>
+
+                <Reveal
+                  delay={0.1}
+                  className="mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-2 border-t border-[color:var(--color-line)] pt-6"
+                >
+                  <span className="text-base">— {t.author}</span>
+                  {attribution && (
+                    <span className="eyebrow opacity-60">{attribution}</span>
+                  )}
+                  {t.projectSlug && (
+                    <Link
+                      href={`/work/${t.projectSlug}`}
+                      className="eyebrow ml-auto underline-offset-4 hover:underline"
+                    >
+                      See the project →
+                    </Link>
+                  )}
+                </Reveal>
+              </div>
+            </section>
+          );
+        })}
       </div>
 
-      {/* Quieter quotes — two-up grid */}
+      {/* Quieter quotes — two-up grid (renders only when present) */}
       {rest.length > 0 && (
         <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-10 md:gap-x-12">
           <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">
             More
           </Reveal>
           <div className="col-span-12 grid grid-cols-1 gap-12 md:col-span-9 md:grid-cols-2 md:gap-x-12 md:gap-y-16">
-            {rest.map((t, i) => (
-              <Reveal
-                key={`${t.author}-${i}`}
-                delay={i * 0.05}
-                className="space-y-6"
-              >
-                <blockquote className="font-display text-xl leading-snug md:text-2xl">
-                  <span className="opacity-30">“</span>
-                  {t.quote}
-                  <span className="opacity-30">”</span>
-                </blockquote>
-                <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1 border-t border-[color:var(--color-line)] pt-4">
-                  <span className="text-sm">{t.author}</span>
-                  <span className="eyebrow opacity-60">
-                    {t.role} · {t.company}
-                  </span>
-                </div>
-              </Reveal>
-            ))}
+            {rest.map((t, i) => {
+              const attribution = attributionLine(t);
+              return (
+                <Reveal
+                  key={`${t.author}-${i}`}
+                  delay={i * 0.05}
+                  className="space-y-5"
+                >
+                  <h3 className="font-display text-2xl leading-snug tracking-tight md:text-3xl">
+                    &ldquo;{t.title}.&rdquo;
+                  </h3>
+                  <p className="text-sm leading-relaxed opacity-80 md:text-base">
+                    {t.quote}
+                  </p>
+                  <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1 border-t border-[color:var(--color-line)] pt-4">
+                    <span className="text-sm">— {t.author}</span>
+                    {attribution && (
+                      <span className="eyebrow opacity-60">{attribution}</span>
+                    )}
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </section>
       )}
