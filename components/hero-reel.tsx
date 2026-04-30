@@ -45,11 +45,27 @@ export function HeroReel() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[color:var(--color-paper)]"
+      className="relative w-full overflow-hidden bg-[color:var(--color-ink)]"
     >
+      <video
+        aria-hidden
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/video/hero.jpg"
+        className="absolute inset-0 h-full w-full object-cover opacity-70"
+      >
+        <source src="/video/hero.mp4" type="video/mp4" />
+      </video>
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70"
+      />
       <HeroBackground />
 
-      <div className="container-edge relative flex min-h-[100svh] flex-col justify-between pt-40 pb-16 text-[color:var(--color-ink)]">
+      <div className="container-edge relative flex min-h-[100svh] flex-col justify-between pt-40 pb-16 text-[color:var(--color-paper)]">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 0.6, y: 0 }}
@@ -111,7 +127,7 @@ export function HeroReel() {
               href="/contact"
               className="group inline-flex items-baseline gap-3 text-base"
             >
-              <span className="border-b border-[color:var(--color-ink)] pb-1">
+              <span className="border-b border-[color:var(--color-paper)] pb-1">
                 Start a project
               </span>
               <span
