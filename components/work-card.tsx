@@ -121,14 +121,14 @@ export function WorkCard({
         {project.logo && (
           <div
             aria-hidden
-            className="absolute top-5 left-5 z-10 h-8 w-auto"
+            className="absolute inset-0 z-10 flex items-center justify-center"
           >
             <Image
               src={project.logo}
               alt=""
-              width={120}
-              height={32}
-              className="h-8 w-auto object-contain brightness-0 invert drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
+              width={240}
+              height={80}
+              className="h-14 w-auto object-contain brightness-0 invert drop-shadow-[0_4px_16px_rgba(0,0,0,0.55)] md:h-20"
               unoptimized
             />
           </div>

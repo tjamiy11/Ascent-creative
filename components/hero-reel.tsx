@@ -70,8 +70,8 @@ export function HeroReel() {
       />
       <HeroBackground />
 
-      <div className="container-edge relative flex min-h-[100svh] flex-col justify-between pt-40 pb-16 text-[color:var(--color-paper)]">
-        <div className="max-w-5xl">
+      <div className="container-edge relative flex min-h-[100svh] flex-col pt-40 pb-16 text-[color:var(--color-paper)]">
+        <div className="my-auto max-w-5xl">
           <motion.h1
             variants={headlineContainer}
             initial="hidden"
@@ -106,7 +106,7 @@ export function HeroReel() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 0.85, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            className="mt-6 font-display text-xl tracking-tight md:text-2xl"
+            className="mt-8 font-display text-xl tracking-tight md:text-2xl"
           >
             Best in Class Video Production
           </motion.p>
@@ -115,7 +115,7 @@ export function HeroReel() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 0.7, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-10 max-w-md text-base leading-relaxed"
+            className="mt-14 max-w-md text-base leading-relaxed"
           >
             Professional Video Marketing for Brands throughout Chicago and Beyond.
           </motion.p>
@@ -124,7 +124,7 @@ export function HeroReel() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.95 }}
-            className="mt-12 flex flex-wrap items-baseline gap-x-10 gap-y-3"
+            className="mt-16 flex flex-wrap items-baseline gap-x-10 gap-y-3"
           >
             <Link
               href="/contact"
