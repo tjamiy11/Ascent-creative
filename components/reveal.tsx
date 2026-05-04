@@ -22,8 +22,8 @@ export function Reveal({
   const Comp = motion[as] as typeof motion.div;
   return (
     <Comp
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, transform: `translateY(${y}px)` }}
+      whileInView={{ opacity: 1, transform: "translateY(0px)" }}
       viewport={{ once: true, margin: "-10% 0px" }}
       transition={{
         duration: 0.8,

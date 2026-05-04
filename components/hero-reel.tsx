@@ -66,7 +66,7 @@ export function HeroReel() {
       </video>
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70"
+        className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/55 to-black/85"
       />
       <HeroBackground />
 

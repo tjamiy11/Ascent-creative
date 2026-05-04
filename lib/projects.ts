@@ -21,29 +21,29 @@ export const projects: Project[] = [
     title: "Becs",
     client: "Hoka",
     year: 2025,
-    role: "Direction · Cinematography",
+    role: "DP · Editor",
     kind: "video",
     tags: ["Commercial", "Athletic"],
     cover: "/video/hoka.jpg",
     clip: "/video/hoka.mp4",
     logo: "/logos/hoka.png",
     excerpt:
-      "A short-form spot for Hoka — vertical-first, built to land in the feed without losing the cinematic standard.",
+      "Becs Gentry on the road — \"forward is a pace.\" A piece on joyful, sustainable movement for Hoka, made with Big Studio and directed by Tom Bender.",
     featured: true,
   },
   {
-    slug: "nike-dtla",
-    title: "Orange",
+    slug: "nike-dtlr",
+    title: "DTLR",
     client: "Nike",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
     tags: ["Brand Film", "Athletic"],
-    cover: "/video/dtla.jpg",
-    clip: "/video/dtla.mp4",
+    cover: "/video/dtlr.jpg",
+    clip: "/video/dtlr.mp4",
     logo: "/logos/nike.svg",
     excerpt:
-      "A downtown LA activation for Nike — color, motion, and the city as a runway.",
+      "A new Nike silhouette built for the in-store screens at DTLR. Agency: Limitless. Shot and cut by Stefan.",
     featured: true,
   },
   {
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     clip: "/video/palmer.mp4",
     logo: "/logos/palmer.png",
     excerpt:
-      "A brand film for the historic Chicago hotel — spa, ceremony, and the language of arrival.",
+      "A marketing film and stills package made in-house at Ascent Studios to draw new clients to the Palmer House Spa. Shot and cut by Stefan.",
     featured: true,
   },
   {
@@ -66,13 +66,13 @@ export const projects: Project[] = [
     title: "Streetfighter",
     client: "Ducati",
     year: 2025,
-    role: "Direction · Cinematography",
+    role: "Co-direction · Drone",
     kind: "video",
     tags: ["Auto", "Brand Film"],
     cover: "/video/ducati.jpg",
     clip: "/video/ducati.mp4",
     excerpt:
-      "A spec spot for Ducati's Streetfighter — speed, precision, and the geometry of motion.",
+      "A spec spot for the Ducati Streetfighter. Co-directed by Stefan and David Strib, with Stefan flying drone, David cutting, and Sam riding.",
   },
   {
     slug: "xai",
@@ -92,26 +92,26 @@ export const projects: Project[] = [
     title: "Reverb",
     client: "Lollapalooza",
     year: 2025,
-    role: "Direction · Cinematography",
+    role: "Cinematography",
     kind: "video",
     tags: ["Music & Festival", "Branded Doc"],
     cover: "/video/lollareverb.jpg",
     clip: "/video/lollareverb.mp4",
     excerpt:
-      "An explainer film for Lollapalooza's Reverb sustainability initiative — backstage, on-stage, and the ground crew that makes it work.",
+      "A sustainability piece for Lollapalooza × Reverb — co-shot with Jackson Visuals, who carried it through the edit.",
   },
   {
-    slug: "miss-usa",
-    title: "Miss USA",
-    client: "Miss USA",
+    slug: "miss-illinois",
+    title: "Miss Illinois",
+    client: "Miss Illinois",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
     tags: ["Brand Film", "Editorial"],
-    cover: "/video/missusa.jpg",
-    clip: "/video/missusa.mp4",
+    cover: "/video/missillinois.jpg",
+    clip: "/video/missillinois.mp4",
     excerpt:
-      "A short brand film for the Miss USA program — composure, ceremony, and the quiet hours before stage.",
+      "A highlight reel for Miss Illinois, cut for her Miss Universe submission.",
   },
   {
     slug: "blum-and-co",
@@ -129,15 +129,15 @@ export const projects: Project[] = [
   {
     slug: "trulli",
     title: "4×4 Trulli",
-    client: "Trulli",
+    client: "Trulli Speakers",
     year: 2025,
-    role: "Direction · Cinematography",
+    role: "Cinematography",
     kind: "video",
     tags: ["Travel", "Brand Film"],
     cover: "/video/trulli.jpg",
     clip: "/video/trulli.mp4",
     excerpt:
-      "A travel piece on the 4×4 trail through Italy's Trulli region — stone, dust, and the slow rhythm of arrival.",
+      "A run of event-recap edits for Trulli Speakers, cut for brand awareness. Production: Kurza.",
   },
   {
     slug: "candy-cloud",
@@ -150,7 +150,7 @@ export const projects: Project[] = [
     cover: "/video/candycloud.jpg",
     clip: "/video/candycloud.mp4",
     excerpt:
-      "An on-the-floor piece capturing the energy of a sorority night at Candy Cloud — light, friends, and a soundtrack that doesn't quit.",
+      "Retainer work for Candy Cloud — branding content and new-collection releases that keep the audience leaning in. In-house at Ascent Studios with creative direction by Peyton; shot and cut by Stefan.",
   },
   {
     slug: "morph",
@@ -181,7 +181,7 @@ export const projects: Project[] = [
   {
     slug: "boxed",
     title: "Boxed",
-    client: "Boxed",
+    client: "Boxed Gift",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
@@ -189,7 +189,7 @@ export const projects: Project[] = [
     cover: "/video/boxed.jpg",
     clip: "/video/boxed.mp4",
     excerpt:
-      "A short-form piece on packaging, ritual, and the small ceremony of a reveal.",
+      "Marketing content videos for Boxed Gift.",
   },
   {
     slug: "gift-card",
