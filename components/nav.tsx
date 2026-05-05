@@ -60,6 +60,20 @@ export function Nav() {
         <nav aria-label="Primary" className="flex items-center gap-7">
           {site.nav.map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const isCta = "cta" in item && item.cta;
+
+            if (isCta) {
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-full border border-current px-4 py-1.5 text-sm tracking-wide transition-colors hover:bg-[currentColor]/10"
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+
             return (
               <Link
                 key={item.href}

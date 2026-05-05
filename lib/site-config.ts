@@ -15,7 +15,7 @@ export const site = {
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
     { label: "Testimonials", href: "/testimonials" },
-    { label: "Contact", href: "/contact" },
+    { label: "Start a Project", href: "/contact", cta: true },
   ],
   // Marquee of past + current clients. Each entry pairs the brand name (alt
   // text + accessibility label) with a logo file in /public/logos/.
