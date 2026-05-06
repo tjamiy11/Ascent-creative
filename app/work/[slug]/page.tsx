@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import type { ComponentType } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
+import { projectContentLoaders } from "@/content/projects";
 import {
   getNextProject,
   getProject,
@@ -39,7 +41,10 @@ export default async function CaseStudyPage({
   const project = getProject(slug);
   if (!project) notFound();
 
-  const { default: Content } = await import(`@/content/projects/${slug}.mdx`);
+  // MDX content is optional — photo entries (and other future kinds) may
+  // not have a per-project write-up. If the file is missing, render the
+  // case study without it instead of 500-ing.
+  const Content = await loadProjectContent(slug);
   const next = getNextProject(slug);
 
   return (
@@ -83,9 +88,11 @@ export default async function CaseStudyPage({
         </div>
       </Reveal>
 
-      <div className="container-edge mt-16">
-        <Content />
-      </div>
+      {Content && (
+        <div className="container-edge mt-16">
+          <Content />
+        </div>
+      )}
 
       <nav
         aria-label="Next project"
@@ -115,6 +122,20 @@ export default async function CaseStudyPage({
       />
     </article>
   );
+}
+
+async function loadProjectContent(
+  slug: string
+): Promise<ComponentType | null> {
+  const loader = projectContentLoaders[slug];
+  if (!loader) return null;
+
+  try {
+    const mod = await loader();
+    return mod.default as ComponentType;
+  } catch {
+    return null;
+  }
 }
 
 function Meta({ label, value }: { label: string; value: string }) {
