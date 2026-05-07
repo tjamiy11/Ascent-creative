@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HoneybookEmbed } from "@/components/honeybook-embed";
+import { InquiryForm } from "@/components/inquiry-form";
 import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/site-config";
 
@@ -75,7 +75,7 @@ export default function ContactPage() {
 
         <div className="col-span-12 md:col-span-8">
           <Reveal>
-            <HoneybookEmbed />
+            <InquiryForm />
           </Reveal>
         </div>
       </section>

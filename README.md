@@ -1,10 +1,11 @@
-# Ascent Creative Co.
+# Ascent Studios
 
-Studio website for **Ascent Creative Co.** — a video and photography studio.
+Studio website for **Ascent Studios** — a Chicago video and photography studio.
 
 Built with **Next.js 16 (App Router) + TypeScript + Tailwind v4**, with Framer
 Motion + Lenis for the editorial motion language and MDX for case-study
-content. The contact page is wired to embed a HoneyBook contact form.
+content. Video clips are hosted on Cloudflare R2; cover images stay local for
+Next.js Image optimization.
 
 ## Getting started
 
@@ -18,12 +19,15 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Project layout
 
 ```
-app/                  Routes (Home, Work, Case study, About, Contact)
-components/           Reusable UI (Nav, Footer, HeroReel, WorkCard, ...)
-content/projects/     MDX case studies, one per project
-lib/projects.ts       Project metadata (titles, covers, tags, etc.)
-lib/site-config.ts    Studio name, nav, social, HoneyBook form ID
-public/placeholders/  Placeholder hero clip + cover stills (swap freely)
+app/                  Routes (Home, Work, Case study, About, Contact, Testimonials)
+components/           Reusable UI (Nav, Footer, HeroReel, WorkCard, VideoCarousel, ...)
+content/projects/     Optional MDX case studies, one per project (graceful if missing)
+lib/projects.ts       Project metadata (titles, covers, clips, gallery, tags, etc.)
+lib/site-config.ts    Studio name, nav, social, clients marquee, inquiry form
+lib/testimonials.ts   Testimonial copy used by /testimonials and the home carousel
+public/photos/        Transcoded portfolio photos (~13 MB total)
+public/logos/         Client logos (transparent PNGs + a few SVGs)
+public/video/*.jpg    Cover stills for each video project (mp4s live on R2)
 mdx-components.tsx    MDX block mappings (Still, Video, Pull, Pair, h2, p)
 ```
 
@@ -32,24 +36,34 @@ mdx-components.tsx    MDX block mappings (Still, Video, Pull, Pair, h2, p)
 ### Add a new project
 
 1. Add an entry to the `projects` array in `lib/projects.ts`.
-2. Drop a cover image (and optional clip) into `public/placeholders/` (or
-   wherever you keep real assets).
-3. Create `content/projects/<slug>.mdx` with the case-study content.
+2. For a video project: transcode the source `.mov` to a small `.mp4`
+   (`ffmpeg -i in.mov -c:v libx264 -crf 24 -vf "scale=1280:-2" out.mp4`)
+   and upload to the R2 bucket. Set `clip` to the R2 URL. Drop a cover
+   still in `public/video/<name>.jpg` (a frame extracted via ffmpeg works).
+3. For a photo project: drop a web-optimized JPG in `public/photos/` and
+   set `kind: "photo"` with `cover` pointing at it.
+4. (Optional) Create `content/projects/<slug>.mdx` with case-study content.
+   If absent, the case-study page renders without it — no error.
 
 The new project shows up automatically in `/work` and at `/work/<slug>`.
 
-### Wire the real HoneyBook form
+### Wire a Google Form for inquiries
 
-1. In HoneyBook, go to **Tools → Contact Forms** and create the form.
-2. Click **Embed**, copy the placement ID.
-3. Paste it into `honeybook.formId` in `lib/site-config.ts`.
+1. Create a Google Form (any structure: name, email, project type, message).
+2. Form Settings → enable email notifications.
+3. **Send** → `< >` Embed tab → copy the iframe `src` URL.
+4. Paste into `lib/site-config.ts` → `inquiryForm.googleFormsUrl`.
+5. Adjust `inquiryForm.height` if the form is taller/shorter than 900px.
 
-The placeholder card in `/contact` will be replaced by the real form.
+Submissions land in the linked Google Sheet automatically. Until you set
+this, the contact page shows a styled mailto fallback form.
 
-### Swap placeholder media for real assets
+### Swap a thumbnail / replace a video
 
-Drop replacements into `public/placeholders/` using the same filenames, or
-update the paths in `lib/projects.ts` and the MDX files.
+- **Thumbnail**: replace `public/video/<name>.jpg` (or set
+  `thumbnailFromCover: true` on the project to skip first-frame mode).
+- **Video**: re-upload a new `<name>.mp4` to the R2 bucket. The repo
+  doesn't store mp4s — they live at `pub-XXXX.r2.dev/<name>.mp4`.
 
 ### Reduce-motion support
 
@@ -58,8 +72,9 @@ Lenis smooth scroll, Framer Motion reveals, and the marquee all respect
 
 ## Deploy
 
-The site is a standard Next.js App Router app — deploy to Vercel, Netlify, or
-any Node host. No environment variables required for the placeholder build.
+Deployed to **Vercel** at [ascentstudios.co](https://ascentstudios.co). Pushes
+to `main` auto-deploy. The site has no required environment variables; videos
+load from Cloudflare R2 at hardcoded URLs in the project config.
 
 ```bash
 npm run build && npm start

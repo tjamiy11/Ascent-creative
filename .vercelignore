@@ -1,0 +1,19 @@
+# Source media folders — local-only working files. The transcoded web-ready
+# versions live in /public/photos/ and on Cloudflare R2. Everything else here
+# is multi-GB raw footage / unprocessed sources that Vercel must not upload.
+Videos*/
+Photos*/
+Thumbnails*/
+company*logos*/
+Company*logos*/
+
+# Claude Code worktree state — local-only
+.claude/
+
+# Local mp4 clips (now hosted on Cloudflare R2)
+public/video/*.mp4
+
+# Defaults Vercel already excludes, listed for clarity
+node_modules/
+.next/
+.git/

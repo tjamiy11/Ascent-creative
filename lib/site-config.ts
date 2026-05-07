@@ -51,12 +51,11 @@ export const site = {
     "Direction & Cinematography",
   ],
   /**
-   * Inquiry form on /contact. Priority of what gets rendered:
+   * Inquiry form on /contact. Priority:
    *   1. Google Forms iframe — if `googleFormsUrl` is set
-   *   2. HoneyBook iframe    — if `honeybook.formId` is set
-   *   3. Built-in mailto form — fallback (works today, no setup needed)
+   *   2. Built-in mailto form — fallback (works today, no setup needed)
    *
-   * To attach a Google Form (recommended easiest path):
+   * To attach a Google Form:
    *   - Open your Google Form → Send → <> (Embed) tab
    *   - Copy the value of `src=` (looks like:
    *     https://docs.google.com/forms/d/e/XXXX/viewform?embedded=true)
@@ -67,10 +66,6 @@ export const site = {
   inquiryForm: {
     googleFormsUrl: "",
     height: 900,
-  },
-  honeybook: {
-    formId: "",
-    scriptSrc: "https://widget.honeybook.com/assets_users_production/website_placements/widget.js",
   },
 } as const;
 

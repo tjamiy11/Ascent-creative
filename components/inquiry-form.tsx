@@ -2,24 +2,21 @@
 
 import { useState, type ReactNode } from "react";
 import type * as React from "react";
-import Script from "next/script";
 import clsx from "clsx";
 import { site } from "@/lib/site-config";
 
 /**
  * Contact / inquiry form for the /contact page.
  *
- * Renders one of three things, in priority order:
+ * Renders one of two things, in priority order:
  *   1. Google Forms iframe — if `site.inquiryForm.googleFormsUrl` is set
- *      (easiest path: paste the form's embed src into config, done)
- *   2. HoneyBook iframe    — if `site.honeybook.formId` is set
- *   3. Built-in mailto form — fallback so the page is never empty
- *
- * Component name kept as `HoneybookEmbed` for caller compatibility.
+ *      (paste the form's embed src into config, done — submissions land
+ *      in the linked Google Sheet, Stefan gets email notifications)
+ *   2. Built-in mailto form — fallback so the page is never empty
+ *      (visitor submits → opens their email client pre-filled to Stefan)
  */
-export function HoneybookEmbed() {
+export function InquiryForm() {
   const { googleFormsUrl, height } = site.inquiryForm;
-  const { formId, scriptSrc } = site.honeybook;
 
   if (googleFormsUrl) {
     return (
@@ -35,24 +32,7 @@ export function HoneybookEmbed() {
     );
   }
 
-  if (formId) {
-    return (
-      <>
-        <div
-          id={formId}
-          data-hb-id={formId}
-          className="hb-p-placement min-h-[600px] w-full"
-        />
-        <Script
-          src={scriptSrc}
-          strategy="afterInteractive"
-          data-w-token={formId}
-        />
-      </>
-    );
-  }
-
-  return <InquiryForm />;
+  return <MailtoForm />;
 }
 
 type FormData = {
@@ -94,7 +74,7 @@ const BUDGETS = [
 const INPUT_BASE =
   "w-full border-b border-[color:var(--color-line)] bg-transparent py-2 text-base transition-colors focus:border-[color:var(--color-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ink)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-paper)]";
 
-function InquiryForm() {
+function MailtoForm() {
   const [data, setData] = useState<FormData>({
     name: "",
     email: "",
