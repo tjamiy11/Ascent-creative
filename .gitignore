@@ -40,7 +40,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# media (large local-only assets)
-/Videos /
-/Company logos /
+# media (large local-only assets) — variants cover case + trailing-space
+/Videos\ /
+/Photos\ /
+/company\ logos/
+/Company\ logos\ /
 /Thumbnails/
+
+# claude code worktree state — local-only
+/.claude/worktrees/

@@ -21,7 +21,6 @@ export function Nav() {
   useEffect(() => {
     const hero = document.querySelector<HTMLElement>("[data-hero]");
     if (!hero) {
-      setOverHero(false);
       return;
     }
     const check = () => {
@@ -67,7 +66,12 @@ export function Nav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="rounded-full border border-current px-4 py-1.5 text-sm tracking-wide transition-colors hover:bg-[currentColor]/10"
+                  style={
+                    overHero
+                      ? { backgroundColor: "var(--color-paper)", color: "var(--color-ink)" }
+                      : { backgroundColor: "var(--color-ink)", color: "var(--color-paper)" }
+                  }
+                  className="rounded-full px-4 py-1.5 text-sm tracking-wide transition-[background-color,color,opacity] duration-300 hover:opacity-85"
                 >
                   {item.label}
                 </Link>
@@ -79,7 +83,7 @@ export function Nav() {
                 key={item.href}
                 href={item.href}
                 className={clsx(
-                  "relative text-sm tracking-wide transition-opacity",
+                  "group relative text-sm tracking-wide transition-opacity",
                   active ? "opacity-100" : "opacity-70 hover:opacity-100"
                 )}
               >

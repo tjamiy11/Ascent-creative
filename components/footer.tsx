@@ -3,6 +3,11 @@ import { site } from "@/lib/site-config";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const socialLinks = [
+    { label: "Instagram (Stefan)", href: site.social.instagramPersonal },
+    { label: "Instagram (Ascent Studios)", href: site.social.instagramStudio },
+  ].filter((link) => Boolean(link.href));
+
   return (
     <footer className="mt-[var(--space-section)] border-t border-[color:var(--color-line)]">
       <div className="container-edge flex flex-col gap-12 py-14 md:py-16">
@@ -20,21 +25,13 @@ export function Footer() {
           <div>
             <p className="eyebrow mb-3 opacity-60">Elsewhere</p>
             <ul className="space-y-1.5">
-              <li>
-                <a href={site.social.instagram} rel="noreferrer" target="_blank">
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a href={site.social.vimeo} rel="noreferrer" target="_blank">
-                  Vimeo
-                </a>
-              </li>
-              <li>
-                <a href={site.social.are_na} rel="noreferrer" target="_blank">
-                  Are.na
-                </a>
-              </li>
+              {socialLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} rel="noreferrer" target="_blank">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

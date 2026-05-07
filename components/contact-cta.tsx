@@ -7,6 +7,8 @@ type ContactCTAProps = {
   eyebrow?: string;
   /** Override the default headline */
   heading?: React.ReactNode;
+  /** Tighten the top spacing — used after sections that already have weight */
+  compact?: boolean;
 };
 
 const DEFAULT_HEADING = (
@@ -19,11 +21,16 @@ const DEFAULT_HEADING = (
 export function ContactCTA({
   eyebrow = "Start a project",
   heading = DEFAULT_HEADING,
+  compact = false,
 }: ContactCTAProps) {
   return (
     <section
       aria-label="Contact"
-      className="container-edge mt-[var(--space-section)] border-t border-[color:var(--color-line)] pt-20 md:pt-32"
+      className={
+        compact
+          ? "container-edge mt-20 border-t border-[color:var(--color-line)] pt-16 md:mt-24 md:pt-20"
+          : "container-edge mt-[var(--space-section)] border-t border-[color:var(--color-line)] pt-20 md:pt-32"
+      }
     >
       <div className="grid grid-cols-12 gap-y-12 md:gap-x-12">
         <Reveal as="p" className="eyebrow col-span-12 opacity-60 md:col-span-3">

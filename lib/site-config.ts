@@ -39,6 +39,8 @@ export const site = {
     { name: "Flygta Airlines", logo: "/logos/flygta.png" },
     { name: "DTRL", logo: "/logos/dtrl.png" },
     { name: "DTA", logo: "/logos/dta.png" },
+    { name: "Samsung", logo: "/logos/samsung.svg" },
+    { name: "Country Splash", logo: "/logos/country-splash.png", naturalColor: true },
   ],
   capabilities: [
     "Brand Commercials",

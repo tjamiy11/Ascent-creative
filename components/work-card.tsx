@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   useTransform,
 } from "framer-motion";
@@ -18,6 +19,12 @@ type WorkCardProps = {
   className?: string;
   /** Aspect ratio class, e.g. "aspect-[4/5]" */
   aspect?: string;
+  /**
+   * If true and the project has a clip, render the video paused at its
+   * first frame as the thumbnail (no cover image). Hovering plays it.
+   * Used on the home tri-fold; `/work` stays on cover-image-then-fade.
+   */
+  firstFrameThumbnail?: boolean;
 };
 
 const MAGNET_STRENGTH = 0.18;
@@ -27,10 +34,12 @@ export function WorkCard({
   priority,
   className,
   aspect = "aspect-[4/5]",
+  firstFrameThumbnail = false,
 }: WorkCardProps) {
   const [hover, setHover] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   // Cursor-magnet: track pointer offset from card center, translate the
   // media block toward it (max ~16px). Subtle on its own; combines with
@@ -65,6 +74,7 @@ export function WorkCard({
     }
   };
   const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    if (reduceMotion) return;
     const el = mediaRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -80,48 +90,79 @@ export function WorkCard({
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
       onPointerMove={onMove}
+      onFocus={onEnter}
+      onBlur={onLeave}
       className={clsx("group block [perspective:1200px]", className)}
     >
       <motion.div
         ref={mediaRef}
-        style={{ x: magnetX, y: magnetY, rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
+        style={
+          reduceMotion
+            ? { transformStyle: "preserve-3d" }
+            : { x: magnetX, y: magnetY, rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }
+        }
         className={clsx(
           "relative w-full overflow-hidden bg-[color:var(--color-ink)]/5",
           aspect
         )}
       >
-        <Image
-          src={project.cover}
-          alt={`${project.title} — ${project.client}`}
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          priority={priority}
-          className={clsx(
-            "object-cover transition-[transform,opacity,filter] duration-700 ease-[cubic-bezier(.16,1,.3,1)]",
-            hover && project.clip ? "opacity-0 blur-md" : "opacity-100 blur-0",
-            "group-hover:scale-[1.03]"
-          )}
-        />
-        {project.clip && (
+        {firstFrameThumbnail && project.clip && !project.thumbnailFromCover ? (
+          // First-frame mode: video is the thumbnail (paused at frame 0),
+          // plays on hover. preload="metadata" loads enough to render the
+          // first frame. The currentTime nudge forces Safari to paint it.
           <video
             ref={videoRef}
             src={project.clip}
             muted
             loop
             playsInline
-            preload="none"
+            preload="metadata"
             aria-hidden
-            className={clsx(
-              "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
-              hover ? "opacity-100" : "opacity-0"
-            )}
+            onLoadedMetadata={(e) => {
+              const v = e.currentTarget;
+              if (v.currentTime === 0) v.currentTime = 0.01;
+            }}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.03]"
           />
+        ) : (
+          <>
+            <Image
+              src={project.cover}
+              alt={`${project.title} — ${project.client}`}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              priority={priority}
+              className={clsx(
+                "object-cover transition-[transform,opacity,filter] duration-700 ease-[cubic-bezier(.16,1,.3,1)]",
+                hover && project.clip ? "opacity-0 blur-md" : "opacity-100 blur-0",
+                "group-hover:scale-[1.03]"
+              )}
+            />
+            {project.clip && (
+              <video
+                ref={videoRef}
+                src={project.clip}
+                muted
+                loop
+                playsInline
+                preload="none"
+                aria-hidden
+                className={clsx(
+                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
+                  hover ? "opacity-100" : "opacity-0"
+                )}
+              />
+            )}
+          </>
         )}
 
         {project.logo && (
           <div
             aria-hidden
-            className="absolute inset-0 z-10 flex items-center justify-center"
+            className={clsx(
+              "absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-300",
+              project.clip && hover ? "opacity-0" : "opacity-100"
+            )}
           >
             <Image
               src={project.logo}
@@ -137,11 +178,11 @@ export function WorkCard({
         <motion.span
           aria-hidden
           initial={false}
-          animate={{ y: hover ? 0 : 28, opacity: hover ? 1 : 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          animate={reduceMotion ? { opacity: hover ? 1 : 0 } : { y: hover ? 0 : 28, opacity: hover ? 1 : 0 }}
+          transition={reduceMotion ? { duration: 0.2 } : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="eyebrow absolute bottom-5 left-5 rounded-full bg-[color:var(--color-paper)] px-3 py-1.5 text-[color:var(--color-ink)]"
         >
-          {project.kind === "video" ? "Film" : "Series"} · {project.year}
+          {project.kind === "video" ? "Film" : "Photography"} · {project.year}
         </motion.span>
       </motion.div>
 

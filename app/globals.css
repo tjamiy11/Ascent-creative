@@ -155,3 +155,30 @@ video {
 @media (prefers-reduced-motion: reduce) {
   .hero-orbit { animation: none; }
 }
+
+/* Scrollbar — invisible by default, only appears when active/hovered.
+   Lenis handles the smooth scroll itself; this is purely the visual. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 200ms ease;
+}
+html:hover ::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background: rgba(10, 10, 10, 0.25);
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+html:hover {
+  scrollbar-color: rgba(10, 10, 10, 0.25) transparent;
+}

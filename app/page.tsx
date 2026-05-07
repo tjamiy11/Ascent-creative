@@ -5,6 +5,7 @@ import { WorkCard } from "@/components/work-card";
 import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { getFeaturedProjects } from "@/lib/projects";
 import { getFeaturedTestimonials } from "@/lib/testimonials";
 import { site } from "@/lib/site-config";
@@ -65,7 +66,7 @@ const INDUSTRIES = [
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
-  const stories = getFeaturedTestimonials().slice(0, 2);
+  const stories = getFeaturedTestimonials();
 
   return (
     <>
@@ -95,6 +96,7 @@ export default function HomePage() {
                 project={project}
                 priority={i === 0}
                 aspect="aspect-[4/5]"
+                firstFrameThumbnail
               />
             </Reveal>
           ))}
@@ -120,19 +122,23 @@ export default function HomePage() {
         <div className="border-y border-[color:var(--color-line)] py-10">
           <Marquee
             durationSec={48}
-            separator={<span aria-hidden className="px-12" />}
+            separator={<span aria-hidden className="px-6" />}
             items={site.clients.map((c) => (
               <span
               key={c.name}
-              className="flex h-14 w-36 items-center justify-center px-2"
+              className="flex h-20 w-44 items-center justify-center"
               title={c.name}
             >
               <Image
                 src={c.logo}
                 alt={c.name}
-                width={144}
+                width={280}
                 height={56}
-                className="max-h-10 max-w-32 object-contain opacity-70 grayscale mix-blend-multiply"
+                className={
+                  "naturalColor" in c && c.naturalColor
+                    ? "max-h-12 max-w-36 w-auto object-contain opacity-70"
+                    : "max-h-12 max-w-36 w-auto object-contain opacity-50 [filter:brightness(0)]"
+                }
                 unoptimized
               />
             </span>
@@ -164,25 +170,28 @@ export default function HomePage() {
             not a generic deliverable list.
           </Reveal>
 
-          <ul className="mt-20 space-y-10">
+          <ul className="mt-20 grid grid-cols-1 gap-x-12 md:grid-cols-2 md:grid-rows-3 md:grid-flow-col">
             {SOLUTIONS.map((s, i) => (
-              <Reveal
-                key={s.title}
-                as="li"
-                delay={i * 0.04}
-                className="grid grid-cols-12 gap-x-6 gap-y-3 border-t border-[color:var(--color-line)] pt-6"
-              >
-                <span className="eyebrow col-span-12 opacity-40 md:col-span-1">
-                  0{i + 1}
-                </span>
-                <div className="col-span-12 md:col-span-11">
-                  <h3 className="font-display text-2xl tracking-tight md:text-3xl">
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 max-w-2xl text-base leading-relaxed opacity-70">
+              <Reveal key={s.title} as="li" delay={i * 0.04}>
+                <details className="group border-t border-[color:var(--color-line)] py-6">
+                  <summary className="flex cursor-pointer list-none items-baseline justify-between gap-4">
+                    <div className="flex items-baseline gap-4">
+                      <span className="eyebrow opacity-40">0{i + 1}</span>
+                      <h3 className="font-display text-xl tracking-tight md:text-2xl">
+                        {s.title}
+                      </h3>
+                    </div>
+                    <span
+                      aria-hidden
+                      className="text-2xl leading-none opacity-50 transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 max-w-md text-sm leading-relaxed opacity-70 md:text-base">
                     {s.body}
                   </p>
-                </div>
+                </details>
               </Reveal>
             ))}
           </ul>
@@ -204,32 +213,10 @@ export default function HomePage() {
             <span className="italic opacity-60">say.</span>
           </Reveal>
 
-          <div className="mt-16 space-y-16 md:space-y-20">
-            {stories.map((t, i) => {
-              const attribution = [t.role, t.company]
-                .filter(Boolean)
-                .join(" · ");
-              return (
-                <Reveal
-                  key={`${t.author}-${i}`}
-                  delay={i * 0.05}
-                  className="border-t border-[color:var(--color-line)] pt-8"
-                >
-                  <h3 className="font-display text-[clamp(1.5rem,2.6vw,2.5rem)] leading-[1.15] tracking-tight">
-                    &ldquo;{t.title}.&rdquo;
-                  </h3>
-                  <p className="mt-6 max-w-2xl text-base leading-relaxed opacity-80">
-                    {t.quote}
-                  </p>
-                  <div className="mt-6 flex flex-wrap items-baseline gap-x-6 gap-y-1">
-                    <span className="text-sm">— {t.author}</span>
-                    {attribution && (
-                      <span className="eyebrow opacity-60">{attribution}</span>
-                    )}
-                  </div>
-                </Reveal>
-              );
-            })}
+          <div className="mt-16">
+            <Reveal>
+              <TestimonialCarousel testimonials={stories} />
+            </Reveal>
           </div>
 
           <Reveal delay={0.15} className="mt-12">
@@ -266,30 +253,32 @@ export default function HomePage() {
             where image carries weight.
           </Reveal>
 
-          <ul className="mt-16 grid grid-cols-1 gap-x-12 gap-y-2 md:grid-cols-2">
+          <ul className="mt-16 grid grid-cols-1 gap-x-12 md:grid-cols-2">
             {INDUSTRIES.map((industry, i) => (
-              <Reveal
-                key={industry.title}
-                as="li"
-                delay={i * 0.04}
-                className="border-b border-[color:var(--color-line)] py-6"
-              >
-                <div className="flex items-baseline justify-between gap-4">
-                  <span className="font-display text-xl tracking-tight md:text-2xl">
-                    {industry.title}
-                  </span>
-                  <span className="text-xs opacity-40">0{i + 1}</span>
-                </div>
-                <p className="mt-3 max-w-md text-sm leading-relaxed opacity-70 md:text-base">
-                  {industry.body}
-                </p>
+              <Reveal key={industry.title} as="li" delay={i * 0.04}>
+                <details className="group border-b border-[color:var(--color-line)] py-6">
+                  <summary className="flex cursor-pointer list-none items-baseline justify-between gap-4">
+                    <span className="font-display text-xl tracking-tight md:text-2xl">
+                      {industry.title}
+                    </span>
+                    <span
+                      aria-hidden
+                      className="text-2xl leading-none opacity-50 transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 max-w-md text-sm leading-relaxed opacity-70 md:text-base">
+                    {industry.body}
+                  </p>
+                </details>
               </Reveal>
             ))}
           </ul>
         </div>
       </section>
 
-      <ContactCTA />
+      <ContactCTA compact />
     </>
   );
 }

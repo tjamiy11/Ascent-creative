@@ -5,6 +5,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
+import { VideoCarousel } from "@/components/video-carousel";
 import { projectContentLoaders } from "@/content/projects";
 import {
   getNextProject,
@@ -76,16 +77,20 @@ export default async function CaseStudyPage({
       </header>
 
       <Reveal delay={0.2} className="container-edge mt-16">
-        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[color:var(--color-ink)]/5">
-          <Image
-            src={project.cover}
-            alt={`${project.title} hero`}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-          />
-        </div>
+        {project.gallery && project.gallery.length > 0 ? (
+          <VideoCarousel videos={project.gallery} ariaLabel={`${project.title} gallery`} />
+        ) : (
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[color:var(--color-ink)]/5">
+            <Image
+              src={project.cover}
+              alt={`${project.title} hero`}
+              fill
+              sizes="100vw"
+              priority
+              className="object-cover"
+            />
+          </div>
+        )}
       </Reveal>
 
       {Content && (
