@@ -211,6 +211,19 @@ export const projects: Project[] = [
     excerpt:
       "An Instagram reel for the Samsung T9 — the small portable on the move.",
   },
+  {
+    slug: "sonim",
+    title: "Sonim",
+    client: "Sonim",
+    year: 2025,
+    role: "Direction · Cinematography",
+    kind: "video",
+    tags: ["Brand Film", "Tech"],
+    cover: "/video/sonim.jpg",
+    clip: "/video/sonim.mp4",
+    excerpt:
+      "Built for the toughest workplaces — the Sonim phone shot among sparks, dust, and steel.",
+  },
   { slug: "photo-amalfi", title: "Amalfi", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/tree-from-italy-iso800-85mm-f5.jpg", excerpt: "From the archive." },
   { slug: "photo-ash", title: "Ash", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/ash.jpg", excerpt: "From the archive." },
   { slug: "photo-bandits", title: "Bandits", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/bandits.jpg", excerpt: "From the archive." },
