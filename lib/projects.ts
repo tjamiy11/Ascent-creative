@@ -36,7 +36,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Commercial", "Athletic"],
     cover: "/video/hoka.jpg",
-    clip: "/video/hoka.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/hoka.mp4",
     logo: "/logos/hoka.png",
     excerpt:
       "Becs Gentry on the road — \"forward is a pace.\" A piece on joyful, sustainable movement for Hoka, made with Big Studio and directed by Tom Bender.",
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Athletic"],
     cover: "/video/dtlr.jpg",
-    clip: "/video/dtlr.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/dtlr.mp4",
     logo: "/logos/nike.svg",
     excerpt:
       "A new Nike silhouette built for the in-store screens at DTLR. Agency: Limitless. Shot and cut by Stefan.",
@@ -66,7 +66,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Hospitality", "Tourism"],
     cover: "/video/palmer.jpg",
-    clip: "/video/palmer.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/palmer.mp4",
     logo: "/logos/palmer-mark.png",
     excerpt:
       "A marketing film and stills package made in-house at Ascent Studios to draw new clients to the Palmer House Spa. Shot and cut by Stefan.",
@@ -81,7 +81,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Auto", "Brand Film"],
     cover: "/video/ducati.jpg",
-    clip: "/video/ducati.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/ducati.mp4",
     logo: "/logos/ducati.svg",
     excerpt:
       "A spec spot for the Ducati Streetfighter. Co-directed by Stefan and David Strib, with Stefan flying drone, David cutting, and Sam riding.",
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Tech", "Brand Film"],
     cover: "/video/xai.jpg",
-    clip: "/video/xai.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/xai.mp4",
     excerpt:
       "A brand film for xAI exploring the texture of computation and the human side of intelligent systems.",
   },
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Music & Festival", "Branded Doc"],
     cover: "/video/lollareverb.jpg",
-    clip: "/video/lollareverb.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/lollareverb.mp4",
     excerpt:
       "A sustainability piece for Lollapalooza × Reverb — co-shot with Jackson Visuals, who carried it through the edit.",
   },
@@ -121,7 +121,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Editorial"],
     cover: "/video/missusa.jpg",
-    clip: "/video/missusa.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/missusa.mp4",
     excerpt:
       "A highlight reel for Miss USA — composure, presence, and the quiet of the runway between rounds.",
   },
@@ -134,7 +134,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Branded Doc", "Founder"],
     cover: "/video/blum.jpg",
-    clip: "/video/blum.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/blum.mp4",
     excerpt:
       "A founder-led day-in-the-life film with the team at Blum & Co — process, hands, and the rhythm of a working studio.",
   },
@@ -147,7 +147,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Travel", "Brand Film"],
     cover: "/video/trulli.jpg",
-    clip: "/video/trulli.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/trulli.mp4",
     excerpt:
       "A run of event-recap edits for Trulli Speakers, cut for brand awareness. Production: Kurza.",
   },
@@ -160,13 +160,13 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Branded Doc", "Editorial"],
     cover: "/video/candycloud.jpg",
-    clip: "/video/candycloud.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/candycloud.mp4",
     gallery: [
-      "/video/candycloud.mp4",
-      "/video/morph.mp4",
-      "/video/halogram.mp4",
-      "/video/giftcard.mp4",
-      "/video/teaser.mp4",
+      "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/candycloud.mp4",
+      "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/morph.mp4",
+      "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/halogram.mp4",
+      "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/giftcard.mp4",
+      "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/teaser.mp4",
     ],
     excerpt:
       "Rush recruitment films for the Alpha Chi Omega chapter under the Candy Cloud umbrella — a multi-part series of branded video content that builds across the season. In-house at Ascent Studios with creative direction by Peyton; shot and cut by Stefan.",
@@ -180,7 +180,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Lifestyle"],
     cover: "/video/boxed.jpg",
-    clip: "/video/boxed.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/boxed.mp4",
     excerpt:
       "Marketing content videos for Boxed Gift.",
   },
@@ -193,7 +193,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Concept", "Editorial"],
     cover: "/video/multiple.jpg",
-    clip: "/video/multiple.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/multiple.mp4",
     excerpt:
       "A composition piece exploring rhythm and repetition across short cuts.",
   },
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Social"],
     cover: "/video/samsung.jpg",
-    clip: "/video/samsung.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/samsung.mp4",
     logo: "/logos/samsung.svg",
     excerpt:
       "An Instagram reel for the Samsung T9 — the small portable on the move.",
@@ -220,7 +220,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Tech"],
     cover: "/video/sonim.jpg",
-    clip: "/video/sonim.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/sonim.mp4",
     excerpt:
       "Built for the toughest workplaces — the Sonim phone shot among sparks, dust, and steel.",
   },

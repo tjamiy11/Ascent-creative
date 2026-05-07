@@ -49,3 +49,6 @@ next-env.d.ts
 
 # claude code worktree state — local-only
 /.claude/worktrees/
+
+# video clips — hosted on Cloudflare R2 (.jpg covers stay tracked for Next.js Image optimization)
+/public/video/*.mp4
