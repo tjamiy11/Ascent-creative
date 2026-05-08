@@ -122,26 +122,26 @@ export default function HomePage() {
         <div className="border-y border-[color:var(--color-line)] py-10">
           <Marquee
             durationSec={48}
-            separator={<span aria-hidden className="px-6" />}
+            separator={<span aria-hidden className="px-10" />}
             items={site.clients.map((c) => (
               <span
-              key={c.name}
-              className="flex h-20 w-44 items-center justify-center"
-              title={c.name}
-            >
-              <Image
-                src={c.logo}
-                alt={c.name}
-                width={280}
-                height={56}
-                className={
-                  "naturalColor" in c && c.naturalColor
-                    ? "max-h-12 max-w-36 w-auto object-contain opacity-70"
-                    : "max-h-12 max-w-36 w-auto object-contain opacity-50 [filter:brightness(0)]"
-                }
-                unoptimized
-              />
-            </span>
+                key={c.name}
+                className="flex h-12 items-center"
+                title={c.name}
+              >
+                <Image
+                  src={c.logo}
+                  alt={c.name}
+                  width={280}
+                  height={56}
+                  className={
+                    "naturalColor" in c && c.naturalColor
+                      ? "h-10 w-auto object-contain opacity-70"
+                      : "h-10 w-auto object-contain opacity-50 [filter:brightness(0)]"
+                  }
+                  unoptimized
+                />
+              </span>
             ))}
           />
         </div>
