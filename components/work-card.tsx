@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -37,13 +37,52 @@ export function WorkCard({
   firstFrameThumbnail = false,
 }: WorkCardProps) {
   const [hover, setHover] = useState(false);
+  const [canHover, setCanHover] = useState(true);
+  const [inView, setInView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
-  // Cursor-magnet: track pointer offset from card center, translate the
-  // media block toward it (max ~16px). Subtle on its own; combines with
-  // the custom cursor's "View" prompt to make the card feel pickable.
+  // Detect hover-capable / fine-pointer devices. Touch devices skip the
+  // hover-driven magnet/tilt/play behavior and use IntersectionObserver
+  // instead so video & label still reveal when scrolling on a phone.
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setCanHover(mq.matches);
+    const update = (e: MediaQueryListEvent) => setCanHover(e.matches);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // Touch devices: autoplay video & fade the logo when the card is mostly
+  // on-screen. Pause when it scrolls away to save battery + bandwidth.
+  useEffect(() => {
+    if (canHover) return;
+    const el = mediaRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        const visible =
+          entry.isIntersecting && entry.intersectionRatio >= 0.55;
+        setInView(visible);
+        const v = videoRef.current;
+        if (!v) return;
+        if (visible) {
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      },
+      { threshold: [0, 0.55, 1], rootMargin: "-15% 0px -15% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [canHover]);
+
+  // "Active" = pointer hover (desktop) OR centered in viewport (touch).
+  const active = canHover ? hover : inView;
+
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 220, damping: 22, mass: 0.4 });
@@ -51,20 +90,20 @@ export function WorkCard({
   const magnetX = useTransform(sx, (v) => v * MAGNET_STRENGTH);
   const magnetY = useTransform(sy, (v) => v * MAGNET_STRENGTH);
 
-  // Tilt (decorative): rotation derived from cursor offset, smoothed with
-  // a slower/bouncier spring so cards feel alive after the cursor stops.
   const rotY = useTransform(mx, [-220, 220], [6, -6]);
   const rotX = useTransform(my, [-260, 260], [-6, 6]);
   const tiltY = useSpring(rotY, { mass: 1, stiffness: 100, damping: 10 });
   const tiltX = useSpring(rotX, { mass: 1, stiffness: 100, damping: 10 });
 
   const onEnter = () => {
+    if (!canHover) return;
     setHover(true);
     if (project.clip && videoRef.current) {
       videoRef.current.play().catch(() => {});
     }
   };
   const onLeave = () => {
+    if (!canHover) return;
     setHover(false);
     mx.set(0);
     my.set(0);
@@ -74,7 +113,7 @@ export function WorkCard({
     }
   };
   const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
-    if (reduceMotion) return;
+    if (!canHover || reduceMotion) return;
     const el = mediaRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -83,6 +122,8 @@ export function WorkCard({
     mx.set(e.clientX - cx);
     my.set(e.clientY - cy);
   };
+
+  const useFlatTransform = reduceMotion || !canHover;
 
   return (
     <Link
@@ -97,9 +138,15 @@ export function WorkCard({
       <motion.div
         ref={mediaRef}
         style={
-          reduceMotion
+          useFlatTransform
             ? { transformStyle: "preserve-3d" }
-            : { x: magnetX, y: magnetY, rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }
+            : {
+                x: magnetX,
+                y: magnetY,
+                rotateX: tiltX,
+                rotateY: tiltY,
+                transformStyle: "preserve-3d",
+              }
         }
         className={clsx(
           "relative w-full overflow-hidden bg-[color:var(--color-ink)]/5",
@@ -134,7 +181,7 @@ export function WorkCard({
               priority={priority}
               className={clsx(
                 "object-cover transition-[transform,opacity,filter] duration-700 ease-[cubic-bezier(.16,1,.3,1)]",
-                hover && project.clip ? "opacity-0 blur-md" : "opacity-100 blur-0",
+                active && project.clip ? "opacity-0 blur-md" : "opacity-100 blur-0",
                 "group-hover:scale-[1.03]"
               )}
             />
@@ -145,11 +192,11 @@ export function WorkCard({
                 muted
                 loop
                 playsInline
-                preload="none"
+                preload={canHover ? "none" : "metadata"}
                 aria-hidden
                 className={clsx(
                   "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
-                  hover ? "opacity-100" : "opacity-0"
+                  active ? "opacity-100" : "opacity-0"
                 )}
               />
             )}
@@ -161,7 +208,7 @@ export function WorkCard({
             aria-hidden
             className={clsx(
               "absolute inset-0 z-10 flex items-center justify-center transition-opacity duration-300",
-              project.clip && hover ? "opacity-0" : "opacity-100"
+              project.clip && active ? "opacity-0" : "opacity-100"
             )}
           >
             <Image
@@ -178,8 +225,16 @@ export function WorkCard({
         <motion.span
           aria-hidden
           initial={false}
-          animate={reduceMotion ? { opacity: hover ? 1 : 0 } : { y: hover ? 0 : 28, opacity: hover ? 1 : 0 }}
-          transition={reduceMotion ? { duration: 0.2 } : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          animate={
+            reduceMotion
+              ? { opacity: active ? 1 : 0 }
+              : { y: active ? 0 : 28, opacity: active ? 1 : 0 }
+          }
+          transition={
+            reduceMotion
+              ? { duration: 0.2 }
+              : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+          }
           className="eyebrow absolute bottom-5 left-5 rounded-full bg-[color:var(--color-paper)] px-3 py-1.5 text-[color:var(--color-ink)]"
         >
           {project.kind === "video" ? "Film" : "Photography"} · {project.year}

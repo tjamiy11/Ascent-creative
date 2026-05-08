@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
@@ -42,6 +42,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 export default function RootLayout({

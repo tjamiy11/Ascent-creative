@@ -79,6 +79,20 @@ export default async function CaseStudyPage({
       <Reveal delay={0.2} className="container-edge mt-16">
         {project.gallery && project.gallery.length > 0 ? (
           <VideoCarousel videos={project.gallery} ariaLabel={`${project.title} gallery`} />
+        ) : project.clip ? (
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[color:var(--color-ink)]/5">
+            <video
+              src={project.clip}
+              poster={project.cover}
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="h-full w-full object-cover"
+            />
+          </div>
         ) : (
           <div className="relative aspect-[16/9] w-full overflow-hidden bg-[color:var(--color-ink)]/5">
             <Image
