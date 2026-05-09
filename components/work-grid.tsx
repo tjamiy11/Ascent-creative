@@ -1,9 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import clsx from "clsx";
-import { WorkCard } from "@/components/work-card";
 import { PhotoMasonry } from "@/components/photo-masonry";
 import type { Project, ProjectKind } from "@/lib/projects";
 
@@ -17,15 +15,15 @@ const FILTERS: { id: Filter; label: string }[] = [
 
 export function WorkGrid({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<Filter>("all");
-  const reduceMotion = useReducedMotion();
 
   const visible = useMemo(
     () => (filter === "all" ? projects : projects.filter((p) => p.kind === filter)),
     [projects, filter]
   );
 
-  const photosOnly =
-    visible.length > 0 && visible.every((p) => p.kind === "photo");
+  // Use first-frame video thumbnails whenever videos are in the visible set.
+  // Pure photo views can't / don't need this.
+  const showFirstFrame = visible.some((p) => p.kind === "video");
 
   return (
     <>
@@ -54,41 +52,11 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
         </span>
       </div>
 
-      {photosOnly ? (
-        // True masonry: each photo renders at its natural aspect (from
-        // project.dims) and is distributed into the shortest column so
-        // there are no gaps from CSS-columns balancing.
-        <PhotoMasonry projects={visible} />
-      ) : (
-        <div className="container-edge grid grid-cols-12 gap-y-10 md:gap-x-8">
-          <AnimatePresence mode="popLayout">
-            {visible.map((project, i) => {
-              const span = i % 3 === 0 ? "md:col-span-7" : "md:col-span-5";
-              return (
-                <motion.div
-                  layout
-                  key={project.slug}
-                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
-                  animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-                  exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
-                  transition={
-                    reduceMotion
-                      ? { duration: 0.2 }
-                      : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
-                  }
-                  className={clsx("col-span-12", span)}
-                >
-                  <WorkCard
-                    project={project}
-                    aspect={i % 3 === 0 ? "aspect-[16/10]" : "aspect-[4/5]"}
-                    firstFrameThumbnail
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
-      )}
+      <PhotoMasonry
+        key={filter}
+        projects={visible}
+        firstFrameThumbnail={showFirstFrame}
+      />
     </>
   );
 }

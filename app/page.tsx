@@ -137,6 +137,8 @@ export default function HomePage() {
                   className={
                     "naturalColor" in c && c.naturalColor
                       ? "h-10 w-auto object-contain opacity-70"
+                      : "mono" in c && c.mono
+                      ? "h-10 w-auto object-contain opacity-70 grayscale"
                       : "h-10 w-auto object-contain opacity-50 [filter:brightness(0)]"
                   }
                   unoptimized
