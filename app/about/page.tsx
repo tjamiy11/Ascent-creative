@@ -122,7 +122,11 @@ export default function AboutPage() {
                 alt={c.name}
                 width={280}
                 height={56}
-                className="max-h-8 max-w-28 object-contain opacity-70 grayscale mix-blend-multiply"
+                className={
+                  "compact" in c && c.compact
+                    ? "max-h-11 max-w-16 object-contain opacity-70 grayscale mix-blend-multiply"
+                    : "max-h-8 max-w-28 object-contain opacity-70 grayscale mix-blend-multiply"
+                }
                 unoptimized
               />
             </span>
