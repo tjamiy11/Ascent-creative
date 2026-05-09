@@ -9,9 +9,9 @@ import type { Project } from "@/lib/projects";
  * into N columns by running cumulative aspect-height (next item goes into
  * the shortest column). No CSS-columns balancing, no big white gaps.
  *
- * We pre-compute the 1/2/3-column layouts at render time and use Tailwind
- * responsive utilities to swap between them — keeps it fully static so
- * there's no hydration flash and SSR matches the client exactly.
+ * Mobile: single column. sm+: two columns. (We pre-compute both layouts
+ * at render time and swap by breakpoint, so SSR and client match — no
+ * hydration flash.)
  */
 type Props = {
   projects: Project[];
@@ -41,7 +41,6 @@ export function PhotoMasonry({ projects, firstFrameThumbnail }: Props) {
   const reduceMotion = useReducedMotion();
   const cols1 = distribute(projects, 1);
   const cols2 = distribute(projects, 2);
-  const cols3 = distribute(projects, 3);
 
   const renderCol = (col: Project[], colIdx: number) => (
     <div key={colIdx} className="flex flex-1 flex-col gap-6">
@@ -74,11 +73,8 @@ export function PhotoMasonry({ projects, firstFrameThumbnail }: Props) {
       <div className="container-edge flex gap-6 sm:hidden">
         {cols1.map((c, i) => renderCol(c, i))}
       </div>
-      <div className="container-edge hidden gap-6 sm:flex lg:hidden">
+      <div className="container-edge hidden gap-6 sm:flex">
         {cols2.map((c, i) => renderCol(c, i))}
-      </div>
-      <div className="container-edge hidden gap-6 lg:flex">
-        {cols3.map((c, i) => renderCol(c, i))}
       </div>
     </>
   );
