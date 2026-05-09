@@ -63,7 +63,13 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
-  const tone = overHero
+  // When the mobile drawer is open, the drawer itself paints a translucent
+  // dark layer behind the header — force the header into a transparent
+  // light-on-dark state so the hamburger / close icon stays visible and
+  // the chrome doesn't fight the drawer's frosted glass.
+  const tone = menuOpen
+    ? "bg-transparent border-b border-transparent text-[color:var(--color-paper)]"
+    : overHero
     ? "bg-black/40 backdrop-blur-md border-b border-white/10 text-[color:var(--color-paper)]"
     : scrolled
     ? "bg-[color:var(--color-paper)]/75 backdrop-blur-md border-b border-[color:var(--color-line)]"
@@ -191,13 +197,13 @@ export function Nav() {
           tabIndex={menuOpen ? 0 : -1}
           onClick={() => setMenuOpen(false)}
           className={clsx(
-            "absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300",
+            "absolute inset-0 bg-black/30 transition-opacity duration-300",
             menuOpen ? "opacity-100" : "opacity-0"
           )}
         />
         <div
           className={clsx(
-            "absolute inset-x-0 top-0 bg-[color:var(--color-paper)] text-[color:var(--color-ink)] shadow-xl transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)]",
+            "absolute inset-x-0 top-0 border-b border-white/10 bg-black/45 text-[color:var(--color-paper)] backdrop-blur-2xl transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)]",
             menuOpen ? "translate-y-0" : "-translate-y-full"
           )}
         >
