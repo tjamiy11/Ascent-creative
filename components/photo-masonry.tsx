@@ -1,0 +1,79 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import { WorkCard } from "@/components/work-card";
+import type { Project } from "@/lib/projects";
+
+/**
+ * True masonry for photo projects: distributes cards into N columns by
+ * running cumulative aspect-height (next item goes into the shortest
+ * column). No CSS-columns balancing, no big white gaps.
+ *
+ * We pre-compute the 1/2/3-column layouts at render time and use Tailwind
+ * responsive utilities to swap between them — keeps it fully static so
+ * there's no hydration flash and SSR matches the client exactly.
+ */
+type Props = { projects: Project[] };
+
+function distribute(items: Project[], n: number): Project[][] {
+  const cols: Project[][] = Array.from({ length: n }, () => []);
+  const heights = Array<number>(n).fill(0);
+  for (const item of items) {
+    const ratio = item.dims ? item.dims.h / item.dims.w : 1;
+    let min = 0;
+    for (let i = 1; i < n; i++) {
+      if (heights[i] < heights[min]) min = i;
+    }
+    cols[min].push(item);
+    heights[min] += ratio;
+  }
+  return cols;
+}
+
+export function PhotoMasonry({ projects }: Props) {
+  const reduceMotion = useReducedMotion();
+  const cols1 = distribute(projects, 1);
+  const cols2 = distribute(projects, 2);
+  const cols3 = distribute(projects, 3);
+
+  const renderCol = (col: Project[], colIdx: number, totalCols: number) => (
+    <div
+      key={colIdx}
+      className="flex flex-1 flex-col gap-6"
+      style={{ width: `${100 / totalCols}%` }}
+    >
+      {col.map((project, i) => (
+        <motion.div
+          key={project.slug}
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
+          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          transition={
+            reduceMotion
+              ? { duration: 0.2 }
+              : {
+                  duration: 0.5,
+                  delay: i * 0.04,
+                  ease: [0.16, 1, 0.3, 1],
+                }
+          }
+        >
+          <WorkCard project={project} />
+        </motion.div>
+      ))}
+    </div>
+  );
+
+  return (
+    <>
+      <div className="container-edge flex gap-6 sm:hidden">
+        {cols1.map((c, i) => renderCol(c, i, 1))}
+      </div>
+      <div className="container-edge hidden gap-6 sm:flex lg:hidden">
+        {cols2.map((c, i) => renderCol(c, i, 2))}
+      </div>
+      <div className="container-edge hidden gap-6 lg:flex">
+        {cols3.map((c, i) => renderCol(c, i, 3))}
+      </div>
+    </>
+  );
+}

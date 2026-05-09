@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import clsx from "clsx";
 import { WorkCard } from "@/components/work-card";
+import { PhotoMasonry } from "@/components/photo-masonry";
 import type { Project, ProjectKind } from "@/lib/projects";
 
 type Filter = "all" | ProjectKind;
@@ -13,16 +14,6 @@ const FILTERS: { id: Filter; label: string }[] = [
   { id: "video", label: "Video" },
   { id: "photo", label: "Photography" },
 ];
-
-// Cycle through varied portrait aspects so masonry packing produces an
-// abstract, uneven rhythm without leaving big white gaps.
-const PHOTO_ASPECTS = [
-  "aspect-[4/5]",
-  "aspect-[3/4]",
-  "aspect-[1/1]",
-  "aspect-[5/7]",
-  "aspect-[4/5]",
-] as const;
 
 export function WorkGrid({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<Filter>("all");
@@ -64,30 +55,10 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
       </div>
 
       {photosOnly ? (
-        // CSS columns masonry: photo cards flow top-to-bottom into N
-        // columns, packing tightly regardless of card height. framer-motion
-        // `layout` doesn't play well with columns, so we drop it here and
-        // use a simple fade-in per card instead.
-        <div className="container-edge columns-1 gap-6 sm:columns-2 lg:columns-3">
-          {visible.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
-              animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-              transition={
-                reduceMotion
-                  ? { duration: 0.2 }
-                  : { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
-              }
-              className="mb-6 break-inside-avoid"
-            >
-              <WorkCard
-                project={project}
-                aspect={PHOTO_ASPECTS[i % PHOTO_ASPECTS.length]}
-              />
-            </motion.div>
-          ))}
-        </div>
+        // True masonry: each photo renders at its natural aspect (from
+        // project.dims) and is distributed into the shortest column so
+        // there are no gaps from CSS-columns balancing.
+        <PhotoMasonry projects={visible} />
       ) : (
         <div className="container-edge grid grid-cols-12 gap-y-10 md:gap-x-8">
           <AnimatePresence mode="popLayout">

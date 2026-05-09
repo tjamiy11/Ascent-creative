@@ -24,6 +24,12 @@ export type Project = {
    * as a slideable gallery. The primary `clip` is always shown first.
    */
   gallery?: string[];
+  /**
+   * Natural dimensions of `cover` (or for video projects, the clip).
+   * Used by the masonry photography view + WorkCard so cards size to
+   * their content instead of being cropped into a forced aspect ratio.
+   */
+  dims?: { w: number; h: number };
 };
 
 export const projects: Project[] = [
@@ -224,32 +230,32 @@ export const projects: Project[] = [
     excerpt:
       "Built for the toughest workplaces — the Sonim phone shot among sparks, dust, and steel.",
   },
-  { slug: "photo-amalfi", title: "Amalfi", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/tree-from-italy-iso800-85mm-f5.jpg", excerpt: "From the archive." },
-  { slug: "photo-ash", title: "Ash", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/ash.jpg", excerpt: "From the archive." },
-  { slug: "photo-bandits", title: "Bandits", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/bandits.jpg", excerpt: "From the archive." },
-  { slug: "photo-cocora", title: "Cocora", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/cocora-85.jpg", excerpt: "From the archive." },
-  { slug: "photo-dead-ville", title: "Dead Ville", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/dead-ville-2.jpg", excerpt: "From the archive." },
-  { slug: "photo-giraffe-gang", title: "Giraffe Gang", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/giraffe-gang.jpg", excerpt: "From the archive." },
-  { slug: "photo-hawaii-heli", title: "Hawaii Heli", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/hawwai-heli-copy-2.jpg", excerpt: "From the archive." },
-  { slug: "photo-jr", title: "JR", client: "JR", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/jr-6.jpg", excerpt: "From the archive." },
-  { slug: "photo-lexi", title: "Lexi", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/lexi.jpg", excerpt: "From the archive." },
-  { slug: "photo-montrose-skyline", title: "Montrose Skyline", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/montrose-skyl-ine.jpg", excerpt: "From the archive." },
-  { slug: "photo-moody", title: "Moody", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody.jpg", excerpt: "From the archive." },
-  { slug: "photo-moody-ii", title: "Moody II", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody-4.jpg", excerpt: "From the archive." },
-  { slug: "photo-nil-and-da-boyz", title: "NIL & Da Boyz", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/nil-and-da-boyz-5.jpg", excerpt: "From the archive." },
-  { slug: "photo-oryx", title: "Oryx", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/oryx-or-impala-2.jpg", excerpt: "From the archive." },
-  { slug: "photo-pelly", title: "Pelly", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/pelly-2.jpg", excerpt: "From the archive." },
-  { slug: "photo-posted-up", title: "Posted Up", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/posted-up-on.jpg", excerpt: "From the archive." },
-  { slug: "photo-reaching-stars", title: "Reaching for the Stars", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/reaching-for-the-stars.jpg", excerpt: "From the archive." },
-  { slug: "photo-sandwich-bae", title: "Sandwich Bae", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sandwich-bae-2.jpg", excerpt: "From the archive." },
-  { slug: "photo-sar", title: "Sar", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sar.jpg", excerpt: "From the archive." },
-  { slug: "photo-treez", title: "Treez", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/treez.jpg", excerpt: "From the archive." },
-  { slug: "photo-wedits", title: "Wedits", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/wedits-2.jpg", excerpt: "From the archive." },
-  { slug: "photo-yeee-75", title: "Yeee 75", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-75.jpg", excerpt: "From the archive." },
-  { slug: "photo-yeee-101", title: "Yeee 101", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-101.jpg", excerpt: "From the archive." },
-  { slug: "photo-yeee-105", title: "Yeee 105", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-105.jpg", excerpt: "From the archive." },
-  { slug: "photo-yeee-108", title: "Yeee 108", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-108.jpg", excerpt: "From the archive." },
-  { slug: "photo-yeee-166", title: "Yeee 166", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-166.jpg", excerpt: "From the archive." },
+  { slug: "photo-amalfi", title: "Amalfi", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/tree-from-italy-iso800-85mm-f5.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-ash", title: "Ash", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/ash.jpg", dims: { w: 2000, h: 1312 }, excerpt: "From the archive." },
+  { slug: "photo-bandits", title: "Bandits", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/bandits.jpg", dims: { w: 2000, h: 1040 }, excerpt: "From the archive." },
+  { slug: "photo-cocora", title: "Cocora", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/cocora-85.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-dead-ville", title: "Dead Ville", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/dead-ville-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-giraffe-gang", title: "Giraffe Gang", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/giraffe-gang.jpg", dims: { w: 2000, h: 1125 }, excerpt: "From the archive." },
+  { slug: "photo-hawaii-heli", title: "Hawaii Heli", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/hawwai-heli-copy-2.jpg", dims: { w: 2000, h: 1704 }, excerpt: "From the archive." },
+  { slug: "photo-jr", title: "JR", client: "JR", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/jr-6.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-lexi", title: "Lexi", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/lexi.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-montrose-skyline", title: "Montrose Skyline", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/montrose-skyl-ine.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-moody", title: "Moody", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-moody-ii", title: "Moody II", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody-4.jpg", dims: { w: 1125, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-nil-and-da-boyz", title: "NIL & Da Boyz", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/nil-and-da-boyz-5.jpg", dims: { w: 2000, h: 1125 }, excerpt: "From the archive." },
+  { slug: "photo-oryx", title: "Oryx", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/oryx-or-impala-2.jpg", dims: { w: 2000, h: 1342 }, excerpt: "From the archive." },
+  { slug: "photo-pelly", title: "Pelly", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/pelly-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-posted-up", title: "Posted Up", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/posted-up-on.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-reaching-stars", title: "Reaching for the Stars", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/reaching-for-the-stars.jpg", dims: { w: 1557, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-sandwich-bae", title: "Sandwich Bae", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sandwich-bae-2.jpg", dims: { w: 2000, h: 1229 }, excerpt: "From the archive." },
+  { slug: "photo-sar", title: "Sar", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sar.jpg", dims: { w: 1336, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-treez", title: "Treez", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/treez.jpg", dims: { w: 2000, h: 1353 }, excerpt: "From the archive." },
+  { slug: "photo-wedits", title: "Wedits", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/wedits-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-75", title: "Yeee 75", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-75.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-101", title: "Yeee 101", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-101.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-105", title: "Yeee 105", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-105.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-108", title: "Yeee 108", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-108.jpg", dims: { w: 2000, h: 1499 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-166", title: "Yeee 166", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-166.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
 ];
 
 export const projectSlugs = projects.map((p) => p.slug);

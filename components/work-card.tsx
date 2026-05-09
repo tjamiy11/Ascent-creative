@@ -17,7 +17,11 @@ type WorkCardProps = {
   project: Project;
   priority?: boolean;
   className?: string;
-  /** Aspect ratio class, e.g. "aspect-[4/5]" */
+  /**
+   * Aspect ratio class, e.g. "aspect-[4/5]". If omitted and the project
+   * has `dims`, the card sizes to the asset's natural aspect; otherwise
+   * falls back to `aspect-[4/5]`.
+   */
   aspect?: string;
   /**
    * If true and the project has a clip, render the video paused at its
@@ -33,9 +37,20 @@ export function WorkCard({
   project,
   priority,
   className,
-  aspect = "aspect-[4/5]",
+  aspect,
   firstFrameThumbnail = false,
 }: WorkCardProps) {
+  // Resolve the card's aspect ratio:
+  //   - explicit `aspect` prop wins (Tailwind class, e.g. "aspect-[16/10]")
+  //   - else if project has `dims`, render natural ratio via inline style
+  //     (Tailwind v4 JIT can't see dynamic class strings, so we can't build
+  //     `aspect-[2000/1333]` at runtime as a class)
+  //   - else fall back to portrait 4/5
+  const aspectClass =
+    aspect ?? (project.dims ? undefined : "aspect-[4/5]");
+  const naturalAspectStyle = project.dims && !aspect
+    ? { aspectRatio: `${project.dims.w} / ${project.dims.h}` }
+    : undefined;
   const [hover, setHover] = useState(false);
   const [canHover, setCanHover] = useState(true);
   const [inView, setInView] = useState(false);
@@ -139,18 +154,19 @@ export function WorkCard({
         ref={mediaRef}
         style={
           useFlatTransform
-            ? { transformStyle: "preserve-3d" }
+            ? { transformStyle: "preserve-3d", ...naturalAspectStyle }
             : {
                 x: magnetX,
                 y: magnetY,
                 rotateX: tiltX,
                 rotateY: tiltY,
                 transformStyle: "preserve-3d",
+                ...naturalAspectStyle,
               }
         }
         className={clsx(
           "relative w-full overflow-hidden bg-[color:var(--color-ink)]/5",
-          aspect
+          aspectClass
         )}
       >
         {firstFrameThumbnail && project.clip && !project.thumbnailFromCover ? (
