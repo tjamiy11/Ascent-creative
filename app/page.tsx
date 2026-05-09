@@ -122,11 +122,11 @@ export default function HomePage() {
         <div className="border-y border-[color:var(--color-line)] py-10">
           <Marquee
             durationSec={48}
-            separator={<span aria-hidden className="px-10" />}
+            separator={<span aria-hidden className="px-6" />}
             items={site.clients.map((c) => (
               <span
                 key={c.name}
-                className="flex h-12 items-center"
+                className="flex h-12 w-32 items-center justify-center"
                 title={c.name}
               >
                 <Image
@@ -136,10 +136,10 @@ export default function HomePage() {
                   height={56}
                   className={
                     "naturalColor" in c && c.naturalColor
-                      ? "h-10 w-auto object-contain opacity-70"
+                      ? "max-h-8 max-w-28 object-contain opacity-70"
                       : "mono" in c && c.mono
-                      ? "h-10 w-auto object-contain opacity-70 grayscale"
-                      : "h-10 w-auto object-contain opacity-50 [filter:brightness(0)]"
+                      ? "max-h-8 max-w-28 object-contain opacity-70 grayscale"
+                      : "max-h-8 max-w-28 object-contain opacity-50 [filter:brightness(0)]"
                   }
                   unoptimized
                 />
