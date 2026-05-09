@@ -80,19 +80,11 @@ export default async function CaseStudyPage({
         {project.gallery && project.gallery.length > 0 ? (
           <VideoCarousel videos={project.gallery} ariaLabel={`${project.title} gallery`} />
         ) : project.clip ? (
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[color:var(--color-ink)]/5">
-            <video
-              src={project.clip}
-              poster={project.cover}
-              controls
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className="h-full w-full object-cover"
-            />
-          </div>
+          <CaseStudyVideo
+            clip={project.clip}
+            cover={project.cover}
+            dims={project.dims}
+          />
         ) : (
           <div className="relative aspect-[16/9] w-full overflow-hidden bg-[color:var(--color-ink)]/5">
             <Image
@@ -155,6 +147,42 @@ async function loadProjectContent(
   } catch {
     return null;
   }
+}
+
+function CaseStudyVideo({
+  clip,
+  cover,
+  dims,
+}: {
+  clip: string;
+  cover: string;
+  dims?: { w: number; h: number };
+}) {
+  const isPortrait = dims ? dims.h > dims.w : false;
+  const aspectStyle = dims
+    ? { aspectRatio: `${dims.w} / ${dims.h}` }
+    : { aspectRatio: "16 / 9" };
+
+  return (
+    <div className={isPortrait ? "mx-auto w-full max-w-md sm:max-w-lg" : "w-full"}>
+      <div
+        className="relative w-full overflow-hidden bg-[color:var(--color-ink)]/5"
+        style={aspectStyle}
+      >
+        <video
+          src={clip}
+          poster={cover}
+          controls
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-contain"
+        />
+      </div>
+    </div>
+  );
 }
 
 function Meta({ label, value }: { label: string; value: string }) {

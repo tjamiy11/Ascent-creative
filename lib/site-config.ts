@@ -22,7 +22,7 @@ export const site = {
     { name: "Nike", logo: "/logos/nike.svg" },
     { name: "Hoka", logo: "/logos/hoka.png" },
     { name: "Adidas", logo: "/logos/adidas.png" },
-    { name: "Arc'teryx", logo: "/logos/arcteryx.svg" },
+    { name: "Arc'teryx", logo: "/logos/arcteryx.svg", compact: true },
     { name: "Amazon", logo: "/logos/amazon.png" },
     { name: "Lexar", logo: "/logos/lexar.svg" },
     { name: "Ducati", logo: "/logos/ducati.svg" },

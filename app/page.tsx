@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import clsx from "clsx";
 import { HeroReel } from "@/components/hero-reel";
 import { WorkCard } from "@/components/work-card";
 import { Marquee } from "@/components/marquee";
@@ -134,13 +135,19 @@ export default function HomePage() {
                   alt={c.name}
                   width={280}
                   height={56}
-                  className={
+                  className={clsx(
+                    // Compact / square-ish logos can use more height
+                    // since they don't have a wide wordmark to anchor
+                    // the visual mass.
+                    "compact" in c && c.compact
+                      ? "max-h-11 max-w-16 object-contain"
+                      : "max-h-8 max-w-28 object-contain",
                     "naturalColor" in c && c.naturalColor
-                      ? "max-h-8 max-w-28 object-contain opacity-70"
+                      ? "opacity-70"
                       : "mono" in c && c.mono
-                      ? "max-h-8 max-w-28 object-contain opacity-70 grayscale"
-                      : "max-h-8 max-w-28 object-contain opacity-50 [filter:brightness(0)]"
-                  }
+                      ? "opacity-70 grayscale"
+                      : "opacity-50 [filter:brightness(0)]"
+                  )}
                   unoptimized
                 />
               </span>
