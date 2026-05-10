@@ -11,7 +11,7 @@ export const site = {
     instagramStudio: "https://www.instagram.com/ascentstudios.co/",
   },
   nav: [
-    { label: "Work", href: "/work" },
+    { label: "Portfolio", href: "/work" },
     { label: "About", href: "/about" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Start a Project", href: "/contact", cta: true },
