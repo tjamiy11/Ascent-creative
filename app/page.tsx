@@ -7,6 +7,80 @@ import { Marquee } from "@/components/marquee";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
+import { PhotoStrip } from "@/components/photo-strip";
+
+// Each strip is hand-placed on a 12-col grid with intentional asymmetry —
+// reads as an editorial spread rather than three tiles in a row. Mobile
+// stacks single-column; placement classes only apply at md+.
+
+const STRIP_AFTER_CLIENTS = [
+  // Lead with the smallest, top-left. Anchor the row with montrose. Drop hawaii
+  // wide and offset on row 2 so the eye travels diagonally down-right.
+  {
+    src: "/photos/tree-from-italy-iso800-85mm-f5.jpg",
+    alt: "Lone tree off the Amalfi coast, leaving Sorrento.",
+    aspect: "3 / 2",
+    place: "md:col-start-1 md:col-span-5 md:row-start-1 md:mt-16",
+  },
+  {
+    src: "/photos/montrose-skyl-ine.jpg",
+    alt: "Chicago skyline from Montrose.",
+    aspect: "3 / 2",
+    place: "md:col-start-7 md:col-span-6 md:row-start-1",
+  },
+  {
+    src: "/photos/hawwai-heli-copy-2.jpg",
+    alt: "Aerial frame from a Hawaii helicopter shoot.",
+    aspect: "4 / 3",
+    place: "md:col-start-3 md:col-span-7 md:row-start-2",
+  },
+];
+
+const STRIP_AFTER_SOLUTIONS = [
+  // The portrait is the centerpiece — narrow, tall, alone on its row in the
+  // upper third. Two flanking landscapes anchor the row below, off-center.
+  {
+    src: "/photos/yeee-105.jpg",
+    alt: "On set — frame 105.",
+    aspect: "4 / 3",
+    place: "md:col-start-1 md:col-span-5 md:row-start-2 md:mt-8",
+  },
+  {
+    src: "/photos/posted-up-on.jpg",
+    alt: "Portrait on location.",
+    aspect: "3 / 4",
+    place: "md:col-start-7 md:col-span-3 md:row-start-1",
+  },
+  {
+    src: "/photos/yeee-108.jpg",
+    alt: "On set — frame 108.",
+    aspect: "4 / 3",
+    place: "md:col-start-7 md:col-span-6 md:row-start-2",
+  },
+];
+
+const STRIP_AFTER_INDUSTRIES = [
+  // Lead with cocora wide-left. Sandwich tucks small upper-right with offset.
+  // Giraffes wide on row 2, off-center, closes the page.
+  {
+    src: "/photos/cocora-85.jpg",
+    alt: "Cocora Valley wax palms, Colombia.",
+    aspect: "3 / 2",
+    place: "md:col-start-1 md:col-span-7 md:row-start-1",
+  },
+  {
+    src: "/photos/sandwich-bae-2.jpg",
+    alt: "Editorial food still.",
+    aspect: "16 / 10",
+    place: "md:col-start-9 md:col-span-4 md:row-start-1 md:mt-20",
+  },
+  {
+    src: "/photos/giraffe-gang.jpg",
+    alt: "Giraffes in the wild.",
+    aspect: "16 / 9",
+    place: "md:col-start-4 md:col-span-8 md:row-start-2",
+  },
+];
 import { getFeaturedProjects } from "@/lib/projects";
 import { getFeaturedTestimonials } from "@/lib/testimonials";
 import { site } from "@/lib/site-config";
@@ -156,6 +230,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Stills — visual rest between clients and solutions */}
+      <PhotoStrip items={STRIP_AFTER_CLIENTS} />
+
       {/* (04) Solutions */}
       <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-12 md:gap-x-12">
         <Reveal
@@ -206,6 +283,9 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+
+      {/* Stills — visual rest between solutions and client stories */}
+      <PhotoStrip items={STRIP_AFTER_SOLUTIONS} />
 
       {/* (05) Client Stories — testimonials excerpt */}
       <section className="container-edge mt-[var(--space-section)] grid grid-cols-12 gap-y-12 md:gap-x-12">
@@ -286,6 +366,9 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+
+      {/* Stills — closing rest before the CTA */}
+      <PhotoStrip items={STRIP_AFTER_INDUSTRIES} />
 
       <ContactCTA compact />
     </>
