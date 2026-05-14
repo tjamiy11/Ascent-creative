@@ -163,7 +163,7 @@ export const projects: Project[] = [
     tags: ["Brand Film", "Editorial"],
     cover: "/video/missusa.jpg",
     clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/missusa.mp4",
-    dims: { w: 720, h: 1280 },
+    dims: { w: 1280, h: 720 },
     excerpt:
       "A highlight reel for Miss USA — composure, presence, and the quiet of the runway between rounds.",
   },
@@ -226,7 +226,7 @@ export const projects: Project[] = [
     tags: ["Brand Film", "Lifestyle"],
     cover: "/video/boxed.jpg",
     clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/boxed.mp4",
-    dims: { w: 720, h: 1280 },
+    dims: { w: 1280, h: 720 },
     excerpt:
       "Marketing content videos for Boxed Gift.",
   },
@@ -240,7 +240,7 @@ export const projects: Project[] = [
     tags: ["Concept", "Editorial"],
     cover: "/video/multiple.jpg",
     clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/multiple.mp4",
-    dims: { w: 1280, h: 720 },
+    dims: { w: 720, h: 1280 },
     excerpt:
       "A composition piece exploring rhythm and repetition across short cuts.",
   },
