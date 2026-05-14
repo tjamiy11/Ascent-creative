@@ -15,7 +15,7 @@ export default function WorkPage() {
     <>
       <section className="container-edge pt-12 pb-24 md:pt-24 md:pb-40">
         <Reveal as="p" className="eyebrow opacity-60">
-          (Index · 2023 — 2025)
+          (Portfolio)
         </Reveal>
         <Reveal as="h1" className="heading-display mt-6 max-w-5xl">
           A small body of

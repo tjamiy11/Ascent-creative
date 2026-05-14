@@ -52,7 +52,9 @@ export default async function CaseStudyPage({
     <article className="pb-[var(--space-section)]">
       <header className="container-edge pt-12 md:pt-20">
         <Reveal as="p" className="eyebrow opacity-60">
-          {project.tags.join(" · ")} · {project.year}
+          {project.kind === "photo"
+            ? project.tags.join(" · ")
+            : `${project.tags.join(" · ")} · ${project.year}`}
         </Reveal>
         <Reveal as="h1" className="heading-display mt-4 max-w-5xl">
           {project.title}
@@ -70,7 +72,9 @@ export default async function CaseStudyPage({
           className="mt-12 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-[color:var(--color-line)] pt-6 text-sm md:grid-cols-4"
         >
           <Meta label="Client" value={project.client} />
-          <Meta label="Year" value={String(project.year)} />
+          {project.kind !== "photo" && (
+            <Meta label="Year" value={String(project.year)} />
+          )}
           <Meta label="Role" value={project.role} />
           <Meta label="Medium" value={project.kind === "video" ? "Film" : "Photography"} />
         </Reveal>
