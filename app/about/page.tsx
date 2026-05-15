@@ -143,11 +143,11 @@ export default function AboutPage() {
           <Reveal delay={0.05} className="mt-8">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-[color:var(--color-ink)]/5">
               <Image
-                src="/placeholders/cover-1.jpg"
+                src="/photos/stefan-portrait.jpg"
                 alt="Stefan Lewikowski, founder of Ascent Studios"
                 fill
                 sizes="(min-width: 768px) 25vw, 100vw"
-                className="object-cover grayscale"
+                className="object-cover"
               />
             </div>
             <p className="mt-4 text-sm">Stefan Lewikowski</p>
