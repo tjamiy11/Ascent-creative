@@ -111,21 +111,7 @@ export const projects: Project[] = [
     excerpt:
       "A spec spot for the Ducati Streetfighter. Co-directed by Stefan and David Strib, with Stefan flying drone, David cutting, and Sam riding.",
   },
-  {
-    slug: "xai",
-    title: "xAI",
-    client: "xAI",
-    year: 2025,
-    role: "Direction · Cinematography",
-    kind: "video",
-    tags: ["Tech", "Brand Film"],
-    cover: "/video/xai.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/xai.mp4",
-    dims: { w: 1280, h: 720 },
-    excerpt:
-      "A brand film for xAI exploring the texture of computation and the human side of intelligent systems.",
-  },
-  {
+{
     slug: "lollapalooza-reverb",
     title: "Reverb",
     client: "Lollapalooza",
