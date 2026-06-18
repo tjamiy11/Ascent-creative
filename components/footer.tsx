@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site-config";
 
@@ -56,11 +57,20 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-4 border-t border-[color:var(--color-line)] pt-6 text-xs opacity-60 md:flex-row">
-          <span>
-            © {year} {site.name}. All rights reserved.
-          </span>
-          <span>Made with intention.</span>
+        <div className="border-t border-[color:var(--color-line)] pt-8">
+          <Image
+            src="/brand/ascent-horizontal-grey.png"
+            alt={site.name}
+            width={1869}
+            height={395}
+            className="mb-6 h-8 w-auto opacity-70 md:h-10"
+          />
+          <div className="flex flex-col items-start justify-between gap-4 text-xs opacity-60 md:flex-row">
+            <span>
+              © {year} {site.name}. All rights reserved.
+            </span>
+            <span>Made with intention.</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -46,9 +46,14 @@ next-env.d.ts
 /company\ logos/
 /Company\ logos\ /
 /Thumbnails/
+# raw logo source exports — site uses /public/logos and /public/brand
+/LOGOS_PNG/
 
 # claude code worktree state — local-only
 /.claude/worktrees/
+
+# claude-flow tooling state — local-only
+/.claude-flow/
 
 # video clips — hosted on Cloudflare R2 (.jpg covers stay tracked for Next.js Image optimization)
 /public/video/*.mp4

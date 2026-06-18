@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -86,10 +87,17 @@ export function Nav() {
         <div className="container-edge flex items-center justify-between py-5">
           <Link
             href="/"
-            className="font-display text-xl tracking-tight"
+            className="block"
             aria-label={`${site.name} home`}
           >
-            {site.shortName}
+            <Image
+              src="/brand/ascent-horizontal-grey.png"
+              alt={site.name}
+              width={1869}
+              height={395}
+              priority
+              className="h-5 w-auto md:h-6"
+            />
           </Link>
 
           <nav
