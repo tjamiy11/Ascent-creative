@@ -57,3 +57,14 @@ next-env.d.ts
 
 # video clips — hosted on Cloudflare R2 (.jpg covers stay tracked for Next.js Image optimization)
 /public/video/*.mp4
+node_modules/
+__pycache__/
+.venv/
+venv/
+.env
+*.db
+*.rvf
+*.rvf.lock
+.next/
+dist/
+memory.db

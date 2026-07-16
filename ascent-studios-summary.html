@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ascent Studios — Project Summary</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: #1a1a1a; font-size: 10.5pt; line-height: 1.5; margin: 0;
+  }
+  h1 { font-size: 26pt; margin: 0 0 2px; letter-spacing: -0.5px; }
+  .sub { color: #666; font-size: 11pt; margin: 0 0 4px; }
+  .meta { color: #999; font-size: 8.5pt; margin: 0 0 18px; }
+  h2 {
+    font-size: 14pt; margin: 26px 0 8px; padding-bottom: 5px;
+    border-bottom: 2px solid #1a1a1a; letter-spacing: -0.3px;
+  }
+  h3 { font-size: 11pt; margin: 16px 0 5px; color: #000; }
+  p { margin: 6px 0; }
+  ul { margin: 6px 0; padding-left: 18px; }
+  li { margin: 3px 0; }
+  code {
+    font-family: "SF Mono", Menlo, monospace; font-size: 9pt;
+    background: #f2f2f2; padding: 1px 4px; border-radius: 3px;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9.5pt; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #ddd; vertical-align: top; }
+  th { background: #1a1a1a; color: #fff; font-weight: 600; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .pill {
+    display: inline-block; font-size: 8pt; padding: 1px 7px; border-radius: 10px;
+    background: #1a1a1a; color: #fff; vertical-align: middle;
+  }
+  .warn { color: #b00020; font-weight: 600; }
+  .ok { color: #0a7d33; font-weight: 600; }
+  .box {
+    background: #f7f7f7; border-left: 3px solid #1a1a1a;
+    padding: 8px 12px; margin: 10px 0; font-size: 9.5pt;
+  }
+  .diagram {
+    font-family: "SF Mono", Menlo, monospace; font-size: 8.5pt; line-height: 1.45;
+    background: #f7f7f7; padding: 12px; border-radius: 5px; white-space: pre; overflow-x: hidden;
+  }
+  .small { font-size: 8.5pt; color: #666; }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<h1>Ascent Studios</h1>
+<p class="sub">Website — Architecture, Integrations &amp; Repository State</p>
+<p class="meta">Project summary &middot; Generated 18 June 2026 &middot; github.com/tjamiy11/Ascent-creative</p>
+
+<h2>1. What this is</h2>
+<p>
+  <strong>Ascent Studios</strong> is the marketing website for a Chicago-based video &amp;
+  photography studio (founder: Stefan, IG <code>@uglysteffy</code>). It is an editorial,
+  motion-forward portfolio site: a kinetic hero, a portfolio/work grid of 53 projects,
+  per-project case-study pages, an about page, a testimonials page, and a contact page.
+</p>
+<table>
+  <tr><th>Aspect</th><th>Detail</th></tr>
+  <tr><td>Live URL</td><td><code>ascentstudios.co</code></td></tr>
+  <tr><td>Repository</td><td><code>github.com/tjamiy11/Ascent-creative.git</code> (private remote, branch <code>main</code>)</td></tr>
+  <tr><td>Package name</td><td><code>ascent-creative-co</code> v0.1.0</td></tr>
+  <tr><td>Tracked files</td><td>123 files in git</td></tr>
+</table>
+
+<h2>2. Tech stack</h2>
+<table>
+  <tr><th>Layer</th><th>Technology</th><th>Role</th></tr>
+  <tr><td>Framework</td><td>Next.js 16.2.4 (App Router)</td><td>Routing, SSR/SSG, image optimization</td></tr>
+  <tr><td>Language</td><td>TypeScript 5</td><td>All app/lib/component code</td></tr>
+  <tr><td>UI runtime</td><td>React 19.2</td><td>Components</td></tr>
+  <tr><td>Styling</td><td>Tailwind CSS v4 (+ PostCSS)</td><td>Design system / utility styling</td></tr>
+  <tr><td>Motion</td><td>Framer Motion 12 + Lenis 1.3</td><td>Reveals, page transitions, smooth scroll</td></tr>
+  <tr><td>Content</td><td>MDX (@next/mdx, gray-matter)</td><td>Optional per-project case studies</td></tr>
+  <tr><td>Utilities</td><td>clsx</td><td>Class composition</td></tr>
+  <tr><td>Linting</td><td>ESLint 9 + eslint-config-next</td><td>Code quality</td></tr>
+</table>
+<p class="small">No database, no auth, no backend API. The site is fully static/edge-rendered with no required environment variables.</p>
+
+<h2>3. The integration map</h2>
+<div class="diagram">
+                        ┌─────────────────────────────┐
+                        │   GitHub: tjamiy11/          │
+                        │   Ascent-creative  (branch:  │
+                        │   main)                      │
+                        └──────────────┬──────────────┘
+                                       │  push to main = auto-deploy
+                                       ▼
+   ┌───────────────────────────────────────────────────────────┐
+   │  VERCEL  (project: "ascent-studios")                       │
+   │  org/team: team_7St938CMh4tMv9PveSYmDIUC                   │
+   │  projectId: prj_KLNWv0heULx6W5mPTofExDrMcah9              │
+   │  → builds Next.js, serves ascentstudios.co                │
+   │  → optimizes /public images (covers, logos, photos)       │
+   │  → .vercelignore keeps multi-GB raw media OUT of deploy    │
+   └───────────────┬───────────────────────────────────────────┘
+                   │  &lt;video&gt; tags + hero point to hardcoded URLs
+                   ▼
+   ┌───────────────────────────────────────────────────────────┐
+   │  CLOUDFLARE R2  (public bucket)                            │
+   │  pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev               │
+   │  → hosts every .mp4 (hero.mp4 + 24 project clips)          │
+   │  → mp4s are git-ignored; only .jpg covers live in repo     │
+   └───────────────────────────────────────────────────────────┘
+
+   Google Forms (optional) ──► contact page inquiry form
+        (not yet wired — currently mailto fallback)
+</div>
+
+<h2>4. Cloudflare R2 — the video CDN</h2>
+<p>
+  Cloudflare R2 is the <strong>only third-party service the running site depends on</strong>.
+  All video playback is served from a single public R2 bucket; no Cloudflare Workers,
+  Pages, or Images product is used — just R2 object storage exposed over its public
+  <code>r2.dev</code> URL.
+</p>
+<table>
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Public bucket URL</td><td><code>https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/</code></td></tr>
+  <tr><td>Hosts</td><td>1 hero reel (<code>hero.mp4</code>) + 24 project clips (hoka, dtlr, palmer, samsung, ducati, lollareverb, croatia, missusa, blum, trulli, candycloud, morph, halogram, giftcard, teaser, boxed, multiple, sonim, jordan-pele, dreamy, nick-blum, uglysteffy, vespa, adidas-macys)</td></tr>
+  <tr><td>Referenced in</td><td><code>lib/projects.ts</code> (24 <code>clip:</code> URLs) &amp; <code>components/hero-reel.tsx</code> (hero source)</td></tr>
+  <tr><td>Why R2</td><td>mp4s are multi-MB each; keeping them out of git/Vercel avoids repo bloat and deploy-size limits. R2 has zero egress fees.</td></tr>
+</table>
+<div class="box">
+  <strong>How a video gets added:</strong> transcode <code>.mov</code> → small <code>.mp4</code>
+  (<code>ffmpeg -i in.mov -c:v libx264 -crf 24 -vf "scale=1280:-2" out.mp4</code>),
+  upload the mp4 to the R2 bucket, set <code>clip:</code> to the R2 URL in
+  <code>lib/projects.ts</code>, and drop a first-frame <code>.jpg</code> cover into
+  <code>public/video/</code>. The repo never stores the mp4.
+</div>
+
+<h2>5. Vercel — hosting &amp; deploy</h2>
+<ul>
+  <li><strong>Project:</strong> <code>ascent-studios</code> (linked via local <code>.vercel/project.json</code>).</li>
+  <li><strong>Deploy trigger:</strong> every push to <code>main</code> on GitHub auto-deploys to production at <code>ascentstudios.co</code>.</li>
+  <li><strong>Environment variables:</strong> none required — video URLs are hardcoded.</li>
+  <li><strong>Build:</strong> <code>next build</code> (default). Image optimization runs on <code>/public</code> covers, logos, and photos.</li>
+  <li><strong>Deploy hygiene:</strong> <code>.vercelignore</code> excludes the local raw-media working folders (<code>/Videos/</code>, <code>/Photos/</code>, <code>/Thumbnails/</code>, <code>/company logos/</code>) and all <code>public/video/*.mp4</code> so multi-GB sources never upload. A case-insensitivity quirk that previously broke deploys is documented in the file.</li>
+</ul>
+
+<h2 class="pagebreak">6. Repository structure</h2>
+<div class="diagram">
+app/                    Routes (App Router)
+ ├─ page.tsx            Home — 5 numbered sections, kinetic hero, photo strips
+ ├─ work/page.tsx       Portfolio grid (53 projects)
+ ├─ work/[slug]/        Per-project case-study page (dynamic)
+ ├─ about/page.tsx      About + founder portrait
+ ├─ contact/page.tsx    Inquiry form (Google Forms or mailto fallback)
+ ├─ testimonials/       Client quotes page
+ ├─ layout.tsx          Root layout, template.tsx page transitions
+ ├─ globals.css         Tailwind v4 + design tokens
+ └─ icon/og/twitter     Favicon + social share images
+components/             16 components — nav, footer, hero-reel, hero-background,
+                        video-carousel, work-card/grid, photo-masonry/strip,
+                        marquee, testimonial-carousel, inquiry-form, reveal,
+                        smooth-scroll, contact-cta, mdx-blocks
+lib/
+ ├─ projects.ts         53 projects: titles, covers, R2 clips, tags, galleries
+ ├─ site-config.ts      Studio name, email, socials, 23-client marquee, form
+ └─ testimonials.ts     Client testimonial copy
+content/projects/       Optional MDX case studies (index.ts registry)
+public/
+ ├─ video/              .jpg covers (mp4s on R2) + a few local .mp4s
+ ├─ photos/             Transcoded portfolio photos (~13 MB)
+ ├─ logos/              23 client logos (PNG/SVG)
+ ├─ brand/              Ascent wordmark variants (h/v × grey/white)
+ └─ placeholders/       Fallback covers/clips (Git LFS tracked)
+scripts/check-mdx-slugs.mjs   Validates MDX slugs match projects
+</div>
+
+<h3>Site content captured in config</h3>
+<ul>
+  <li><strong>Contact:</strong> <code>stefan@ascentstudios.co</code></li>
+  <li><strong>Socials:</strong> IG <code>@uglysteffy</code> (personal), <code>@ascentstudios.co</code> (studio)</li>
+  <li><strong>Clients marquee (23):</strong> Nike, Hoka, Adidas, Arc'teryx, Amazon, Lexar, Ducati, PGYTECH, Insomniac, Wynn Las Vegas, XS Las Vegas, Skybar, Palmer House, Club Quarters, Mamitas, Bounce, Jon Cotay, Flygta Airlines, DTRL, DTA, Samsung, Country Splash</li>
+  <li><strong>Inquiry form:</strong> Google Forms slot exists (<code>inquiryForm.googleFormsUrl</code>) but is currently <em>empty</em> → contact page shows the styled mailto fallback until a form URL is pasted in.</li>
+</ul>
+
+<h2>7. What has NOT been pushed to the repo</h2>
+<p>
+  <code>main</code> is <span class="ok">fully in sync with <code>origin/main</code></span> (0 commits ahead).
+  The unpushed material falls into three buckets:
+</p>
+
+<h3>A. Uncommitted working-tree changes (modified, tracked files)</h3>
+<table>
+  <tr><th>File</th><th>Change</th></tr>
+  <tr><td><code>lib/projects.ts</code></td><td>+159 / −0 lines — largest change (new projects / metadata)</td></tr>
+  <tr><td><code>components/footer.tsx</code></td><td>~20 lines changed</td></tr>
+  <tr><td><code>components/nav.tsx</code></td><td>~12 lines changed</td></tr>
+  <tr><td><code>app/favicon.ico</code></td><td>replaced (25.9 KB → 5.4 KB)</td></tr>
+  <tr><td><code>public/video/missusa.jpg</code></td><td>cover image replaced</td></tr>
+</table>
+
+<h3>B. Untracked files (new, never added to git)</h3>
+<table>
+  <tr><th>Path</th><th>Size</th><th>Note</th></tr>
+  <tr><td><code>app/icon.png</code></td><td>16 KB</td><td>App icon — likely should be committed</td></tr>
+  <tr><td><code>app/apple-icon.png</code></td><td>4 KB</td><td>Apple touch icon — likely should be committed</td></tr>
+  <tr><td><code>app/opengraph-image.png</code></td><td>8 KB</td><td>OG social share image — likely should be committed</td></tr>
+  <tr><td><code>app/twitter-image.png</code></td><td>8 KB</td><td>Twitter share image — likely should be committed</td></tr>
+  <tr><td><code>public/brand/</code></td><td>152 KB</td><td>Ascent wordmark variants — likely should be committed</td></tr>
+  <tr><td><code>public/video/*.jpg</code> (6)</td><td>~640 KB</td><td>New covers: adidas-macys, dreamy, jordan-pele, nick-blum, uglysteffy, vespa — needed by Next.js Image</td></tr>
+  <tr><td><code>LOGOS_PNG/</code></td><td>1.9 MB</td><td>Working folder — probably local-only source assets</td></tr>
+  <tr><td><code>.claude-flow/</code></td><td>4 KB</td><td>Tooling state — local-only, do not commit</td></tr>
+</table>
+<p class="small">
+  Also present but intentionally git-ignored (local-only working media, never meant for the repo):
+  <code>Videos/</code>, <code>Photos/</code>, <code>Thumbnails/</code>, <code>Company logos/</code>,
+  <code>company logos/</code>, the <code>.next/</code> build, and all <code>public/video/*.mp4</code> clips
+  (those belong on R2).
+</p>
+
+<h3>C. An entire local branch that was never pushed <span class="warn">⚠</span></h3>
+<p>
+  The remote (<code>origin</code>) only has one branch: <code>main</code>. The local branch
+  <code>home/testimonial-carousel</code> is <span class="warn">18 commits</span> that do not exist
+  on the remote — it has no upstream and was never pushed. It contains the full early build
+  history of the site, e.g.:
+</p>
+<ul class="small">
+  <li>Initial scaffold: Next.js 16 + Tailwind v4 + TS</li>
+  <li>Build out the studio site: Home, Work, About, Contact</li>
+  <li>Cinematic redesign: dark palette, typographic hero, ContactCTA</li>
+  <li>Hero experiments: WebGL glass icosahedron (R3F), then reverted to typographic-only</li>
+  <li>Landing: restructure home around 5 numbered sections</li>
+  <li>Add /testimonials page + revolving company banner; horizontal testimonial carousel</li>
+  <li>Videos: replace placeholder content with real client work</li>
+</ul>
+<div class="box">
+  <strong>Worth confirming:</strong> whether <code>home/testimonial-carousel</code> is dead history
+  (already superseded by what's on <code>main</code>) or contains work that still needs to be merged.
+  The three <code>claude/*</code> worktree branches are all even with <code>origin/main</code> (0 ahead) — nothing pending there.
+</div>
+
+<h2>8. Quick-reference summary</h2>
+<table>
+  <tr><th>Question</th><th>Answer</th></tr>
+  <tr><td>What hosts the site?</td><td>Vercel (project <code>ascent-studios</code>), auto-deploy on push to <code>main</code></td></tr>
+  <tr><td>What hosts the videos?</td><td>Cloudflare R2 public bucket — 25 mp4s, hardcoded URLs</td></tr>
+  <tr><td>Any secrets/env vars?</td><td>None required</td></tr>
+  <tr><td>Is <code>main</code> pushed?</td><td><span class="ok">Yes — in sync with origin</span></td></tr>
+  <tr><td>What's unpushed?</td><td>5 modified files + ~2.5 MB untracked assets (icons, brand, covers) + an 18-commit local branch</td></tr>
+  <tr><td>Biggest gap to close</td><td>Commit the new social/app icons, brand assets, and 6 video covers; decide the fate of <code>home/testimonial-carousel</code></td></tr>
+</table>
+
+</body>
+</html>
