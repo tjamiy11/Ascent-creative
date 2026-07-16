@@ -21,10 +21,6 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
     [projects, filter]
   );
 
-  // Use first-frame video thumbnails whenever videos are in the visible set.
-  // Pure photo views can't / don't need this.
-  const showFirstFrame = visible.some((p) => p.kind === "video");
-
   return (
     <>
       <div role="group" aria-label="Filter work by medium" className="container-edge mb-12 flex items-center gap-2">
@@ -52,11 +48,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
         </span>
       </div>
 
-      <PhotoMasonry
-        key={filter}
-        projects={visible}
-        firstFrameThumbnail={showFirstFrame}
-      />
+      <PhotoMasonry key={filter} projects={visible} />
     </>
   );
 }

@@ -54,9 +54,32 @@ export function WorkCard({
   const [hover, setHover] = useState(false);
   const [canHover, setCanHover] = useState(true);
   const [inView, setInView] = useState(false);
+  const [nearView, setNearView] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
+
+  // Lazy-mount the <video> only once the card approaches the viewport.
+  // Cards in the hidden duplicate masonry layout (display:none) never
+  // intersect, so their videos never mount — this is what stops /work
+  // from firing dozens of video requests at once on load. Once seen we
+  // keep it mounted (desktop videos are preload="none", so idle-cheap).
+  useEffect(() => {
+    if (nearView) return;
+    const el = mediaRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setNearView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [nearView]);
 
   // Detect hover-capable / fine-pointer devices. Touch devices skip the
   // hover-driven magnet/tilt/play behavior and use IntersectionObserver
@@ -171,22 +194,26 @@ export function WorkCard({
       >
         {firstFrameThumbnail && project.clip && !project.thumbnailFromCover ? (
           // First-frame mode: video is the thumbnail (paused at frame 0),
-          // plays on hover. preload="metadata" loads enough to render the
-          // first frame. The currentTime nudge forces Safari to paint it.
-          <video
-            ref={videoRef}
-            src={project.clip}
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-hidden
-            onLoadedMetadata={(e) => {
-              const v = e.currentTarget;
-              if (v.currentTime === 0) v.currentTime = 0.01;
-            }}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.03]"
-          />
+          // plays on hover. Gated on nearView so it only loads once the
+          // card approaches the viewport. preload="metadata" loads enough
+          // to render the first frame; the currentTime nudge forces Safari
+          // to paint it.
+          nearView && (
+            <video
+              ref={videoRef}
+              src={project.clip}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden
+              onLoadedMetadata={(e) => {
+                const v = e.currentTarget;
+                if (v.currentTime === 0) v.currentTime = 0.01;
+              }}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.03]"
+            />
+          )
         ) : (
           <>
             <Image
@@ -201,7 +228,7 @@ export function WorkCard({
                 "group-hover:scale-[1.03]"
               )}
             />
-            {project.clip && (
+            {project.clip && nearView && (
               <video
                 ref={videoRef}
                 src={project.clip}
