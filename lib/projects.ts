@@ -82,6 +82,20 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "jordan-pele",
+    title: "Pelé",
+    client: "Jordan",
+    year: 2025,
+    role: "Direction · Cinematography",
+    kind: "video",
+    tags: ["Brand Film", "Athletic"],
+    cover: "/video/jordan-pele.jpg",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/jordan-pele.mp4",
+    dims: { w: 720, h: 1280 },
+    excerpt:
+      "A 30-second cut for Jordan honoring Pelé — vertical, kinetic, made for the feed.",
+  },
+  {
     slug: "samsung-t9",
     title: "T9",
     client: "Samsung",
@@ -177,7 +191,7 @@ export const projects: Project[] = [
     tags: ["Travel", "Brand Film"],
     cover: "/video/trulli.jpg",
     clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/trulli.mp4",
-    dims: { w: 1280, h: 720 },
+    dims: { w: 720, h: 1280 },
     excerpt:
       "A run of event-recap edits for Trulli Speakers, cut for brand awareness. Production: Kurza.",
   },
@@ -261,7 +275,7 @@ export const projects: Project[] = [
     tags: ["Brand Film", "Lifestyle"],
     cover: "/video/boxed.jpg",
     clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/boxed.mp4",
-    dims: { w: 720, h: 1280 },
+    dims: { w: 1280, h: 720 },
     excerpt:
       "Marketing content videos for Boxed Gift.",
   },
@@ -294,22 +308,6 @@ export const projects: Project[] = [
       "Built for the toughest workplaces — the Sonim phone shot among sparks, dust, and steel.",
   },
   {
-    slug: "jordan-pele",
-    title: "Pelé",
-    client: "Jordan",
-    year: 2025,
-    role: "Direction · Cinematography",
-    kind: "video",
-    tags: ["Brand Film", "Athletic"],
-    cover: "/video/jordan-pele.jpg",
-    // Placeholder until the final film is uploaded to R2:
-    // https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/jordan-pele.mp4
-    clip: "/placeholders/jordan-pele.mp4",
-    dims: { w: 720, h: 1280 },
-    excerpt:
-      "A 30-second cut for Jordan honoring Pelé — vertical, kinetic, made for the feed.",
-  },
-  {
     slug: "dreamy",
     title: "Dreamy",
     client: "Personal",
@@ -318,9 +316,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Concept", "Editorial"],
     cover: "/video/dreamy.jpg",
-    // Placeholder until the final film is uploaded to R2:
-    // https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/dreamy.mp4
-    clip: "/placeholders/dreamy.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/dreamy.mp4",
     dims: { w: 720, h: 1280 },
     excerpt:
       "An atmospheric piece — slow color, drifted focus, and a track that carries it.",
@@ -334,9 +330,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Founder", "Portrait"],
     cover: "/video/nick-blum.jpg",
-    // Placeholder until the final film is uploaded to R2:
-    // https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/nick-blum.mp4
-    clip: "/placeholders/nick-blum.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/nick-blum.mp4",
     dims: { w: 1280, h: 720 },
     excerpt:
       "A short portrait of Nick Blum — the man behind the studio.",
@@ -350,9 +344,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Concept", "Personal"],
     cover: "/video/uglysteffy.jpg",
-    // Placeholder until the final film is uploaded to R2:
-    // https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/uglysteffy.mp4
-    clip: "/placeholders/uglysteffy.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/uglysteffy.mp4",
     dims: { w: 1280, h: 720 },
     excerpt:
       "A long-form personal piece — POV, raw, signed with a mini Stefan logo.",
@@ -366,9 +358,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Auto"],
     cover: "/video/vespa.jpg",
-    // Placeholder until the final film is uploaded to R2:
-    // https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/vespa.mp4
-    clip: "/placeholders/vespa.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/vespa.mp4",
     dims: { w: 1280, h: 720 },
     excerpt:
       "A brand film for Vespa — wide, cinematic, on the road.",
@@ -382,9 +372,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Retail"],
     cover: "/video/adidas-macys.jpg",
-    // Placeholder until the final film is uploaded to R2:
-    // https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/adidas-macys.mp4
-    clip: "/placeholders/adidas-macys.mp4",
+    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/adidas-macys.mp4",
     dims: { w: 1280, h: 720 },
     excerpt:
       "A World Cup 2026 piece for adidas at Macy's — kit, ceremony, and the build to the tournament.",

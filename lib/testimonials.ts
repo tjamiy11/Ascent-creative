@@ -8,6 +8,12 @@ export type Testimonial = {
   company?: string;
   /** Optional slug to link to the related case study in /work */
   projectSlug?: string;
+  /**
+   * Optional client headshot, e.g. "/testimonials/rachel.jpg" (drop the
+   * file in /public/testimonials/). When absent, the page renders an
+   * initials avatar so the layout is never broken by a missing image.
+   */
+  image?: string;
   featured?: boolean;
 };
 

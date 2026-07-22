@@ -10,15 +10,15 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   const socialLinks = [
-    { label: "Instagram (Stefan)", href: site.social.instagramPersonal },
-    { label: "Instagram (Ascent Studios)", href: site.social.instagramStudio },
+    { label: "@uglysteffy", href: site.social.instagramPersonal },
+    { label: "Ascent Studios", href: site.social.instagramStudio },
   ].filter((link) => Boolean(link.href));
 
   return (
     <>
       <section className="container-edge pt-12 pb-24 md:pt-24 md:pb-32">
         <Reveal as="p" className="eyebrow opacity-60">
-          (Now booking · 2025 — 2026)
+          (Now booking · 2026 — 2027)
         </Reveal>
         <Reveal as="h1" className="heading-display mt-6 max-w-5xl">
           Tell us about

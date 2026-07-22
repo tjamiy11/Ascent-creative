@@ -32,7 +32,7 @@ export function InquiryForm() {
     );
   }
 
-  return <MailtoForm />;
+  return <ProjectForm />;
 }
 
 type FormData = {
@@ -46,6 +46,7 @@ type FormData = {
 };
 
 const PROJECT_TYPES = [
+  "Starter Project",
   "Brand Commercial",
   "Tourism Film",
   "Social Content",
@@ -74,43 +75,70 @@ const BUDGETS = [
 const INPUT_BASE =
   "w-full border-b border-[color:var(--color-line)] bg-transparent py-2 text-base transition-colors focus:border-[color:var(--color-ink)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ink)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-paper)]";
 
-function MailtoForm() {
-  const [data, setData] = useState<FormData>({
-    name: "",
-    email: "",
-    company: "",
-    projectType: "",
-    timeline: "",
-    budget: "",
-    message: "",
-  });
+const EMPTY: FormData = {
+  name: "",
+  email: "",
+  company: "",
+  projectType: "",
+  timeline: "",
+  budget: "",
+  message: "",
+};
+
+type Status = "idle" | "submitting" | "success" | "error";
+
+function ProjectForm() {
+  const [data, setData] = useState<FormData>(EMPTY);
+  const [status, setStatus] = useState<Status>("idle");
 
   const set = <K extends keyof FormData>(key: K, value: FormData[K]) =>
     setData((prev) => ({ ...prev, [key]: value }));
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = `New project inquiry${
-      data.company ? ` — ${data.company}` : ""
-    }`;
-    const body = [
-      `Name: ${data.name}`,
-      `Email: ${data.email}`,
-      data.company && `Company: ${data.company}`,
-      data.projectType && `Project type: ${data.projectType}`,
-      data.timeline && `Timeline: ${data.timeline}`,
-      data.budget && `Budget: ${data.budget}`,
-      "",
-      "Message:",
-      data.message,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    const url = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = url;
+    setStatus("submitting");
+    try {
+      // Submits straight to Stefan's inbox via the serverless Resend route
+      // (app/api/inquiry/route.ts) — no email-client redirect.
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setData(EMPTY);
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
+
+  if (status === "success") {
+    return (
+      <div className="border-t border-[color:var(--color-line)] pt-10">
+        <p className="eyebrow opacity-60">Message sent</p>
+        <h2 className="mt-4 font-display text-3xl tracking-tight md:text-4xl">
+          Thanks — we&rsquo;ll be in touch.
+        </h2>
+        <p className="mt-4 max-w-md text-sm leading-relaxed opacity-70">
+          Your inquiry landed in our inbox. We reply within two business days,
+          from Chicago.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-8 text-sm underline underline-offset-4 opacity-70 transition-opacity hover:opacity-100"
+        >
+          Send another →
+        </button>
+      </div>
+    );
+  }
+
+  const submitting = status === "submitting";
 
   return (
     <form onSubmit={onSubmit} className="space-y-10">
@@ -187,17 +215,31 @@ function MailtoForm() {
       <div className="flex flex-wrap items-center gap-6 pt-2">
         <button
           type="submit"
+          disabled={submitting}
           style={{
             backgroundColor: "var(--color-ink)",
             color: "var(--color-paper)",
           }}
-          className="rounded-full px-6 py-3 text-sm tracking-wide transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ink)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-paper)]"
+          className="rounded-full px-6 py-3 text-sm tracking-wide transition-opacity hover:opacity-85 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ink)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-paper)]"
         >
-          Send inquiry →
+          {submitting ? "Sending…" : "Send inquiry →"}
         </button>
-        <p className="text-xs opacity-50">
-          This opens your email app with the message pre-filled.
-        </p>
+        {status === "error" ? (
+          <p className="text-xs text-red-600">
+            Something went wrong — please email{" "}
+            <a
+              href={`mailto:${site.email}`}
+              className="underline underline-offset-2"
+            >
+              {site.email}
+            </a>{" "}
+            directly.
+          </p>
+        ) : (
+          <p className="text-xs opacity-50">
+            We reply within two business days, from Chicago.
+          </p>
+        )}
       </div>
     </form>
   );

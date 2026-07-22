@@ -280,9 +280,7 @@ export function WorkCard({
           }
           className="eyebrow absolute bottom-5 left-5 rounded-full bg-[color:var(--color-paper)] px-3 py-1.5 text-[color:var(--color-ink)]"
         >
-          {project.kind === "video"
-            ? `Film · ${project.year}`
-            : "Photography"}
+          {project.kind === "video" ? "Film" : "Photography"}
         </motion.span>
       </motion.div>
 

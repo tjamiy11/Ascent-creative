@@ -65,6 +65,19 @@ export const site = {
    */
   inquiryForm: {
     googleFormsUrl: "",
+    /**
+     * The /contact form submits directly to stefan@ascentstudios.co via the
+     * serverless route at app/api/inquiry/route.ts (powered by Resend) — no
+     * email-client redirect. Setup (one time):
+     *   1. Create an account at https://resend.com and add + verify the
+     *      sending domain (ascentstudios.co).
+     *   2. Create an API key, then add it to Vercel as the env var
+     *      RESEND_API_KEY (Project → Settings → Environment Variables).
+     *   3. Optionally set INQUIRY_TO / INQUIRY_FROM env vars to override the
+     *      defaults (to = site.email, from = inquiries@ascentstudios.co).
+     * Until RESEND_API_KEY is set the route returns a friendly error and the
+     * form tells visitors to email directly — so the page is never broken.
+     */
     height: 900,
   },
 } as const;

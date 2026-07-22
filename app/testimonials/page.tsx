@@ -18,6 +18,45 @@ function attributionLine(t: Testimonial): string | null {
   return parts.length > 0 ? parts.join(" · ") : null;
 }
 
+function initials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+/**
+ * Client headshot. Renders the photo when `image` is set, otherwise an
+ * initials chip — so a missing/unprovided photo never leaves a broken
+ * image icon on the page.
+ */
+function Avatar({ t, size = 44 }: { t: Testimonial; size?: number }) {
+  if (t.image) {
+    return (
+      <Image
+        src={t.image}
+        alt={t.author}
+        width={size}
+        height={size}
+        className="shrink-0 rounded-full object-cover"
+        style={{ width: size, height: size }}
+        unoptimized
+      />
+    );
+  }
+  return (
+    <span
+      aria-hidden
+      className="flex shrink-0 items-center justify-center rounded-full border border-[color:var(--color-line)] bg-[color:var(--color-ink)]/5 text-xs font-medium tracking-wide opacity-70"
+      style={{ width: size, height: size }}
+    >
+      {initials(t.author)}
+    </span>
+  );
+}
+
 export default function TestimonialsPage() {
   const featured = getFeaturedTestimonials();
   const rest = testimonials.filter((t) => !t.featured);
@@ -76,9 +115,12 @@ export default function TestimonialsPage() {
 
                 <Reveal
                   delay={0.1}
-                  className="mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-2 border-t border-[color:var(--color-line)] pt-6"
+                  className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-2 border-t border-[color:var(--color-line)] pt-6"
                 >
-                  <span className="text-base">— {t.author}</span>
+                  <span className="flex items-center gap-3 text-base">
+                    <Avatar t={t} />
+                    {t.author}
+                  </span>
                   {attribution && (
                     <span className="eyebrow opacity-60">{attribution}</span>
                   )}
@@ -118,8 +160,11 @@ export default function TestimonialsPage() {
                   <p className="text-sm leading-relaxed opacity-80 md:text-base">
                     {t.quote}
                   </p>
-                  <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1 border-t border-[color:var(--color-line)] pt-4">
-                    <span className="text-sm">— {t.author}</span>
+                  <div className="flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-[color:var(--color-line)] pt-4">
+                    <span className="flex items-center gap-2.5 text-sm">
+                      <Avatar t={t} size={36} />
+                      {t.author}
+                    </span>
                     {attribution && (
                       <span className="eyebrow opacity-60">{attribution}</span>
                     )}
