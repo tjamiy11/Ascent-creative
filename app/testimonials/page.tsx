@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { Marquee } from "@/components/marquee";
 import { ContactCTA } from "@/components/contact-cta";
+import { ClientLogo } from "@/components/client-logo";
 import { testimonials, getFeaturedTestimonials } from "@/lib/testimonials";
 import type { Testimonial } from "@/lib/testimonials";
 import { site } from "@/lib/site-config";
@@ -185,20 +186,7 @@ export default function TestimonialsPage() {
           durationSec={48}
           separator={<span aria-hidden className="px-12" />}
           items={site.clients.map((c) => (
-            <span
-              key={c.name}
-              className="flex h-14 w-36 items-center justify-center px-2"
-              title={c.name}
-            >
-              <Image
-                src={c.logo}
-                alt={c.name}
-                width={144}
-                height={56}
-                className="max-h-10 max-w-32 object-contain opacity-70 grayscale mix-blend-multiply"
-                unoptimized
-              />
-            </span>
+            <ClientLogo key={c.name} client={c} tone="grey" />
           ))}
         />
       </section>

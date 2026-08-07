@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
-import clsx from "clsx";
 import { HeroReel } from "@/components/hero-reel";
 import { WorkCard } from "@/components/work-card";
 import { Marquee } from "@/components/marquee";
@@ -8,6 +6,7 @@ import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { PhotoStrip } from "@/components/photo-strip";
+import { ClientLogo } from "@/components/client-logo";
 
 // Each strip is hand-placed on a 12-col grid with intentional asymmetry —
 // reads as an editorial spread rather than three tiles in a row. Mobile
@@ -199,32 +198,7 @@ export default function HomePage() {
             durationSec={48}
             separator={<span aria-hidden className="px-6" />}
             items={site.clients.map((c) => (
-              <span
-                key={c.name}
-                className="flex h-12 w-32 items-center justify-center"
-                title={c.name}
-              >
-                <Image
-                  src={c.logo}
-                  alt={c.name}
-                  width={280}
-                  height={56}
-                  className={clsx(
-                    // Compact / square-ish logos can use more height
-                    // since they don't have a wide wordmark to anchor
-                    // the visual mass.
-                    "compact" in c && c.compact
-                      ? "max-h-11 max-w-16 object-contain"
-                      : "max-h-8 max-w-28 object-contain",
-                    "naturalColor" in c && c.naturalColor
-                      ? "opacity-70"
-                      : "mono" in c && c.mono
-                      ? "opacity-70 grayscale"
-                      : "opacity-50 [filter:brightness(0)]"
-                  )}
-                  unoptimized
-                />
-              </span>
+              <ClientLogo key={c.name} client={c} />
             ))}
           />
         </div>

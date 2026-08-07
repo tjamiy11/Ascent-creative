@@ -68,6 +68,10 @@ export function Nav() {
   // dark layer behind the header — force the header into a transparent
   // light-on-dark state so the hamburger / close icon stays visible and
   // the chrome doesn't fight the drawer's frosted glass.
+  // The two states where the header paints its contents in paper rather than
+  // ink. Kept as its own flag because the wordmark has to follow it too.
+  const lightOnDark = menuOpen || overHero;
+
   const tone = menuOpen
     ? "bg-transparent border-b border-transparent text-[color:var(--color-paper)]"
     : overHero
@@ -90,13 +94,24 @@ export function Nav() {
             className="block"
             aria-label={`${site.name} home`}
           >
+            {/* The grey lockup goes muddy against the hero video and the
+                drawer's dark glass, so it flips to white there. Done with a
+                filter on the one horizontal file rather than by swapping in
+                ascent-horizontal-white.png — that asset is 1435×941, a stacked
+                lockup despite the name, and would change the mark's shape.
+                The source is greyscale + alpha, so brightness-0 drives every
+                visible pixel to black and invert lifts it to pure white with
+                the transparency intact. */}
             <Image
               src="/brand/ascent-horizontal-grey.png"
               alt={site.name}
               width={1869}
               height={395}
               priority
-              className="h-5 w-auto md:h-6"
+              className={clsx(
+                "h-5 w-auto transition-[filter] duration-500 md:h-6",
+                lightOnDark && "brightness-0 invert"
+              )}
             />
           </Link>
 
@@ -152,6 +167,20 @@ export function Nav() {
                 </Link>
               );
             })}
+
+            {/* Existing clients. Lighter than everything else in the nav on
+                purpose — findable, but it never pulls a prospect off the
+                sales path. */}
+            <span
+              aria-hidden
+              className="h-3.5 w-px bg-[currentColor] opacity-20"
+            />
+            <Link
+              href={site.portalLink.href}
+              className="text-[0.8rem] tracking-wide opacity-50 transition-opacity hover:opacity-90"
+            >
+              {site.portalLink.label}
+            </Link>
           </nav>
 
           <button
@@ -235,9 +264,16 @@ export function Nav() {
                 </Link>
               );
             })}
+            <Link
+              href={site.portalLink.href}
+              onClick={() => setMenuOpen(false)}
+              className="mt-6 block text-sm opacity-60 underline underline-offset-4"
+            >
+              {site.portalLink.label}
+            </Link>
             <a
               href={`mailto:${site.email}`}
-              className="mt-6 block text-sm opacity-60 underline underline-offset-4"
+              className="mt-2 block text-sm opacity-60 underline underline-offset-4"
             >
               {site.email}
             </a>

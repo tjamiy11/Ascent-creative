@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/nav";
-import { Footer } from "@/components/footer";
-import { SmoothScroll } from "@/components/smooth-scroll";
+import { SiteChrome } from "@/components/site-chrome";
 import { site } from "@/lib/site-config";
 
 const display = Fraunces({
@@ -63,10 +61,7 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <SmoothScroll />
-        <Nav />
-        <main className="flex-1 pt-24">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
