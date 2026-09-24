@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { InquiryForm } from "@/components/inquiry-form";
 import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/site-config";
 
@@ -42,31 +42,18 @@ export function ContactCTA({
             {heading}
           </Reveal>
 
-          <Reveal
-            delay={0.15}
-            className="mt-12 flex flex-col items-start gap-6 md:flex-row md:items-baseline md:gap-12"
-          >
-            <Link
-              href="/contact"
-              className="group inline-flex items-baseline gap-3 text-base"
-            >
-              <span className="border-b border-[color:var(--color-ink)] pb-1">
-                Start a project
-              </span>
-              <span
-                aria-hidden
-                className="transition-transform duration-300 ease-[cubic-bezier(.16,1,.3,1)] group-hover:translate-x-1"
-              >
-                →
-              </span>
-            </Link>
-
+          <Reveal delay={0.1} as="p" className="mt-8 text-sm opacity-70">
+            Prefer email?{" "}
             <a
               href={`mailto:${site.email}`}
-              className="eyebrow underline-offset-4 hover:underline"
+              className="underline underline-offset-4"
             >
               {site.email}
             </a>
+          </Reveal>
+
+          <Reveal delay={0.15} className="mt-14">
+            <InquiryForm />
           </Reveal>
         </div>
       </div>

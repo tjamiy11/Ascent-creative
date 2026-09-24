@@ -1,120 +1,108 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 import { site } from "@/lib/site-config";
 
-// Node runtime (Resend uses the Node SDK, not edge).
-export const runtime = "nodejs";
+/**
+ * Website lead → email to Stefan, sent through Resend (https://resend.com).
+ *
+ * Env vars (set in Vercel → Project → Settings → Environment Variables):
+ *   RESEND_API_KEY   required
+ *   INQUIRY_TO       optional, defaults to site.email
+ *   INQUIRY_FROM     optional, defaults to Resend's shared sender. Once
+ *                    ascentstudios.co is verified in Resend, set this to e.g.
+ *                    "Ascent Studios Website <leads@ascentstudios.co>".
+ *
+ * Every subject starts with "[Website Lead]" so a Gmail filter can file it
+ * under "Business/ASCENT STUDIO Website leads".
+ */
 
-type Payload = {
-  name?: unknown;
-  email?: unknown;
-  company?: unknown;
-  projectType?: unknown;
-  timeline?: unknown;
-  budget?: unknown;
-  message?: unknown;
-};
+const SUBJECT_TAG = "[Website Lead]";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const FIELDS = [
+  ["name", "Name"],
+  ["email", "Email"],
+  ["phone", "Phone"],
+  ["projectDate", "Project date"],
+  ["location", "City & state"],
+  ["lookingFor", "Looking for"],
+  ["budget", "Budget"],
+  ["referral", "How they heard about us"],
+  ["message", "About the project"],
+] as const;
 
-/** Trim + hard length cap so a single field can't be abused. */
-function clean(value: unknown, max: number): string {
-  return typeof value === "string" ? value.trim().slice(0, max) : "";
-}
+type Key = (typeof FIELDS)[number][0];
 
-function esc(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
+const escape = (s: string) =>
+  s.replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!
+  );
 
-export async function POST(request: Request) {
-  let body: Payload;
+export async function POST(req: Request) {
+  let body: Record<string, unknown>;
   try {
-    body = (await request.json()) as Payload;
+    body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const name = clean(body.name, 200);
-  const email = clean(body.email, 320);
-  const company = clean(body.company, 200);
-  const projectType = clean(body.projectType, 100);
-  const timeline = clean(body.timeline, 100);
-  const budget = clean(body.budget, 100);
-  const message = clean(body.message, 5000);
+  // Honeypot — real visitors never see this field. Pretend success for bots.
+  if (typeof body.website === "string" && body.website.trim()) {
+    return NextResponse.json({ ok: true });
+  }
 
-  // Validate the required fields at the boundary.
-  if (!name || !EMAIL_RE.test(email) || !message) {
+  const data = Object.fromEntries(
+    FIELDS.map(([key]) => [key, String(body[key] ?? "").trim().slice(0, 5000)])
+  ) as Record<Key, string>;
+
+  if (!data.name || !data.message || !/^\S+@\S+\.\S+$/.test(data.email)) {
     return NextResponse.json(
-      { error: "Please provide your name, a valid email, and a message." },
+      { error: "Please fill in your name, a valid email, and a few words about the project." },
       { status: 400 }
     );
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    // Not configured yet — the form surfaces a "email us directly" fallback.
+    console.error("[inquiry] RESEND_API_KEY is not set");
     return NextResponse.json(
-      { error: "Inquiry email is not configured yet." },
-      { status: 503 }
+      { error: `Our form is offline — please email ${site.email} directly.` },
+      { status: 500 }
     );
   }
 
-  const to = process.env.INQUIRY_TO || site.email;
-  const from =
-    process.env.INQUIRY_FROM || "Ascent Studios <inquiries@ascentstudios.co>";
-  const subject = `New project inquiry${company ? ` — ${company}` : ""}`;
+  const rows = FIELDS.filter(([key]) => data[key]);
+  const text = rows.map(([key, label]) => `${label}: ${data[key]}`).join("\n\n");
+  const html = `<table cellpadding="8" style="font-family:sans-serif;font-size:14px;border-collapse:collapse">${rows
+    .map(
+      ([key, label]) =>
+        `<tr><td style="color:#666;vertical-align:top;white-space:nowrap">${label}</td><td style="white-space:pre-wrap">${escape(data[key])}</td></tr>`
+    )
+    .join("")}</table>`;
 
-  const rows: [string, string][] = [
-    ["Name", name],
-    ["Email", email],
-    ["Company / Brand", company],
-    ["Project type", projectType],
-    ["Timeline", timeline],
-    ["Budget", budget],
-  ].filter(([, v]) => v) as [string, string][];
+  const subject = [SUBJECT_TAG, data.name, data.lookingFor].filter(Boolean).join(" — ");
 
-  const html = `
-    <h2 style="font-family:sans-serif">New project inquiry</h2>
-    <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
-      ${rows
-        .map(
-          ([k, v]) =>
-            `<tr><td style="padding:4px 12px 4px 0;opacity:.6">${k}</td><td style="padding:4px 0">${esc(
-              v
-            )}</td></tr>`
-        )
-        .join("")}
-    </table>
-    <p style="font-family:sans-serif;font-size:14px;white-space:pre-wrap;margin-top:16px">${esc(
-      message
-    )}</p>
-  `;
-
-  const text = [
-    ...rows.map(([k, v]) => `${k}: ${v}`),
-    "",
-    "Message:",
-    message,
-  ].join("\n");
-
-  try {
-    const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
-      from,
-      to,
-      replyTo: email,
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: process.env.INQUIRY_FROM || "Ascent Studios Website <onboarding@resend.dev>",
+      to: [process.env.INQUIRY_TO || site.email],
+      reply_to: data.email,
       subject,
-      html,
       text,
-    });
-    if (error) {
-      return NextResponse.json({ error: "Failed to send." }, { status: 502 });
-    }
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "Failed to send." }, { status: 502 });
+      html,
+    }),
+  });
+
+  if (!res.ok) {
+    console.error("[inquiry] Resend error", res.status, await res.text());
+    return NextResponse.json(
+      { error: `Something went wrong — please email ${site.email} directly.` },
+      { status: 502 }
+    );
   }
+
+  return NextResponse.json({ ok: true });
 }

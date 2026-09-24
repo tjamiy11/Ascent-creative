@@ -53,7 +53,7 @@ export const site = {
   /**
    * Inquiry form on /contact. Priority:
    *   1. Google Forms iframe — if `googleFormsUrl` is set
-   *   2. Built-in mailto form — fallback (works today, no setup needed)
+   *   2. Built-in form — posts to /api/inquiry (needs RESEND_API_KEY)
    *
    * To attach a Google Form:
    *   - Open your Google Form → Send → <> (Embed) tab
