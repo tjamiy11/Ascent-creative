@@ -85,6 +85,29 @@ const INPUT_BASE =
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+const LABELS: [keyof FormData, string][] = [
+  ["name", "Name"],
+  ["email", "Email"],
+  ["phone", "Phone"],
+  ["projectDate", "Project date"],
+  ["location", "City & state"],
+  ["lookingFor", "Looking for"],
+  ["budget", "Budget"],
+  ["referral", "How they heard about us"],
+  ["message", "About the project"],
+];
+
+/** Pre-filled email, used only if the server can't send (no Resend key). */
+function mailtoFor(data: FormData) {
+  const subject = ["Project inquiry", data.name, data.lookingFor]
+    .filter(Boolean)
+    .join(" — ");
+  const body = LABELS.filter(([k]) => data[k])
+    .map(([k, label]) => `${label}: ${data[k]}`)
+    .join("\n\n");
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 function LeadForm() {
   const [data, setData] = useState<FormData>(EMPTY);
   const [status, setStatus] = useState<Status>("idle");
@@ -104,6 +127,11 @@ function LeadForm() {
         body: JSON.stringify(data),
       });
       const json = await res.json().catch(() => ({}));
+      if (json.fallback === "mailto") {
+        window.location.href = mailtoFor(data);
+        setStatus("idle");
+        return;
+      }
       if (!res.ok) throw new Error(json.error || "Something went wrong.");
       setStatus("sent");
       setData(EMPTY);

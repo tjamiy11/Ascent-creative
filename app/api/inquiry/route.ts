@@ -7,9 +7,8 @@ import { site } from "@/lib/site-config";
  * Env vars (set in Vercel → Project → Settings → Environment Variables):
  *   RESEND_API_KEY   required
  *   INQUIRY_TO       optional, defaults to site.email
- *   INQUIRY_FROM     optional, defaults to Resend's shared sender. Once
- *                    ascentstudios.co is verified in Resend, set this to e.g.
- *                    "Ascent Studios Website <leads@ascentstudios.co>".
+ *   INQUIRY_FROM     optional, defaults to inquiries@ascentstudios.co
+ *                    (ascentstudios.co is verified in Resend).
  *
  * Every subject starts with "[Website Lead]" so a Gmail filter can file it
  * under "Business/ASCENT STUDIO Website leads".
@@ -62,10 +61,12 @@ export async function POST(req: Request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
+    // Not configured yet: the form falls back to the visitor's email app
+    // (pre-filled), so a lead is never lost.
     console.error("[inquiry] RESEND_API_KEY is not set");
     return NextResponse.json(
-      { error: `Our form is offline — please email ${site.email} directly.` },
-      { status: 500 }
+      { error: `Our form is offline — please email ${site.email} directly.`, fallback: "mailto" },
+      { status: 503 }
     );
   }
 
@@ -87,7 +88,7 @@ export async function POST(req: Request) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.INQUIRY_FROM || "Ascent Studios Website <onboarding@resend.dev>",
+      from: process.env.INQUIRY_FROM || "Ascent Studios Website <inquiries@ascentstudios.co>",
       to: [process.env.INQUIRY_TO || site.email],
       reply_to: data.email,
       subject,
