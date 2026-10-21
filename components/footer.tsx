@@ -46,6 +46,14 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
+              <li>
+                <a
+                  href={`tel:${site.phone.replace(/\D/g, "")}`}
+                  className="underline-offset-4 hover:underline"
+                >
+                  {site.phone}
+                </a>
+              </li>
               <li className="opacity-80">
                 {site.address.street}, {site.address.city}, {site.address.region}
               </li>

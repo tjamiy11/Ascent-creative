@@ -53,6 +53,7 @@ export const organizationJsonLd = {
   description: site.description,
   url: site.url,
   email: site.email,
+  telephone: "+1-815-212-0774",
   logo: `${site.url}/icon.png`,
   image: `${site.url}/opengraph-image.png`,
   address: {

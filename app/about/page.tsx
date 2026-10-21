@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { Marquee } from "@/components/marquee";
 import { ContactCTA } from "@/components/contact-cta";
+import { ClientLogo } from "@/components/client-logo";
 import { site } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
@@ -114,24 +115,7 @@ export default function AboutPage() {
           durationSec={48}
           separator={<span aria-hidden className="px-6" />}
           items={site.clients.map((c) => (
-            <span
-              key={c.name}
-              className="flex h-12 w-32 items-center justify-center"
-              title={c.name}
-            >
-              <Image
-                src={c.logo}
-                alt={c.name}
-                width={280}
-                height={56}
-                className={
-                  "compact" in c && c.compact
-                    ? "max-h-11 max-w-16 object-contain opacity-70 grayscale mix-blend-multiply"
-                    : "max-h-8 max-w-28 object-contain opacity-70 grayscale mix-blend-multiply"
-                }
-                unoptimized
-              />
-            </span>
+            <ClientLogo key={c.name} client={c} tone="grey" />
           ))}
         />
       </section>

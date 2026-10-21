@@ -53,6 +53,14 @@ export default function ContactPage() {
                 {site.email}
               </a>
             </li>
+            <li>
+              <a
+                href={`tel:${site.phone.replace(/\D/g, "")}`}
+                className="underline underline-offset-4"
+              >
+                {site.phone}
+              </a>
+            </li>
           </ul>
 
           <p className="eyebrow mt-10 opacity-60">Studio</p>
