@@ -5,6 +5,7 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { site } from "@/lib/site-config";
+import { JsonLd, organizationJsonLd } from "@/lib/seo";
 
 const display = Fraunces({
   variable: "--font-display",
@@ -35,13 +36,15 @@ export const metadata: Metadata = {
     "professional video marketing",
     "Chicago video agency",
   ],
-  metadataBase: new URL("https://ascentstudios.com"),
+  metadataBase: new URL(site.url),
   openGraph: {
-    title: site.name,
+    title: `${site.name} — ${site.tagline}`,
     description: site.description,
+    siteName: site.name,
     type: "website",
     locale: "en_US",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
@@ -63,6 +66,7 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <JsonLd data={organizationJsonLd} />
         <SmoothScroll />
         <Nav />
         <main className="flex-1 pt-24">{children}</main>

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { Marquee } from "@/components/marquee";
 import { ContactCTA } from "@/components/contact-cta";
 import { site } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About — Chicago Video Production Agency",
   description:
     "Ascent Studios is a Chicago video production agency. Ten-plus years of experience producing brand commercials, tourism films, and social media content for clients across the U.S. and worldwide.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

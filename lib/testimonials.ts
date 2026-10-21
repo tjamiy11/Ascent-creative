@@ -42,6 +42,8 @@ export const testimonials: Testimonial[] = [
     quote:
       "Working with Stefan is as easy as pie! He's not only great at what he does, but he's a joy to be around. Steffy's work speaks for itself. Completely original and amazing.",
     author: "Nick Blum",
+    company: "Blum & Co",
+    projectSlug: "blum-and-co",
     featured: true,
   },
   {

@@ -4,8 +4,23 @@ export const site = {
   tagline: "Chicago Video Production Agency",
   description:
     "Ascent Studios is a Chicago video production agency crafting brand commercials, tourism films, and social media content. Based in Chicago. Serving clients in Chicago, NYC, LA, and worldwide.",
+  /** Canonical origin — apex ascentstudios.co redirects here. */
+  url: "https://www.ascentstudios.co",
   email: "stefan@ascentstudios.co",
   location: "Chicago",
+  /** Used in the footer, contact page, and LocalBusiness schema. Keep it
+   *  identical to the Google Business Profile listing. */
+  address: {
+    street: "1800 N Milwaukee Ave",
+    city: "Chicago",
+    region: "IL",
+    postalCode: "60647",
+    country: "US",
+  },
+  /** Where the mp4s live. Swap for a custom domain (e.g.
+   *  https://media.ascentstudios.co) once it's connected to the R2 bucket —
+   *  r2.dev URLs are rate-limited and not meant for production. */
+  mediaBase: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev",
   social: {
     instagramPersonal: "https://www.instagram.com/uglysteffy/",
     instagramStudio: "https://www.instagram.com/ascentstudios.co/",
@@ -37,7 +52,7 @@ export const site = {
     { name: "Bounce", logo: "/logos/bounce.png", compact: true },
     { name: "Jon Cotay", logo: "/logos/jon-cotay.png", compact: true },
     { name: "Flygta Airlines", logo: "/logos/flygta.png", compact: true },
-    { name: "DTRL", logo: "/logos/dtrl.png" },
+    { name: "DTLR", logo: "/logos/dtrl.png" },
     { name: "DTA", logo: "/logos/dta.png" },
     { name: "Samsung", logo: "/logos/samsung.svg" },
     { name: "Country Splash", logo: "/logos/country-splash.png", mono: true },

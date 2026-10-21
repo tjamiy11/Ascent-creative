@@ -1,3 +1,7 @@
+import { site } from "@/lib/site-config";
+
+const media = site.mediaBase;
+
 export type ProjectKind = "video" | "photo";
 
 export type Project = {
@@ -42,7 +46,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Commercial", "Athletic"],
     cover: "/video/hoka.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/hoka.mp4",
+    clip: `${media}/hoka.mp4`,
     logo: "/logos/hoka.png",
     dims: { w: 720, h: 1280 },
     excerpt:
@@ -58,7 +62,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Athletic"],
     cover: "/video/dtlr.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/dtlr.mp4",
+    clip: `${media}/dtlr.mp4`,
     logo: "/logos/nike.svg",
     dims: { w: 720, h: 1280 },
     excerpt:
@@ -74,7 +78,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Hospitality", "Tourism"],
     cover: "/video/palmer.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/palmer.mp4",
+    clip: `${media}/palmer.mp4`,
     logo: "/logos/palmer-mark.png",
     dims: { w: 1280, h: 720 },
     excerpt:
@@ -84,16 +88,16 @@ export const projects: Project[] = [
   {
     slug: "jordan-pele",
     title: "Pelé",
-    client: "Jordan",
+    client: "Big Studio",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
     tags: ["Brand Film", "Athletic"],
     cover: "/video/jordan-pele.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/jordan-pele.mp4",
+    clip: `${media}/jordan-pele.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
-      "A 30-second cut for Jordan honoring Pelé — vertical, kinetic, made for the feed.",
+      "Shot for Big Studio for the Nike Pelé store in Times Square — a 30-second vertical cut honoring Pelé, kinetic and made for the feed.",
   },
   {
     slug: "samsung-t9",
@@ -104,7 +108,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Social"],
     cover: "/video/samsung.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/samsung.mp4",
+    clip: `${media}/samsung.mp4`,
     logo: "/logos/samsung.svg",
     dims: { w: 720, h: 540 },
     excerpt:
@@ -119,7 +123,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Auto", "Brand Film"],
     cover: "/video/ducati.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/ducati.mp4",
+    clip: `${media}/ducati.mp4`,
     logo: "/logos/ducati.svg",
     dims: { w: 1280, h: 720 },
     excerpt:
@@ -134,7 +138,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Music & Festival", "Branded Doc"],
     cover: "/video/lollareverb.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/lollareverb.mp4",
+    clip: `${media}/lollareverb.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "A sustainability piece for Lollapalooza × Reverb — co-shot with Jackson Visuals, who carried it through the edit.",
@@ -148,24 +152,24 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Travel", "After Movie"],
     cover: "/video/croatia.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/croatia.mp4",
+    clip: `${media}/croatia.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "After-movie from a Croatia trip — coastline, slow afternoons, and the rhythm of being away.",
   },
   {
-    slug: "miss-usa",
-    title: "Miss USA",
-    client: "Miss USA",
+    slug: "miss-illinois",
+    title: "Miss Illinois",
+    client: "Miss Illinois",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
     tags: ["Brand Film", "Editorial"],
     cover: "/video/missusa.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/missusa.mp4",
+    clip: `${media}/missusa.mp4`,
     dims: { w: 1920, h: 1080 },
     excerpt:
-      "A highlight reel for Miss USA — composure, presence, and the quiet of the runway between rounds.",
+      "A highlight reel for Miss Illinois's Miss Universe submission — composure, presence, and the quiet of the runway between rounds.",
   },
   {
     slug: "blum-and-co",
@@ -176,7 +180,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Branded Doc", "Founder"],
     cover: "/video/blum.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/blum.mp4",
+    clip: `${media}/blum.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "A founder-led day-in-the-life film with the team at Blum & Co — process, hands, and the rhythm of a working studio.",
@@ -190,7 +194,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Travel", "Brand Film"],
     cover: "/video/trulli.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/trulli.mp4",
+    clip: `${media}/trulli.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
       "A run of event-recap edits for Trulli Speakers, cut for brand awareness. Production: Kurza.",
@@ -204,7 +208,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Branded Doc", "Editorial"],
     cover: "/video/candycloud.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/candycloud.mp4",
+    clip: `${media}/candycloud.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
       "Rush recruitment films for the Alpha Chi Omega chapter — a multi-part series of branded video content built across the season. In-house at Ascent Studios with creative direction by Peyton; shot and cut by Stefan.",
@@ -218,7 +222,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Branded Doc", "Concept"],
     cover: "/video/morph.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/morph.mp4",
+    clip: `${media}/morph.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
       "A morph-and-music cut for Candy Cloud — pure motion driven by the track.",
@@ -232,7 +236,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Branded Doc", "Concept"],
     cover: "/video/halogram.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/halogram.mp4",
+    clip: `${media}/halogram.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
       "A hologram-styled cut for Candy Cloud — refraction, light, and short kinetic beats.",
@@ -246,7 +250,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Branded Doc", "Editorial"],
     cover: "/video/giftcard.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/giftcard.mp4",
+    clip: `${media}/giftcard.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
       "A gift-card piece for Candy Cloud — color, hands, and a beat that lands.",
@@ -260,7 +264,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Social", "Concept"],
     cover: "/video/teaser.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/teaser.mp4",
+    clip: `${media}/teaser.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
       "A six-second bonus cut for Candy Cloud.",
@@ -274,7 +278,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Lifestyle"],
     cover: "/video/boxed.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/boxed.mp4",
+    clip: `${media}/boxed.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "Marketing content videos for Boxed Gift.",
@@ -288,7 +292,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Concept", "Editorial"],
     cover: "/video/multiple.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/multiple.mp4",
+    clip: `${media}/multiple.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "A composition piece exploring rhythm and repetition across short cuts.",
@@ -302,7 +306,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Tech"],
     cover: "/video/sonim.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/sonim.mp4",
+    clip: `${media}/sonim.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "Built for the toughest workplaces — the Sonim phone shot among sparks, dust, and steel.",
@@ -316,7 +320,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Concept", "Editorial"],
     cover: "/video/dreamy.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/dreamy.mp4",
+    clip: `${media}/dreamy.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
       "An atmospheric piece — slow color, drifted focus, and a track that carries it.",
@@ -330,7 +334,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Founder", "Portrait"],
     cover: "/video/nick-blum.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/nick-blum.mp4",
+    clip: `${media}/nick-blum.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "A short portrait of Nick Blum — the man behind the studio.",
@@ -344,7 +348,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Concept", "Personal"],
     cover: "/video/uglysteffy.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/uglysteffy.mp4",
+    clip: `${media}/uglysteffy.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "A long-form personal piece — POV, raw, signed with a mini Stefan logo.",
@@ -356,12 +360,12 @@ export const projects: Project[] = [
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
-    tags: ["Brand Film", "Auto"],
+    tags: ["Spec Film", "Auto"],
     cover: "/video/vespa.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/vespa.mp4",
+    clip: `${media}/vespa.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
-      "A brand film for Vespa — wide, cinematic, on the road.",
+      "A spec film for Vespa — wide, cinematic, on the road.",
   },
   {
     slug: "adidas-macys",
@@ -372,7 +376,7 @@ export const projects: Project[] = [
     kind: "video",
     tags: ["Brand Film", "Retail"],
     cover: "/video/adidas-macys.jpg",
-    clip: "https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/adidas-macys.mp4",
+    clip: `${media}/adidas-macys.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
       "A World Cup 2026 piece for adidas at Macy's — kit, ceremony, and the build to the tournament.",

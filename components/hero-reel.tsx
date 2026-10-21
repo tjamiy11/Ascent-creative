@@ -62,7 +62,7 @@ export function HeroReel() {
         poster="/video/hero.jpg"
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       >
-        <source src="https://pub-1782b44702d746a7a6cc86a019b0fb9f.r2.dev/hero.mp4" type="video/mp4" />
+        <source src={`${site.mediaBase}/hero.mp4`} type="video/mp4" />
       </video>
       <div
         aria-hidden
@@ -161,6 +161,9 @@ export function HeroReel() {
             <span aria-hidden className="hero-orbit-wrap ml-3">
               <span className="hero-orbit" />
             </span>
+          </p>
+          <p className="eyebrow col-span-6 text-right opacity-50 md:col-start-7">
+            Chicago, IL · Working worldwide
           </p>
         </motion.div>
       </div>

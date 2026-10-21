@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
@@ -84,6 +85,11 @@ const STRIP_AFTER_INDUSTRIES = [
 import { getFeaturedProjects } from "@/lib/projects";
 import { getFeaturedTestimonials } from "@/lib/testimonials";
 import { site } from "@/lib/site-config";
+
+export const metadata: Metadata = {
+  title: { absolute: `${site.name} — ${site.tagline}` },
+  alternates: { canonical: "/" },
+};
 
 const SOLUTIONS = [
   {

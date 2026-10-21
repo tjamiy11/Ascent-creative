@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/reveal";
+import { pageMetadata } from "@/lib/seo";
 import { ContactCTA } from "@/components/contact-cta";
 import { VideoCarousel } from "@/components/video-carousel";
 import { projectContentLoaders } from "@/content/projects";
@@ -27,10 +28,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return {
+  return pageMetadata({
     title: `${project.title} — ${project.client}`,
     description: project.excerpt,
-  };
+    path: `/work/${project.slug}`,
+    image: project.cover,
+  });
 }
 
 export default async function CaseStudyPage({

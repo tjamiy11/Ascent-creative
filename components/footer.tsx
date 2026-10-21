@@ -46,6 +46,9 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
+              <li className="opacity-80">
+                {site.address.street}, {site.address.city}, {site.address.region}
+              </li>
             </ul>
           </div>
           <div>
@@ -54,6 +57,12 @@ export function Footer() {
               Brand commercials, tourism films, and social media content. From
               Chicago. Worldwide.
             </p>
+            <Link
+              href="/chicago-video-production"
+              className="mt-3 inline-block underline underline-offset-4"
+            >
+              Video production in Chicago
+            </Link>
           </div>
         </div>
 

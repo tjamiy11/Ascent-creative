@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { WorkGrid } from "@/components/work-grid";
 import { Reveal } from "@/components/reveal";
 import { ContactCTA } from "@/components/contact-cta";
 import { projects } from "@/lib/projects";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Portfolio — Chicago Video Production",
   description:
     "Selected brand commercials, tourism films, and social media content by Ascent Studios — a Chicago video production agency working with clients in Chicago, NYC, LA, and worldwide.",
-};
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
@@ -8,10 +9,11 @@ import { testimonials, getFeaturedTestimonials } from "@/lib/testimonials";
 import type { Testimonial } from "@/lib/testimonials";
 import { site } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Testimonials — Client Feedback",
   description: `What clients say about working with ${site.name}, a Chicago video production agency. Brand commercials, tourism films, and social media content.`,
-};
+  path: "/testimonials",
+});
 
 function attributionLine(t: Testimonial): string | null {
   const parts = [t.role, t.company].filter(Boolean) as string[];
