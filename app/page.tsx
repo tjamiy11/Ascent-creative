@@ -41,7 +41,7 @@ const STRIP_AFTER_SOLUTIONS = [
   // upper third. Two flanking landscapes anchor the row below, off-center.
   {
     src: "/photos/yeee-105.jpg",
-    alt: "On set — frame 105.",
+    alt: "Aerial photograph.",
     aspect: "4 / 3",
     place: "md:col-start-1 md:col-span-5 md:row-start-2 md:mt-8",
   },
@@ -53,7 +53,7 @@ const STRIP_AFTER_SOLUTIONS = [
   },
   {
     src: "/photos/yeee-108.jpg",
-    alt: "On set — frame 108.",
+    alt: "Aerial photograph.",
     aspect: "4 / 3",
     place: "md:col-start-7 md:col-span-6 md:row-start-2",
   },
@@ -70,7 +70,7 @@ const STRIP_AFTER_INDUSTRIES = [
   },
   {
     src: "/photos/sandwich-bae-2.jpg",
-    alt: "Editorial food still.",
+    alt: "Sandwich Bay, Namibia, on a 150–600mm lens.",
     aspect: "16 / 10",
     place: "md:col-start-9 md:col-span-4 md:row-start-1 md:mt-20",
   },

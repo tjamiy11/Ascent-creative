@@ -29,6 +29,8 @@ type WorkCardProps = {
    * Used on the home tri-fold; `/work` stays on cover-image-then-fade.
    */
   firstFrameThumbnail?: boolean;
+  /** Smaller title, no tag — for dense rows like "More from …". */
+  compact?: boolean;
 };
 
 const MAGNET_STRENGTH = 0.18;
@@ -39,6 +41,7 @@ export function WorkCard({
   className,
   aspect,
   firstFrameThumbnail = false,
+  compact = false,
 }: WorkCardProps) {
   // Resolve the card's aspect ratio:
   //   - explicit `aspect` prop wins (Tailwind class, e.g. "aspect-[16/10]")
@@ -286,12 +289,21 @@ export function WorkCard({
 
       <div className="mt-4 flex items-baseline justify-between gap-4">
         <div>
-          <h3 className="font-display text-2xl tracking-tight md:text-3xl">
+          <h3
+            className={clsx(
+              "font-display tracking-tight",
+              compact ? "text-lg leading-snug md:text-xl" : "text-2xl md:text-3xl"
+            )}
+          >
             {project.title}
           </h3>
-          <p className="mt-0.5 text-sm opacity-60">{project.client}</p>
+          <p className="mt-0.5 text-sm opacity-60">
+            {project.location ?? project.client}
+          </p>
         </div>
-        <span className="eyebrow shrink-0 opacity-50">{project.tags[0]}</span>
+        {!compact && (
+          <span className="eyebrow shrink-0 opacity-50">{project.tags[0]}</span>
+        )}
       </div>
     </Link>
   );

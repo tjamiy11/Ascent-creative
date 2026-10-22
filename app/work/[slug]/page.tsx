@@ -8,9 +8,12 @@ import { pageMetadata } from "@/lib/seo";
 import { ContactCTA } from "@/components/contact-cta";
 import { VideoCarousel } from "@/components/video-carousel";
 import { projectContentLoaders } from "@/content/projects";
+import { WorkCard } from "@/components/work-card";
 import {
   getNextProject,
   getProject,
+  getRelatedProjects,
+  projectGroup,
   projectSlugs,
 } from "@/lib/projects";
 
@@ -50,6 +53,7 @@ export default async function CaseStudyPage({
   // case study without it instead of 500-ing.
   const Content = await loadProjectContent(slug);
   const next = getNextProject(slug);
+  const related = getRelatedProjects(project);
 
   return (
     <article className="pb-[var(--space-section)]">
@@ -74,12 +78,20 @@ export default async function CaseStudyPage({
           delay={0.15}
           className="mt-12 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-[color:var(--color-line)] pt-6 text-sm md:grid-cols-4"
         >
-          <Meta label="Client" value={project.client} />
+          {project.client !== "Personal" && (
+            <Meta label="Client" value={project.client} />
+          )}
+          {project.location && (
+            <Meta label="Location" value={project.location} />
+          )}
           {project.kind !== "photo" && (
             <Meta label="Year" value={String(project.year)} />
           )}
           <Meta label="Role" value={project.role} />
           <Meta label="Medium" value={project.kind === "video" ? "Film" : "Photography"} />
+          {project.credits?.map((c) => (
+            <Meta key={c.label} label={c.label} value={c.value} />
+          ))}
         </Reveal>
       </header>
 
@@ -112,6 +124,24 @@ export default async function CaseStudyPage({
         </div>
       )}
 
+      {related.length > 0 && (
+        <section
+          aria-label={`More from ${projectGroup(project)}`}
+          className="container-edge mt-[var(--space-section)]"
+        >
+          <Reveal as="p" className="eyebrow opacity-60">
+            More from {projectGroup(project)}
+          </Reveal>
+          <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4 md:gap-x-6">
+            {related.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 0.04}>
+                <WorkCard project={p} aspect="aspect-[4/5]" compact />
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
       <nav
         aria-label="Next project"
         className="container-edge mt-[var(--space-section)] border-t border-[color:var(--color-line)] pt-12"
@@ -124,7 +154,7 @@ export default async function CaseStudyPage({
           <span className="font-display text-3xl tracking-tight md:text-6xl">
             {next.title}
           </span>
-          <span className="eyebrow whitespace-nowrap">{next.client} →</span>
+          <span className="eyebrow whitespace-nowrap">{next.location ?? next.client} →</span>
         </Link>
       </nav>
 

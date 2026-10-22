@@ -16,6 +16,16 @@ export type Project = {
   clip?: string;
   logo?: string;
   excerpt: string;
+  /** Shown under the title instead of the client — used for photo locations. */
+  location?: string;
+  /**
+   * Groups related work on case-study pages ("More from Nike"). Defaults to
+   * `client`; set it when the credited client differs from the brand (Pelé
+   * was shot for Big Studio but belongs with the Nike work).
+   */
+  brand?: string;
+  /** Extra credits shown with Client / Role, e.g. Model, Supporting. */
+  credits?: { label: string; value: string }[];
   featured?: boolean;
   /**
    * Force the card to use the `cover` image instead of the video's first
@@ -39,7 +49,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "hoka-becs",
-    title: "Becs",
+    title: "Becs × Hoka Social Commercial",
     client: "Hoka",
     year: 2025,
     role: "DP · Editor",
@@ -55,7 +65,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nike-dtlr",
-    title: "DTLR",
+    title: "DTLR In-Store Nike Promo",
     client: "Nike",
     year: 2025,
     role: "Direction · Cinematography",
@@ -71,7 +81,7 @@ export const projects: Project[] = [
   },
   {
     slug: "palmer-house",
-    title: "Palmer House",
+    title: "Palmer House Spa Experience",
     client: "Palmer House Hotel & Spa",
     year: 2025,
     role: "Direction · Cinematography",
@@ -87,8 +97,9 @@ export const projects: Project[] = [
   },
   {
     slug: "jordan-pele",
-    title: "Pelé",
+    title: "Pelé × Nike Jordan",
     client: "Big Studio",
+    brand: "Nike",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
@@ -116,8 +127,9 @@ export const projects: Project[] = [
   },
   {
     slug: "ducati-streetfighter",
-    title: "Streetfighter",
-    client: "Ducati",
+    title: "Ducati Streetfighter Film",
+    client: "Spec",
+    brand: "Ducati",
     year: 2025,
     role: "Co-direction · Drone",
     kind: "video",
@@ -145,8 +157,8 @@ export const projects: Project[] = [
   },
   {
     slug: "croatia-jeff",
-    title: "Croatia",
-    client: "Personal",
+    title: "Croatia Travel Film",
+    client: "Jeff Pug",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
@@ -155,7 +167,7 @@ export const projects: Project[] = [
     clip: `${media}/croatia.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
-      "After-movie from a Croatia trip — coastline, slow afternoons, and the rhythm of being away.",
+      "A client travel film for Jeff Pug — Croatia's coastline, festivals, and the rhythm of being away.",
   },
   {
     slug: "miss-illinois",
@@ -187,7 +199,7 @@ export const projects: Project[] = [
   },
   {
     slug: "trulli",
-    title: "4×4 Trulli",
+    title: "4×4 Trulli Event",
     client: "Trulli Speakers",
     year: 2025,
     role: "Cinematography",
@@ -201,8 +213,8 @@ export const projects: Project[] = [
   },
   {
     slug: "alpha-chi-omega-rush",
-    title: "Rush Recruitment | Alpha Chi Omega",
-    client: "Alpha Chi Omega",
+    title: "Rush Recruitment — Alpha Chi Omega × Candy Cloud",
+    client: "Candy Cloud",
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
@@ -215,7 +227,7 @@ export const projects: Project[] = [
   },
   {
     slug: "candy-cloud-morph",
-    title: "Morph",
+    title: "Morph VFX Social Piece",
     client: "Candy Cloud",
     year: 2025,
     role: "Direction · Cinematography",
@@ -229,7 +241,7 @@ export const projects: Project[] = [
   },
   {
     slug: "candy-cloud-halogram",
-    title: "Halogram",
+    title: "Hologram VFX Social Piece",
     client: "Candy Cloud",
     year: 2025,
     role: "Direction · Cinematography",
@@ -239,11 +251,11 @@ export const projects: Project[] = [
     clip: `${media}/halogram.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
-      "A hologram-styled cut for Candy Cloud — refraction, light, and short kinetic beats.",
+      "A hologram-styled VFX cut for Candy Cloud — refraction, light, and short kinetic beats.",
   },
   {
     slug: "candy-cloud-giftcard",
-    title: "Gift Card",
+    title: "Gift Card Promotion",
     client: "Candy Cloud",
     year: 2025,
     role: "Direction · Cinematography",
@@ -257,7 +269,7 @@ export const projects: Project[] = [
   },
   {
     slug: "candy-cloud-teaser",
-    title: "Bonus Teaser",
+    title: "Bonus Flavor Teaser",
     client: "Candy Cloud",
     year: 2025,
     role: "Direction · Cinematography",
@@ -267,7 +279,7 @@ export const projects: Project[] = [
     clip: `${media}/teaser.mp4`,
     dims: { w: 720, h: 1280 },
     excerpt:
-      "A six-second bonus cut for Candy Cloud.",
+      "A six-second bonus flavor teaser for Candy Cloud.",
   },
   {
     slug: "boxed",
@@ -299,7 +311,7 @@ export const projects: Project[] = [
   },
   {
     slug: "sonim",
-    title: "Sonim",
+    title: "Sonim Durability Phone",
     client: "Sonim",
     year: 2025,
     role: "Direction · Cinematography",
@@ -313,8 +325,9 @@ export const projects: Project[] = [
   },
   {
     slug: "dreamy",
-    title: "Dreamy",
-    client: "Personal",
+    title: "Sueños Social Edit",
+    client: "Sueños",
+    credits: [{ label: "Supporting", value: "Christian & Lily" }],
     year: 2025,
     role: "Direction · Cinematography",
     kind: "video",
@@ -327,7 +340,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nick-blum",
-    title: "Nick Blum",
+    title: "Nick Blum Trailer",
     client: "Blum & Co",
     year: 2025,
     role: "Cinematography",
@@ -341,21 +354,22 @@ export const projects: Project[] = [
   },
   {
     slug: "uglysteffy",
-    title: "Uglysteffy",
-    client: "Personal",
+    title: "Sueños × Uglysteffy Collab",
+    client: "Sueños",
+    credits: [{ label: "Supporting", value: "Christian & Lily" }],
     year: 2025,
-    role: "Direction · Cinematography",
+    role: "Direction · Edit",
     kind: "video",
     tags: ["Concept", "Personal"],
     cover: "/video/uglysteffy.jpg",
     clip: `${media}/uglysteffy.mp4`,
     dims: { w: 1280, h: 720 },
     excerpt:
-      "A long-form personal piece — POV, raw, signed with a mini Stefan logo.",
+      "A long-form social piece — a POV experience of a music festival featuring creator Uglysteffy. Directed and edited by Stefan.",
   },
   {
     slug: "vespa",
-    title: "Vespa",
+    title: "Vespa Amalfi Coast Film",
     client: "Vespa",
     year: 2025,
     role: "Direction · Cinematography",
@@ -381,31 +395,31 @@ export const projects: Project[] = [
     excerpt:
       "A World Cup 2026 piece for adidas at Macy's — kit, ceremony, and the build to the tournament.",
   },
-  { slug: "photo-amalfi", title: "Amalfi", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/tree-from-italy-iso800-85mm-f5.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
-  { slug: "photo-ash", title: "Ash", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/ash.jpg", dims: { w: 2000, h: 1312 }, excerpt: "From the archive." },
+  { slug: "photo-amalfi", title: "Coastline Tree", client: "Personal", location: "Amalfi Coast, Italy", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/tree-from-italy-iso800-85mm-f5.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-ash", title: "Ash in the Namib Desert", client: "Personal", location: "Namibia", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/ash.jpg", dims: { w: 2000, h: 1312 }, excerpt: "From the archive." },
   { slug: "photo-bandits", title: "Bandits", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/bandits.jpg", dims: { w: 2000, h: 1040 }, excerpt: "From the archive." },
-  { slug: "photo-cocora", title: "Cocora", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/cocora-85.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
-  { slug: "photo-dead-ville", title: "Dead Ville", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/dead-ville-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-cocora", title: "Cocora", client: "Personal", location: "Cocora Valley, Colombia", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/cocora-85.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-dead-ville", title: "Deadvlei", client: "Personal", location: "Namibia", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/dead-ville-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
   { slug: "photo-giraffe-gang", title: "Giraffe Gang", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/giraffe-gang.jpg", dims: { w: 2000, h: 1125 }, excerpt: "From the archive." },
-  { slug: "photo-hawaii-heli", title: "Hawaii Heli", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/hawwai-heli-copy-2.jpg", dims: { w: 2000, h: 1704 }, excerpt: "From the archive." },
-  { slug: "photo-jr", title: "JR", client: "JR", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/jr-6.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
-  { slug: "photo-lexi", title: "Lexi", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/lexi.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
-  { slug: "photo-montrose-skyline", title: "Montrose Skyline", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/montrose-skyl-ine.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
-  { slug: "photo-moody", title: "Moody", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
-  { slug: "photo-moody-ii", title: "Moody II", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody-4.jpg", dims: { w: 1125, h: 2000 }, excerpt: "From the archive." },
-  { slug: "photo-nil-and-da-boyz", title: "NIL & Da Boyz", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/nil-and-da-boyz-5.jpg", dims: { w: 2000, h: 1125 }, excerpt: "From the archive." },
-  { slug: "photo-oryx", title: "Oryx", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/oryx-or-impala-2.jpg", dims: { w: 2000, h: 1342 }, excerpt: "From the archive." },
-  { slug: "photo-pelly", title: "Pelly", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/pelly-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
-  { slug: "photo-posted-up", title: "Posted Up", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/posted-up-on.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
-  { slug: "photo-reaching-stars", title: "Reaching for the Stars", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/reaching-for-the-stars.jpg", dims: { w: 1557, h: 2000 }, excerpt: "From the archive." },
-  { slug: "photo-sandwich-bae", title: "Sandwich Bae", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sandwich-bae-2.jpg", dims: { w: 2000, h: 1229 }, excerpt: "From the archive." },
-  { slug: "photo-sar", title: "Sar", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sar.jpg", dims: { w: 1336, h: 2000 }, excerpt: "From the archive." },
-  { slug: "photo-treez", title: "Treez", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/treez.jpg", dims: { w: 2000, h: 1353 }, excerpt: "From the archive." },
+  { slug: "photo-hawaii-heli", title: "Hawaii Heli", client: "Personal", location: "Hawaii", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/hawwai-heli-copy-2.jpg", dims: { w: 2000, h: 1704 }, excerpt: "From the archive." },
+  { slug: "photo-jr", title: "John Reed", client: "John Reed", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/jr-6.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-lexi", title: "Lexi Fousey", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/lexi.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-montrose-skyline", title: "Montrose Skyline", client: "Personal", location: "Chicago", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/montrose-skyl-ine.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
+  { slug: "photo-moody", title: "Soap", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-moody-ii", title: "Soap II", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/moody-4.jpg", dims: { w: 1125, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-nil-and-da-boyz", title: "Dudes, Mallorca", client: "Personal", location: "Mallorca, Spain", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/nil-and-da-boyz-5.jpg", dims: { w: 2000, h: 1125 }, excerpt: "From the archive." },
+  { slug: "photo-oryx", title: "Oryx", client: "Personal", location: "Africa", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/oryx-or-impala-2.jpg", dims: { w: 2000, h: 1342 }, excerpt: "From the archive." },
+  { slug: "photo-pelly", title: "Pelly", client: "Personal", location: "Africa", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/pelly-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "Shot on a 600mm lens." },
+  { slug: "photo-posted-up", title: "Posted Up", client: "Personal", location: "Amalfi Coast, Italy", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/posted-up-on.jpg", dims: { w: 1333, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-reaching-stars", title: "Reaching for the Stars", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/reaching-for-the-stars.jpg", dims: { w: 1557, h: 2000 }, excerpt: "Detail shot on a 150–600mm lens." },
+  { slug: "photo-sandwich-bae", title: "Sandwich Bay Expedition", client: "Personal", location: "Namibia", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sandwich-bae-2.jpg", dims: { w: 2000, h: 1229 }, excerpt: "Shot on a 150–600mm lens." },
+  { slug: "photo-sar", title: "Palmer House Social Photos", client: "Palmer House Hotel & Spa", credits: [{ label: "Model", value: "Sarah" }], year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/sar.jpg", dims: { w: 1336, h: 2000 }, excerpt: "From the archive." },
+  { slug: "photo-treez", title: "Treez", client: "Personal", location: "Deadvlei, Namibia", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/treez.jpg", dims: { w: 2000, h: 1353 }, excerpt: "From the archive." },
   { slug: "photo-wedits", title: "Wedits", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/wedits-2.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
-  { slug: "photo-yeee-75", title: "Yeee 75", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-75.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
-  { slug: "photo-yeee-101", title: "Yeee 101", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-101.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
-  { slug: "photo-yeee-105", title: "Yeee 105", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-105.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
-  { slug: "photo-yeee-108", title: "Yeee 108", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-108.jpg", dims: { w: 2000, h: 1499 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-75", title: "Switzerland Aerial", client: "Personal", location: "Aerial Photography", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-75.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-101", title: "Aerial I", client: "Personal", location: "Aerial Photography", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-101.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-105", title: "Aerial II", client: "Personal", location: "Aerial Photography", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-105.jpg", dims: { w: 2000, h: 1497 }, excerpt: "From the archive." },
+  { slug: "photo-yeee-108", title: "Aerial III", client: "Personal", location: "Aerial Photography", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-108.jpg", dims: { w: 2000, h: 1499 }, excerpt: "From the archive." },
   { slug: "photo-yeee-166", title: "Yeee 166", client: "Personal", year: 2025, role: "Photography", kind: "photo", tags: ["Photography"], cover: "/photos/yeee-166.jpg", dims: { w: 2000, h: 1333 }, excerpt: "From the archive." },
 ];
 
@@ -417,6 +431,21 @@ export function getProject(slug: string): Project | undefined {
 
 export function getFeaturedProjects(): Project[] {
   return projects.filter((p) => p.featured);
+}
+
+/** The group a project belongs to for "More from …". */
+export function projectGroup(p: Project): string | null {
+  const g = p.brand ?? p.client;
+  return g === "Personal" || g === "Spec" ? null : g;
+}
+
+/** Other work from the same brand/client, in portfolio order. */
+export function getRelatedProjects(project: Project): Project[] {
+  const group = projectGroup(project);
+  if (!group) return [];
+  return projects.filter(
+    (p) => p.slug !== project.slug && projectGroup(p) === group
+  );
 }
 
 export function getNextProject(slug: string): Project {
